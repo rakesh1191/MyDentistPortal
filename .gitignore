@@ -1,0 +1,11 @@
+/target/
+/test-output/
+
+# Eclipse files and directories
+.project
+.classpath
+.settings/
+
+# build.properties
+build.properties
+
