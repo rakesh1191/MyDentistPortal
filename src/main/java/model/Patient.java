@@ -22,7 +22,7 @@ public class Patient {
     @OneToMany
     private List<Appointments> patientAppId;
     
-    @ManyToOne
+    @OneToOne
     private User userId;
     
     @OneToOne
