@@ -1,4 +1,4 @@
-package model;
+package myDentist.model;
 
 import java.util.List;
 
