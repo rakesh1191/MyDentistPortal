@@ -1,11 +1,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>5220myDentist</groupId>
-  <artifactId>5220myDentist</artifactId>
+  <groupId>myDentist</groupId>
+  <artifactId>myDentist</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>war</packaging>
   <build>
-    <finalName>5220myDentist</finalName>
+    <finalName>myDentist</finalName>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -47,7 +47,6 @@
           <groupId>org.springframework</groupId>
           <artifactId>spring-webmvc</artifactId>
           <version>4.3.2.RELEASE</version>
-          <scope>provided</scope>
       </dependency>
       <dependency>
           <groupId>javax.servlet</groupId>
@@ -64,15 +63,26 @@
       	<artifactId>spring-orm</artifactId>
       	<version>4.3.2.RELEASE</version>
       </dependency>
+
+      <dependency>
+      	<groupId>org.postgresql</groupId>
+      	<artifactId>postgresql</artifactId>
+      	<version>9.4.1211</version>
+      </dependency>
       <dependency>
       	<groupId>org.apache.tomcat</groupId>
       	<artifactId>tomcat-jdbc</artifactId>
       	<version>8.0.23</version>
       </dependency>
       <dependency>
-      	<groupId>org.springframework</groupId>
-      	<artifactId>spring-web</artifactId>
-      	<version>4.3.2.RELEASE</version>
+      	<groupId>org.springframework.security</groupId>
+      	<artifactId>spring-security-taglibs</artifactId>
+      	<version>4.1.3.RELEASE</version>
+      </dependency>
+      <dependency>
+      	<groupId>org.springframework.security</groupId>
+      	<artifactId>spring-security-config</artifactId>
+      	<version>4.1.3.RELEASE</version>
       </dependency>
   </dependencies>
 </project>
