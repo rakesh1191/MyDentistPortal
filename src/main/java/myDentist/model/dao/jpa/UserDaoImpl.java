@@ -9,6 +9,7 @@ import myDentist.model.User;
 import myDentist.model.dao.userDao;
 
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 public class UserDaoImpl implements userDao {
@@ -26,6 +27,13 @@ public class UserDaoImpl implements userDao {
 	public List<User> getUsers()
 	{
 		return entitymanager.createQuery("from User order by userId", User.class).getResultList();
+	}
+
+	@Override
+	@Transactional
+	public User saveUser(User user) {
+		
+		return entitymanager.merge(user);
 	}
 	
 }

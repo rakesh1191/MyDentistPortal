@@ -10,12 +10,15 @@
 <body>
 <h1>List of Users</h1>
 <table border="1">
-<tr><th>ID</th><th>Username</th><th>UserEmail</th></tr>
+<tr><th>ID</th><th>Username</th><th>UserEmail</th><th>Address</th><th>Birthdate</th><th>Contact</th></tr>
 <c:forEach items="${users}" var="user">
 <tr>
   <td>${user.userId}</td>
   <td>${user.username}</td>
   <td>${user.userEmail}</td>
+  <td>${user.userAddress}</td>
+  <td>${user.dateOfBirth}</td>
+  <td>${user.userContact}</td>
 </tr>
 </c:forEach>
 </table>
