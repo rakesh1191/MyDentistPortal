@@ -1,8 +1,11 @@
-package myDentist.model;
+package model;
+
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -20,7 +23,50 @@ public class Billing {
     @OneToOne
     private User patientName;
     
-    private Long payments;
+    @ManyToMany
+    private List<Medicine> medicineId;
+    
+    @OneToOne
+    private Medicine medicineName;
+     
+    @OneToOne
+    private Medicine medicinePrice;
+      
+    private Integer quantity;
+    
+    private Long total;
+    
+	public List<Medicine> getMedicineId() {
+		return medicineId;
+	}
+
+	public void setMedicineId(List<Medicine> medicineId) {
+		this.medicineId = medicineId;
+	}
+
+	public Medicine getMedicineName() {
+		return medicineName;
+	}
+
+	public void setMedicineName(Medicine medicineName) {
+		this.medicineName = medicineName;
+	}
+
+	public Medicine getMedicinePrice() {
+		return medicinePrice;
+	}
+
+	public void setMedicinePrice(Medicine medicinePrice) {
+		this.medicinePrice = medicinePrice;
+	}
+
+	public Integer getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(Integer quantity) {
+		this.quantity = quantity;
+	}
 
 	public Integer getBillingID() {
 		return billingID;
@@ -46,12 +92,12 @@ public class Billing {
 		this.patientName = patientName;
 	}
 
-	public Long getPayments() {
-		return payments;
+	public Long getTotal() {
+		return total;
 	}
 
-	public void setPayments(Long payments) {
-		this.payments = payments;
+	public void setTotal(Long total) {
+		this.total = total;
 	}
     
     
