@@ -9,5 +9,6 @@ public interface userDao {
 	User getUser (Integer userId);
 	
 	List<User> getUsers();	
-
+	
+	User saveUser(User user);
 }
