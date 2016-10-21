@@ -10,5 +10,7 @@ create sequence hibernate_sequence start 1 increment 1;
         username varchar(255),
         primary key (userId)
     );
+    
+    
 
     
