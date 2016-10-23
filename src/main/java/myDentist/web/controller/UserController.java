@@ -50,9 +50,16 @@ public class UserController {
 	{	
 		System.out.println(user.getUsername());
 		System.out.println(user.getUserPassword());
+		System.out.println(user.getUserType());
 		for(User u : userDao.getUsers()){
 			if(user.getUsername().equals(u.getUsername())&& user.getUserPassword().equals(u.getUserPassword())){
-				return "redirect:display.html";
+				if(u.getUserType().equals("patient")){
+					return "redirect:PatientHome.html";
+				}else if(u.getUserType().equals("doctor")){
+					return "redirect:DoctorHome.html";
+				}else if(u.getUserType().equals("admin")){
+					return "redirect:display.html";
+				}
 			}
 				
 		}
@@ -114,5 +121,12 @@ public class UserController {
 		System.out.println("value is :"+appointment.getAppointmentDate());
 		appointment=appointmentsDao.saveAppointment(appointment);
 		return "redirect:display.html";		
+	}
+	
+	@RequestMapping(value="/PatientHome.html", method=RequestMethod.GET)
+	public String PatientHom(ModelMap models)
+	{
+		return "PatientHome";
+		
 	}
 }
