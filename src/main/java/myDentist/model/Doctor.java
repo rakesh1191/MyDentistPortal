@@ -3,8 +3,6 @@ package myDentist.model;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -14,7 +12,7 @@ public class Doctor {
 
     @Id
     @GeneratedValue
-    private Integer id;
+    private Integer doctorId;
 
     @OneToOne
     private User userId;
@@ -24,7 +22,11 @@ public class Doctor {
     private String specialization;
     
     private Integer dateOfBirth;
+        
+	private String address;
     
+    private String contactNo;
+
     public Integer getDateOfBirth() {
 		return dateOfBirth;
 	}
@@ -32,17 +34,13 @@ public class Doctor {
 	public void setDateOfBirth(Integer dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
 	}
-
-	private String address;
     
-    private String contactNo;
-
-	public Integer getId() {
-		return id;
+	public Integer getDoctorId() {
+		return doctorId;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
+	public void setDoctorId(Integer doctorId) {
+		this.doctorId = doctorId;
 	}
 
 	public User getUserId() {
