@@ -7,15 +7,28 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import myDentist.model.Appointments;
+import myDentist.model.Patient;
 import myDentist.model.User;
+import myDentist.model.dao.appointmentsDao;
+import myDentist.model.dao.patientDao;
 import myDentist.model.dao.userDao;
+import myDentist.model.dao.jpa.appointmentsDaoImpl;
 
 @Controller
 public class UserController {
 	
 	@Autowired
 	private userDao userDao;
+	
+	@Autowired
+	private appointmentsDao appointmentsDao;
+	
+	@Autowired
+	private patientDao patientDao;
+	
 	
 	@RequestMapping("/display.html")
 	public String displayUser(ModelMap models)
@@ -47,5 +60,41 @@ public class UserController {
 			return "loginPage.html";
 		}
 		return "loginPage.html";
+	}
+	
+	@RequestMapping(value="/PatientRegistration.html", method=RequestMethod.GET)
+	public String PatientRegistration(ModelMap models)
+	{	
+		models.put("user", new User());
+		return "PatientRegistration";
+	}
+	
+	@RequestMapping(value="/PatientRegistration.html", method=RequestMethod.POST)
+	public String PatientRegistration(@ModelAttribute ("User") User user, BindingResult result)
+	{	
+		user.setUserType("patient");
+		// save user to database
+		user=userDao.saveUser(user);
+		System.out.println("Data saved in db :"+user.getUsername());
+		//redirect to display page
+		return "redirect:loginPage.html";
+	}
+	
+	@RequestMapping(value="/appointment.html", method=RequestMethod.GET)
+	public String takeAppointment(ModelMap models)
+	{
+		models.put("appointments", new Appointments());
+		return "appointment";
+		
+	}
+	
+	@RequestMapping(value="/appointment.html",method=RequestMethod.POST)
+	public String takeAppointment(@ModelAttribute("appointments") Appointments appointment,@RequestParam Integer id,BindingResult results)
+	{		
+		System.out.println("-------------"+id);
+		appointment.setPatientId(patientDao.getPatient(id));
+		System.out.println("value is :"+appointment.getAppointmentDate());
+		appointment=appointmentsDao.saveAppointment(appointment);
+		return "redirect:display.html";		
 	}
 }

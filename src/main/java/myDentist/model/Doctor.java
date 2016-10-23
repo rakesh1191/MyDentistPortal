@@ -23,7 +23,17 @@ public class Doctor {
     
     private String specialization;
     
-    private String address;
+    private Integer dateOfBirth;
+    
+    public Integer getDateOfBirth() {
+		return dateOfBirth;
+	}
+
+	public void setDateOfBirth(Integer dateOfBirth) {
+		this.dateOfBirth = dateOfBirth;
+	}
+
+	private String address;
     
     private String contactNo;
 

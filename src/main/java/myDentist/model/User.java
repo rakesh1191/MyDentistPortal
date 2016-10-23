@@ -1,5 +1,7 @@
 package myDentist.model;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -18,10 +20,40 @@ public class User {
 
     private String userType;
     
+    private Integer userContact;
+    
     private String userEmail;
     
+    private Date dateOfBirth;
+    
     private String userPassword;
+    
+    private String userAddress;
+    
+    public Date getDateOfBirth() {
+		return dateOfBirth;
+	}
 
+	public void setDateOfBirth(Date dateOfBirth) {
+		this.dateOfBirth = dateOfBirth;
+	}
+
+    
+    public String getUserAddress() {
+		return userAddress;
+	}
+
+	public void setUserAddress(String userAddress) {
+		this.userAddress = userAddress;
+	}
+
+	public Integer getUserContact() {
+		return userContact;
+	}
+
+	public void setUserContact(Integer userContact) {
+		this.userContact = userContact;
+	}
 
 	public Integer getUserId() {
 		return userId;
