@@ -80,6 +80,24 @@ public class UserController {
 		return "redirect:loginPage.html";
 	}
 	
+	@RequestMapping(value="/doctorRegistration.html", method=RequestMethod.GET)
+	public String doctorRegistration(ModelMap models)
+	{	
+		models.put("user", new User());
+		return "doctorRegistration";
+	}
+	
+	@RequestMapping(value="/doctorRegistration.html", method=RequestMethod.POST)
+	public String doctorRegistration(@ModelAttribute ("User") User user, BindingResult result)
+	{	
+		user.setUserType("doctor");
+		// save user to database
+		user=userDao.saveUser(user);
+		System.out.println("Data saved in db :"+user.getUsername());
+		//redirect to display page
+		return "redirect:loginPage.html";
+	}
+	
 	@RequestMapping(value="/appointment.html", method=RequestMethod.GET)
 	public String takeAppointment(ModelMap models)
 	{

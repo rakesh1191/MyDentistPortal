@@ -18,6 +18,9 @@ public class Appointments {
 
     @ManyToOne
     private Patient patientId;
+    
+    @ManyToOne
+    private Doctor doctorId;
 
     private String appointmentDate;
     

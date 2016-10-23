@@ -1,16 +1,5 @@
 
 
-create table users (
-        userId int4 not null,
-        dateOfBirth timestamp,
-        userAddress varchar(255),
-        userContact int4,
-        userEmail varchar(255),
-        userPassword varchar(255),
-        userType varchar(255),
-        username varchar(255),
-        primary key (userId)
-    );
     create table appointments (
         appointmentId int4 not null,
         appointmentDate varchar(255),
