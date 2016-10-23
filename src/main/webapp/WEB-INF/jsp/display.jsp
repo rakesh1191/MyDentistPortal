@@ -20,7 +20,9 @@
   <td>${user.dateOfBirth}</td>
   <td>${user.userContact}</td>
 </tr>
+<a href="appointment.html?id=${user.userId}">Take Appointment</a>
 </c:forEach>
 </table>
+
 </body>
 </html>
