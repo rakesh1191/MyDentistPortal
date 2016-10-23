@@ -1,5 +1,6 @@
 package myDentist.web.controller;
 
+import org.omg.CORBA.Request;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -8,6 +9,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 
 import myDentist.model.Appointments;
 import myDentist.model.Patient;
@@ -18,6 +21,7 @@ import myDentist.model.dao.userDao;
 import myDentist.model.dao.jpa.appointmentsDaoImpl;
 
 @Controller
+@SessionAttributes(value="getuserid")
 public class UserController {
 	
 	@Autowired
@@ -44,20 +48,28 @@ public class UserController {
 		models.put("users", userDao.getUsers());
 		return "loginPage";
 	}
-	
+	int uid=0;
 	@RequestMapping(value="/loginPage.html", method=RequestMethod.POST)
-	public String loginPage(@ModelAttribute ("user") User user,BindingResult result, ModelMap models)
+	public String loginPage(@ModelAttribute ("user") User user,BindingResult result, ModelMap models,SessionStatus status)
 	{	
 		System.out.println(user.getUsername());
 		System.out.println(user.getUserPassword());
 		System.out.println(user.getUserType());
+		
 		for(User u : userDao.getUsers()){
 			if(user.getUsername().equals(u.getUsername())&& user.getUserPassword().equals(u.getUserPassword())){
 				if(u.getUserType().equals("patient")){
+					
+					uid=u.getUserId();
+					status.setComplete();
 					return "redirect:PatientHome.html";
 				}else if(u.getUserType().equals("doctor")){
+					uid=u.getUserId();
+					status.setComplete();
 					return "redirect:DoctorHome.html";
 				}else if(u.getUserType().equals("admin")){
+					uid=u.getUserId();
+					status.setComplete();
 					return "redirect:display.html";
 				}
 			}
@@ -66,7 +78,15 @@ public class UserController {
 		if(!result.hasErrors()){
 			return "loginPage.html";
 		}
+		
 		return "loginPage.html";
+	}
+	
+	@ModelAttribute(value="getuserid")
+	public Integer getuserID()
+	{		
+		//System.out.println("hiiiiiiiiii-----"+uid);
+		return uid;
 	}
 	
 	@RequestMapping(value="/PatientRegistration.html", method=RequestMethod.GET)
@@ -105,23 +125,6 @@ public class UserController {
 		return "redirect:loginPage.html";
 	}
 	
-	@RequestMapping(value="/appointment.html", method=RequestMethod.GET)
-	public String takeAppointment(ModelMap models)
-	{
-		models.put("appointments", new Appointments());
-		return "appointment";
-		
-	}
-	
-	@RequestMapping(value="/appointment.html",method=RequestMethod.POST)
-	public String takeAppointment(@ModelAttribute("appointments") Appointments appointment,@RequestParam Integer id,BindingResult results)
-	{		
-		System.out.println("-------------"+id);
-		appointment.setPatientId(patientDao.getPatient(id));
-		System.out.println("value is :"+appointment.getAppointmentDate());
-		appointment=appointmentsDao.saveAppointment(appointment);
-		return "redirect:display.html";		
-	}
 	
 	@RequestMapping(value="/PatientHome.html", method=RequestMethod.GET)
 	public String PatientHom(ModelMap models)
