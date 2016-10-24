@@ -21,7 +21,7 @@ import myDentist.model.dao.userDao;
 import myDentist.model.dao.jpa.appointmentsDaoImpl;
 
 @Controller
-@SessionAttributes(value="getuserid")
+//@SessionAttributes(value="getuserid")
 public class UserController {
 	
 	@Autowired
@@ -59,8 +59,8 @@ public class UserController {
 		for(User u : userDao.getUsers()){
 			if(user.getUsername().equals(u.getUsername())&& user.getUserPassword().equals(u.getUserPassword())){
 				if(u.getUserType().equals("patient")){
-					
-					uid=u.getUserId();
+					models.put("userid", u.getUserId());
+					//uid=u.getUserId();
 					status.setComplete();
 					return "redirect:PatientHome.html";
 				}else if(u.getUserType().equals("doctor")){
@@ -82,12 +82,7 @@ public class UserController {
 		return "loginPage.html";
 	}
 	
-	@ModelAttribute(value="getuserid")
-	public Integer getuserID()
-	{		
-		//System.out.println("hiiiiiiiiii-----"+uid);
-		return uid;
-	}
+	
 	
 	@RequestMapping(value="/PatientRegistration.html", method=RequestMethod.GET)
 	public String PatientRegistration(ModelMap models)
@@ -126,10 +121,5 @@ public class UserController {
 	}
 	
 	
-	@RequestMapping(value="/PatientHome.html", method=RequestMethod.GET)
-	public String PatientHom(ModelMap models)
-	{
-		return "PatientHome";
-		
-	}
+	
 }

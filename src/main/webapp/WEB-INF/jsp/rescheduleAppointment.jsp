@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %> 
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>   
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -37,36 +36,45 @@
  <div class="container-fluid">
   <div class="row">
 <form:form modelAttribute="appointments">
+   
    <div class="col-md-6 col-sm-6 col-xs-12">
 
     <!-- Form code begins -->
     
       <div class="form-group"> <!-- Date input -->
-        <label class="control-label" for="date">Date</label>
-        <spring:bind path="appointmentDate"><input class="form-control" id="appointmentDate" name="appointmentDate" placeholder="MM/DD/YYY" type="text"></spring:bind>
+        <label class="control-label" for="date"></label>
+        <form:input path="appointmentId" type="hidden"/>
+      </div>
+      
+      
+      
+      <div class="form-group"> <!-- Date input -->
+        <label class="control-label" for="date"> Appointment Date :</label>
+        <form:input path="appointmentDate"/>
+      </div>
+      <div  class="form-group">
+      <label for="appointmentTime">Appointment Time :</label>
         
+        <form:select path="appointmentTime">
+		    <option value="9-10">9-10</option>
+		    <option value="10-11">10-11</option>
+		    <option value="11-12">11-12</option>
+		    <option value="12-1">12-1</option>
+		</form:select>
+      
       </div>
-      <div>
-      <label for="appointmentTime">Time</label>
-      <spring:bind path="appointmentTime"><input type="text" class="form-control" name="appointmentTime" id="appointmentTime">
-      </spring:bind>
-	</div>
-	
-	<div  class="form-group">
-      <label for="doctorId">   Doctor's Name :</label>
-        
-         <select id="doctorname" name="doctorname" class="form-control" required>
-								                <option>Select Doctor</option>
-												<c:forEach items="${doctors}" var="d">												
-												<option value="${d.doctorName}">${d.doctorName}</option>
-												</c:forEach>
-												</select>
-			</div>      
-      </div>
-    <div class="form-group">
-		<input type="hidden" value="${userid}" name="userid"/>
-        <input type="submit" name="submit" id="submit" value="Submit" class="btn btn-info pull-right">
-      </div>
+      
+      
+      
+    
+    
+    <input type="hidden" name="userid" value="${userid.userId}"/>
+    <input type="hidden" name="appid" value="${appointments.appointmentId}"/>
+    <div>&nbsp;
+    <br/>
+       <input class="btn btn-primary btn-lnk" type="Submit" value="Save">
+        </div> 
+    
      <!-- Form code ends --> 
 
     </div>
