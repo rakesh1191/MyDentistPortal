@@ -54,7 +54,7 @@ public class appointmentController {
 	public String takeAppointment(ModelMap models,@RequestParam Integer userid)
 	{
 		models.put("doctors", doctorDao.getDoctors());
-		System.out.println("doctor"+doctorDao.getDoctor(102).getDoctorName());
+		//System.out.println("doctor"+doctorDao.getDoctor(102).getDoctorName());
 		models.put("userid", userid);
 		return "appointment";
 		
