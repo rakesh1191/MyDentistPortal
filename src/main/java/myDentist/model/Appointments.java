@@ -17,14 +17,30 @@ public class Appointments {
     private Integer appointmentId;
 
     @ManyToOne
-    private Patient patientId;
+    private User userId;
     
-    @ManyToOne
+    public User getUserId() {
+		return userId;
+	}
+
+	public void setUserId(User userId) {
+		this.userId = userId;
+	}
+
+	@ManyToOne
     private Doctor doctorId;
 
     private String appointmentDate;
     
-    private String appointmentTime;
+    public Doctor getDoctorId() {
+		return doctorId;
+	}
+
+	public void setDoctorId(Doctor doctorId) {
+		this.doctorId = doctorId;
+	}
+
+	private String appointmentTime;
     
     public Integer getAppointmentId() {
 		return appointmentId;
@@ -34,14 +50,7 @@ public class Appointments {
 		this.appointmentId = appointmentId;
 	}
 
-	public Patient getPatientId() {
-		return patientId;
-	}
-
-	public void setPatientId(Patient patientId) {
-		this.patientId = patientId;
-	}
-
+	
 	public String getAppointmentDate() {
 		return appointmentDate;
 	}

@@ -13,8 +13,18 @@ public class Doctor {
     @Id
     @GeneratedValue
     private Integer doctorId;
+    
+    private String doctorName;
 
-    @OneToOne
+    public String getDoctorName() {
+		return doctorName;
+	}
+
+	public void setDoctorName(String doctorName) {
+		this.doctorName = doctorName;
+	}
+
+	@OneToOne
     private User userId;
 
     private String designation;
