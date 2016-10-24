@@ -23,7 +23,8 @@
       </div>
       <div id="collapse1" class="panel-collapse collapse">
         <div class="panel-body">Haven't schedule an appointment? Here's your chance!</div>
-        <div class="panel-footer">Make it. <a href="appointment.html?id=${sessionScope.getuserid}">Appointment</a></div>
+        <div class="panel-footer">Make it. <a href="appointment.html?userid=${userid}">Appointment</a>
+        </div>
       </div>
     </div>
   </div>
@@ -34,8 +35,18 @@
         </h4>
       </div>
       <div id="collapse2" class="panel-collapse collapse">
-        <div class="panel-body">Want to update your appointment? Go ahead and do it!</div>
-        <div class="panel-footer"><a href="appointment.html">Appointment</a></div>
+        <div class="panel-body">
+  <c:forEach items="${appointments}" var="apt">
+        <c:if test="${apt.userId.userId eq userid}" >
+        <table>
+        <tr>
+        <td>${apt.appointmentId}</td><td><a href="rescheduleAppointment.html?id=${apt.appointmentId}">Reschedule</a></td>
+        </tr>        
+        </table>
+        </c:if>
+        </c:forEach>
+  	      </div>
+        <div class="panel-footer"><a href="rescheduleAppointment.html?id=${users}">Appointment</a></div>
       </div>
     </div>
   
@@ -50,7 +61,6 @@
         <div class="panel-footer">Want to check the Lab reports?</div>
       </div>
   </div>
-  
   <div class="panel panel-default">
       <div class="panel-heading">
         <h4 class="panel-title">
