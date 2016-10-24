@@ -17,5 +17,6 @@ public interface appointmentsDao {
 	List getappointmentId(Integer userid);
 	
 	List<Appointments> getAppointments();	
-
+	
+	
 }

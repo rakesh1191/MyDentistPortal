@@ -64,9 +64,10 @@ public class UserController {
 					status.setComplete();
 					return "redirect:PatientHome.html";
 				}else if(u.getUserType().equals("doctor")){
+					models.put("userid", u.getUserId());
 					uid=u.getUserId();
 					status.setComplete();
-					return "redirect:DoctorHome.html";
+					return "redirect:doctorHome.html";
 				}else if(u.getUserType().equals("admin")){
 					uid=u.getUserId();
 					status.setComplete();
