@@ -35,8 +35,9 @@
 
 <div class="bootstrap-iso">
  <div class="container-fluid">
-  <div class="row">
 <form:form modelAttribute="appointments">
+  <div class="row">
+
    <div class="col-md-6 col-sm-6 col-xs-12">
 
     <!-- Form code begins -->
@@ -50,6 +51,19 @@
       <label for="appointmentTime">Time</label>
       <spring:bind path="appointmentTime"><input type="text" class="form-control" name="appointmentTime" id="appointmentTime">
       </spring:bind>
+               <select id="appointmentTime" name="appointmentTime" class="form-control" required >
+								                <option>Select TimeSlot</option>
+												<c:forEach items="${appointments}" var="app">												
+												<c:choose>
+												<c:when test="${param.appointmentDate eq app.appointmentDate}">
+												<option value="${app.appointmentDate}">${app.appointmentDate}</option>
+												</c:when>
+												<c:otherwise>
+												
+												</c:otherwise>
+												</c:choose>												
+												</c:forEach>
+												</select>     
 	</div>
 	
 	<div  class="form-group">
@@ -62,7 +76,6 @@
 												</c:forEach>
 												</select>
 			</div>      
-      </div>
     <div class="form-group">
 		<input type="hidden" value="${userid}" name="userid"/>
         <input type="submit" name="submit" id="submit" value="Submit" class="btn btn-info pull-right">
@@ -70,10 +83,12 @@
      <!-- Form code ends --> 
 
     </div>
+      </div>
+   
     
 </form:form>
   </div>    
  </div>
-</div>
+
 </body>
 </html>

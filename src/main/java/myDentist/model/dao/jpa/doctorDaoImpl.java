@@ -6,6 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import myDentist.model.Appointments;
 import myDentist.model.Doctor;
@@ -28,6 +29,13 @@ public class doctorDaoImpl implements doctorDao{
 	public List<Doctor> getDoctors() {
 		
 		return entitymanager.createQuery("from Doctor order by doctorId", Doctor.class).getResultList();
+	}
+
+	@Override
+	@Transactional
+	public Doctor saveDoctor(Doctor doctor) {
+		
+		return entitymanager.merge(doctor);
 	}
 
 	
