@@ -16,6 +16,7 @@ import myDentist.model.Appointments;
 import myDentist.model.Patient;
 import myDentist.model.User;
 import myDentist.model.dao.appointmentsDao;
+import myDentist.model.dao.doctorDao;
 import myDentist.model.dao.patientDao;
 import myDentist.model.dao.userDao;
 import myDentist.model.dao.jpa.appointmentsDaoImpl;
@@ -40,6 +41,13 @@ public class UserController {
 		
 		models.put("users", userDao.getUsers());
 		return "display";
+	}
+	
+	@RequestMapping("/adminHome.html")
+	public String adminHome(ModelMap models)
+	{
+		models.put("appointments", appointmentsDao.getAppointments());
+		return "adminHome";
 	}
 	
 	@RequestMapping(value="/loginPage.html", method=RequestMethod.GET)
@@ -71,7 +79,7 @@ public class UserController {
 				}else if(u.getUserType().equals("admin")){
 					uid=u.getUserId();
 					status.setComplete();
-					return "redirect:display.html";
+					return "redirect:adminHome.html";
 				}
 			}
 				
