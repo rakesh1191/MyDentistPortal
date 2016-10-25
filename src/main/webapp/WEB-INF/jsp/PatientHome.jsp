@@ -73,8 +73,13 @@
       </div>
     </div>
 </div>
+<form action="logout" method="post">
+<input name="_csrf" type="hidden" value="${_csrf.token}"/>
 <div class="container">
-  <button type="button" class="btn btn-lg btn-info collapsed" type="submit" >Logout</button>
+  <input type="submit" class="btn btn-lg btn-info collapsed" value="Logout" >
 </div>
+</form>
 </body>
 </html>
+
+ 

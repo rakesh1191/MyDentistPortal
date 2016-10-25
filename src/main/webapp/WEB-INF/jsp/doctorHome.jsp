@@ -12,7 +12,7 @@
 </head>
 <body>
 <div class="container">
-  <h1>Welcome to Home Page</h1>
+  <h1>Welcome ${doctorid}</h1>
   <br><br>
   <div class="panel-group">
     <div class="panel panel-default">
@@ -42,9 +42,11 @@
     </div>
     
 </div>
+<form action="logout" method="post">
+<input name="_csrf" type="hidden" value="${_csrf.token}"/>
 <div class="container">
-  <button type="button" class="btn btn-lg btn-info collapsed" type="submit" >Logout</button>
- 
+  <input type="submit" class="btn btn-lg btn-info collapsed" value="Logout" >
 </div>
+</form>
 </body>
 </html>
