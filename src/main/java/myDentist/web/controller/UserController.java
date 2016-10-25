@@ -1,7 +1,11 @@
 package myDentist.web.controller;
 
+import javax.servlet.http.HttpSession;
+
+import org.hibernate.Session;
 import org.omg.CORBA.Request;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -22,7 +26,6 @@ import myDentist.model.dao.userDao;
 import myDentist.model.dao.jpa.appointmentsDaoImpl;
 
 @Controller
-//@SessionAttributes(value="getuserid")
 public class UserController {
 	
 	@Autowired
@@ -41,6 +44,15 @@ public class UserController {
 		
 		models.put("users", userDao.getUsers());
 		return "display";
+	}
+	
+	@RequestMapping("/logout.html")
+	public String loginOut(HttpSession session)
+	{	
+		//if(session!=null)
+		session.invalidate();
+		//models.put("users", userDao.getUsers());
+		return "logout.html";
 	}
 	
 	@RequestMapping("/adminHome.html")

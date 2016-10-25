@@ -14,6 +14,7 @@
 	<form:form modelAttribute="loginPage" role="form">
 	Username : <spring:bind path="username"><input type="text" name="username" id="username" required/></spring:bind><br><br>
 	Password : <spring:bind path="userPassword"><input type="password" name="userPassword" id="userPassword" required/></spring:bind><br><br>
+	<input type="hidden" name="_csrf" value="${_csrf.token}">
 	<button type="submit" class="btn btn-primary btn-block btn-large">Let me in.</button>
 	<center><br><br>
 	<a href="PatientRegistration.html">New Patient ? Sign-up here</a>

@@ -1,5 +1,8 @@
 package myDentist.web.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -40,6 +43,7 @@ public class appointmentController {
 		models.put("users", userDao.getUser(userid));
 		models.put("appointments",appointmentsDao.getAppointments());
 		System.out.println("out of appoinment for loop");
+		
 		for(Appointments a:appointmentsDao.getAppointments())
 		{
 			System.out.println("In appoinment for loop");
@@ -53,6 +57,11 @@ public class appointmentController {
 	@RequestMapping(value="/appointment.html", method=RequestMethod.GET)
 	public String takeAppointment(ModelMap models,@RequestParam Integer userid)
 	{
+		List listA = new ArrayList();
+		listA.add("10");
+		listA.add("element 2");
+		listA.add("element 3");
+		models.put("list", listA);
 		models.put("doctors", doctorDao.getDoctors());
 		//System.out.println("doctor"+doctorDao.getDoctor(102).getDoctorName());
 		models.put("userid", userid);
@@ -66,7 +75,8 @@ public class appointmentController {
 		System.out.println("-------------"+userid);
 		//appointment.setDoctorId("10");
 		appointment.setUserId(userDao.getUser(userid));
-				
+		//Doctor d=doctorDao.getDoctor(doctorId);
+		//appointment.setDoctorId(doctorDao.getDoctor(doctorId));		
 		System.out.println("value is :"+appointment.getAppointmentDate());
 		appointment=appointmentsDao.saveAppointment(appointment);
 		return "redirect:PatientHome.html?userid="+userid;		

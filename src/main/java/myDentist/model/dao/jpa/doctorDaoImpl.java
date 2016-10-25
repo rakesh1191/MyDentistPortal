@@ -38,5 +38,11 @@ public class doctorDaoImpl implements doctorDao{
 		return entitymanager.merge(doctor);
 	}
 
+	@Override
+	public List<Doctor> getDoctorbyUserId(Integer userId) {
+		
+		return entitymanager.createQuery("from Doctor where userId="+userId, Doctor.class).getResultList();
+	}
+
 	
 }
