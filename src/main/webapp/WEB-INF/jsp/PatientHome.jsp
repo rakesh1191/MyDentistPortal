@@ -36,17 +36,21 @@
       </div>
       <div id="collapse2" class="panel-collapse collapse">
         <div class="panel-body">
-  <c:forEach items="${appointments}" var="apt">
-        <c:if test="${apt.userId.userId eq userid}" >
-        <table>
+  		View All my Appointments
+  	    </div>
+        <div class="panel-footer"></div>
+      	<table border="1">
         <tr>
-        <td>${apt.appointmentId}</td><td><a href="rescheduleAppointment.html?id=${apt.appointmentId}">Reschedule</a></td>
+        <th>Appointment ID</th><th>Operations</th>
+        </tr>
+  		<c:forEach items="${appointments}" var="apt">
+        <c:if test="${apt.userId.userId eq userid}" >
+        <tr>
+        <td>${apt.appointmentId}</td><td><a href="rescheduleAppointment.html?id=${apt.appointmentId}">Reschedule My Appointment</a></td>
         </tr>        
-        </table>
         </c:if>
         </c:forEach>
-  	      </div>
-        <div class="panel-footer"><a href="rescheduleAppointment.html?id=${users}">Appointment</a></div>
+  	    </table>
       </div>
     </div>
   

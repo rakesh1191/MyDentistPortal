@@ -62,7 +62,7 @@ public class doctorController {
 		doctor.setUserId(us);
 		System.out.println(doctor.getDesignation());
 		doctorDao.saveDoctor(doctor);
-		return "redirect:doctorProfile.html?userid="+userid;
+		return "redirect:doctorHome.html?userid="+userid;
 	}
 	
 }

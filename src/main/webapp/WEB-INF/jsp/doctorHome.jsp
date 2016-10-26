@@ -36,8 +36,8 @@
         </h4>
       </div>
       <div id="collapse3" class="panel-collapse collapse">
-        <div class="panel-body">---</div>
-        <div class="panel-footer">---</div>
+        <div class="panel-body">Want to check out patient's medical information?</div>
+        <div class="panel-footer">Here's the link for it.</div>
       </div>
     </div>
     
