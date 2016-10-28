@@ -31,10 +31,12 @@
 </script>
 </head>
 <body>
-
 <div class="bootstrap-iso">
- <div class="container-fluid">
-  <div class="row">
+<div class="container-fluid">
+<div class="row">
+<!-- ------------------------------------------------------------------------------------------------- -->
+
+<!-- ------------------------------------------------------------------------------------------------- -->
 <form:form modelAttribute="appointments">
    
    <div class="col-md-6 col-sm-6 col-xs-12">
@@ -63,11 +65,6 @@
 		</form:select>
       
       </div>
-      
-      
-      
-    
-    
     <input type="hidden" name="userid" value="${userid.userId}"/>
     <input type="hidden" name="appid" value="${appointments.appointmentId}"/>
     <div>&nbsp;

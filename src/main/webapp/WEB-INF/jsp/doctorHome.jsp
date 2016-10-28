@@ -12,7 +12,7 @@
 </head>
 <body>
 <div class="container">
-  <h1>Welcome to Home Page</h1>
+  <h1>Welcome ${doctorid}</h1>
   <br><br>
   <div class="panel-group">
     <div class="panel panel-default">
@@ -28,14 +28,7 @@
       </div>
     </div>
   </div>
-  <div class="panel panel-default">
-      <div class="panel-heading">
-        <h4 class="panel-title">
-          <a data-toggle="collapse" href="#collapse2"><h4> Visit records</h4></a>
-        </h4>
-      </div>
-    </div>
-  
+ 
   <div class="panel panel-default">
       <div class="panel-heading">
         <h4 class="panel-title">
@@ -43,15 +36,17 @@
         </h4>
       </div>
       <div id="collapse3" class="panel-collapse collapse">
-        <div class="panel-body">---</div>
-        <div class="panel-footer">---</div>
+        <div class="panel-body">Want to check out patient's medical information?</div>
+        <div class="panel-footer">Here's the link for it.</div>
       </div>
     </div>
     
 </div>
+<form action="logout" method="post">
+<input name="_csrf" type="hidden" value="${_csrf.token}"/>
 <div class="container">
-  <button type="button" class="btn btn-lg btn-info collapsed" type="submit" >Logout</button>
- 
+  <input type="submit" class="btn btn-lg btn-info collapsed" value="Logout" >
 </div>
+</form>
 </body>
 </html>

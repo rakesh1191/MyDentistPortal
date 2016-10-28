@@ -22,17 +22,35 @@
         </h4>
       </div>
       <div id="collapse1" class="panel-collapse collapse">
-        <div class="panel-body">Haven't schedule an appointment? Here's your chance!</div>
-        <div class="panel-footer">Make it. <a href="doctorRegistration.html">View Appointment</a>
+        <div class="panel-body">Want to add new Doctor? Add it then</div>
+        <div class="panel-footer"><a href="doctorRegistration.html">Add New Doctor</a>
         </div>
       </div>
     </div>
   </div>
+  
   <div class="panel panel-default">
       <div class="panel-heading">
         <h4 class="panel-title">
-          <a data-toggle="collapse" href="#collapse2"><h4> Visit records</h4></a>
+          <a data-toggle="collapse" href="#collapse2"><h4>View All Appointment Records</h4></a>
         </h4>
+      </div>
+      <div id="collapse2" class="panel-collapse collapse">
+        <div class="panel-body">Appointment records</div>
+        <div class="panel-footer">
+        <table border="1">
+        	<tr><th>Appointment ID</th><th>Patient ID</th><th>Doctor ID</th><th>Appointment Date</th><th>Appointment Time</th></tr>
+        	<c:forEach items="${appointments}" var="apt">
+        	<tr>
+        	<td>${apt.appointmentId}</td>
+        	<td>${apt.userId.userId}</td>
+        	<td>${apt.doctorId.doctorId}</td>
+        	<td>${apt.appointmentDate}</td>
+        	<td>${apt.appointmentTime}</td>
+        	</tr>        
+        	</c:forEach>
+        </table>
+        </div>
       </div>
     </div>
   
@@ -49,8 +67,11 @@
     </div>
     
 </div>
+<form action="logout" method="post">
+<input name="_csrf" type="hidden" value="${_csrf.token}"/>
 <div class="container">
-  <button type="button" class="btn btn-lg btn-info collapsed" type="submit" >Logout</button>
+  <input type="submit" class="btn btn-lg btn-info collapsed" value="Logout" >
 </div>
+</form>
 </body>
 </html>

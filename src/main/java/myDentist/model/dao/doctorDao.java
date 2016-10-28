@@ -11,6 +11,8 @@ public interface doctorDao {
 
 	Doctor getDoctor(Integer doctorId);
 	
+	List<Doctor> getDoctorbyUserId(Integer userId);
+	
 	List<Doctor> getDoctors();
 	
 	Doctor saveDoctor(Doctor doctor);

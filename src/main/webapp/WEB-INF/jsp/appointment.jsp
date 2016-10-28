@@ -47,28 +47,22 @@
         <spring:bind path="appointmentDate"><input class="form-control" id="appointmentDate" name="appointmentDate" placeholder="MM/DD/YYY" type="text"></spring:bind>
         
       </div>
-      <div>
+      <div>  
       <label for="appointmentTime">Time</label>
-      <spring:bind path="appointmentTime"><input type="text" class="form-control" name="appointmentTime" id="appointmentTime">
-      </spring:bind>
-               <select id="appointmentTime" name="appointmentTime" class="form-control" required >
-								                <option>Select TimeSlot</option>
-												<c:forEach items="${appointments}" var="app">												
-												<c:choose>
-												<c:when test="${param.appointmentDate eq app.appointmentDate}">
-												<option value="${app.appointmentDate}">${app.appointmentDate}</option>
-												</c:when>
-												<c:otherwise>
-												
-												</c:otherwise>
-												</c:choose>												
-												</c:forEach>
-												</select>     
+               <select id="appointmentTime" name="appointmentTime" class="form-control" required>
+								              
+												    <option value="9-10">9-10</option>
+												    <option value="10-11">10-11</option>
+												    <option value="11-12">11-12</option>
+											   		 <option value="12-1">12-1</option>
+											   		 <option value="12-1">1-2</option>
+											   		 <option value="12-1">2-3</option>
+											   		 <option value="12-1">3-4</option>
+											   		 <option value="12-1">4-5</option>
+												</select>  
 	</div>
-	
 	<div  class="form-group">
       <label for="doctorId">   Doctor's Name :</label>
-        
          <select id="doctorname" name="doctorname" class="form-control" required>
 								                <option>Select Doctor</option>
 												<c:forEach items="${doctors}" var="d">												

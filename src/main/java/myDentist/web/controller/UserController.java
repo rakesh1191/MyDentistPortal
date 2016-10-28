@@ -1,7 +1,11 @@
 package myDentist.web.controller;
 
+import javax.servlet.http.HttpSession;
+
+import org.hibernate.Session;
 import org.omg.CORBA.Request;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -16,12 +20,12 @@ import myDentist.model.Appointments;
 import myDentist.model.Patient;
 import myDentist.model.User;
 import myDentist.model.dao.appointmentsDao;
+import myDentist.model.dao.doctorDao;
 import myDentist.model.dao.patientDao;
 import myDentist.model.dao.userDao;
 import myDentist.model.dao.jpa.appointmentsDaoImpl;
 
 @Controller
-//@SessionAttributes(value="getuserid")
 public class UserController {
 	
 	@Autowired
@@ -40,6 +44,22 @@ public class UserController {
 		
 		models.put("users", userDao.getUsers());
 		return "display";
+	}
+	
+	@RequestMapping("/logout.html")
+	public String loginOut(HttpSession session)
+	{	
+		//if(session!=null)
+		session.invalidate();
+		//models.put("users", userDao.getUsers());
+		return "logout.html";
+	}
+	
+	@RequestMapping("/adminHome.html")
+	public String adminHome(ModelMap models)
+	{
+		models.put("appointments", appointmentsDao.getAppointments());
+		return "adminHome";
 	}
 	
 	@RequestMapping(value="/loginPage.html", method=RequestMethod.GET)
@@ -71,7 +91,7 @@ public class UserController {
 				}else if(u.getUserType().equals("admin")){
 					uid=u.getUserId();
 					status.setComplete();
-					return "redirect:display.html";
+					return "redirect:adminHome.html";
 				}
 			}
 				
@@ -118,7 +138,7 @@ public class UserController {
 		user=userDao.saveUser(user);
 		System.out.println("Data saved in db :"+user.getUsername());
 		//redirect to display page
-		return "redirect:loginPage.html";
+		return "redirect:doctorHome.html";
 	}
 	
 	

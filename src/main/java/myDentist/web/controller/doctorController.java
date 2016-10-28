@@ -1,6 +1,7 @@
 package myDentist.web.controller;
 
 import java.lang.reflect.Method;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,6 +30,10 @@ public class doctorController {
 	public String doctorHome(ModelMap models,@RequestParam Integer userid)
 	{
 		models.put("userid", userid);
+		List<Doctor> d=doctorDao.getDoctorbyUserId(userid);
+		models.put("doctorid", d.get(0).getDoctorName().toString());
+		
+		//System.out.println("mmm"+);
 		System.out.println("user 1"+userid);
 		return "doctorHome";
 	}
@@ -57,7 +62,7 @@ public class doctorController {
 		doctor.setUserId(us);
 		System.out.println(doctor.getDesignation());
 		doctorDao.saveDoctor(doctor);
-		return "redirect:doctorProfile.html?userid="+userid;
+		return "redirect:doctorHome.html?userid="+userid;
 	}
 	
 }
