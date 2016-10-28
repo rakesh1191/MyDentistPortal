@@ -26,7 +26,7 @@
       </div>
       <div id="collapse1" class="panel-collapse collapse">
         <div class="panel-body"></div>
-        <div class="panel-footer"><a href="doctorProfile.html?userid=${userid}">View/Edit Profile</a>
+        <div class="panel-footer"><a href="users/doctorProfile.html?userid=${userid}">View/Edit Profile</a>
         </div>
       </div>
     </div>
@@ -54,7 +54,7 @@
       </div>
       <div id="collapse1" class="panel-collapse collapse">
         <div class="panel-body">Haven't schedule an appointment? Here's your chance!</div>
-        <div class="panel-footer">Make it. <a href="appointment.html?userid=${userid}">Appointment</a>
+        <div class="panel-footer">Make it. <a href="users/appointment.html?userid=${userid}">Appointment</a>
         </div>
       </div>
     </div>
@@ -71,13 +71,13 @@
         <c:if test="${apt.userId.userId eq userid}" >
         <table>
         <tr>
-        <td>${apt.appointmentId}</td><td><a href="rescheduleAppointment.html?id=${apt.appointmentId}">Reschedule</a></td>
+        <td>${apt.appointmentId}</td><td><a href="users/rescheduleAppointment.html?id=${apt.appointmentId}">Reschedule</a></td>
         </tr>        
         </table>
         </c:if>
         </c:forEach>
   	      </div>
-        <div class="panel-footer"><a href="rescheduleAppointment.html?id=${users}">Appointment</a></div>
+        <div class="panel-footer"><a href="users/rescheduleAppointment.html?id=${users}">Appointment</a></div>
       </div>
     </div>
   
