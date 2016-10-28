@@ -9,16 +9,18 @@
 	<link rel="stylesheet" type="text/CSS" href="CSS/style.css">
   </head>
   <body>
+  <form action="login" method="post">
     <div class="login">
 	<h1>Login</h1>
-	<form:form modelAttribute="loginPage" role="form">
-	Username : <spring:bind path="username"><input type="text" name="username" id="username" required/></spring:bind><br><br>
-	Password : <spring:bind path="userPassword"><input type="password" name="userPassword" id="userPassword" required/></spring:bind><br><br>
+	
+	Username : <input type="text" name="username" id="username" required/><br><br>
+	Password : <input type="password" name="password" id="password" required/><br><br>
 	<input type="hidden" name="_csrf" value="${_csrf.token}">
-	<button type="submit" class="btn btn-primary btn-block btn-large">Let me in.</button>
-	<center><br><br>
+	<button type="submit" class="btn btn-primary btn-block btn-large" name="login" value="Login" >Let me in.</button>
+	<br><br>
 	<a href="PatientRegistration.html">New Patient ? Sign-up here</a>
- </form:form>
+ 
 </div>
+</form>
   </body>
 </html>

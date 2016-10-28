@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -11,10 +12,40 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
+ 
 <div class="container">
-  <h1>Welcome to Home Page</h1>
+  <h1>Welcome ${doctorid}</h1>
   <br><br>
+   <security:authorize access="hasAnyRole('ADMIN')">
   <div class="panel-group">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" href="#collapse1"><h4>Profile</h4></a>
+        </h4>
+      </div>
+      <div id="collapse1" class="panel-collapse collapse">
+        <div class="panel-body"></div>
+        <div class="panel-footer"><a href="doctorProfile.html?userid=${userid}">View/Edit Profile</a>
+        </div>
+      </div>
+    </div>
+  </div>
+ 
+  <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" href="#collapse3"><h4>View Patient Info</h4></a>
+        </h4>
+      </div>
+      <div id="collapse3" class="panel-collapse collapse">
+        <div class="panel-body">---</div>
+        <div class="panel-footer">---</div>
+      </div>
+    </div>
+    </security:authorize>
+        <security:authorize access="hasAnyRole('USER')">
+        <div class="panel-group">
     <div class="panel panel-default">
       <div class="panel-heading">
         <h4 class="panel-title">
@@ -72,15 +103,15 @@
         <div class="panel-footer">Here's the link for paying the bills.</div>
       </div>
     </div>
+    </security:authorize>
+    
 </div>
 <form action="logout" method="post">
-<input name="_csrf" type="hidden" value="${_csrf.token}"/>
+
 <div class="container">
-  <input type="submit" class="btn btn-lg btn-info collapsed" value="Logout" >
-  <a href="<c:url value='/logout' />">Logout</a>
+  <a href="<c:url value='/logout'/>" class="btn btn-info" role="button">Logout</a>
 </div>
 </form>
+
 </body>
 </html>
-
- 
