@@ -50,7 +50,7 @@
                     <spring:bind path="userContact"><input type="text" class="form-control" name="userContact" id="userContact" placeholder="Enter Contact" required/>
                     </spring:bind>
                 </div>
-                <input type="submit" name="submit" id="submit" value="Submit" class="btn btn-info pull-right">
+                <input type="submit" name="submit" id="submit" value="adminHome" class="btn btn-info pull-right">
             </div>
         </form:form>
     </div>

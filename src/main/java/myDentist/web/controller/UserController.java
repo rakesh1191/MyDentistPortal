@@ -138,7 +138,7 @@ public class UserController {
 		user=userDao.saveUser(user);
 		System.out.println("Data saved in db :"+user.getUsername());
 		//redirect to display page
-		return "redirect:loginPage.html";
+		return "redirect:doctorHome.html";
 	}
 	
 	
