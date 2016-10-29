@@ -12,14 +12,14 @@
 </head>
 <body>
 <div class="container">
-  <h1>Welcome ${doctorid}</h1>
+  <h1>Welcome to Home page</h1>
   <br><br>
   <div class="panel-group">
     <div class="panel panel-default">
       <div class="panel-heading">
-        <h4 class="panel-title">
-          <a data-toggle="collapse" href="#collapse1"><h4>Profile</h4></a>
-        </h4>
+        <h5 class="panel-title">
+          <a data-toggle="collapse" href="#collapse1"><h3>Profile</h3></a>
+        </h5>
       </div>
       <div id="collapse1" class="panel-collapse collapse">
         <div class="panel-body"></div>
@@ -31,9 +31,21 @@
  
   <div class="panel panel-default">
       <div class="panel-heading">
-        <h4 class="panel-title">
-          <a data-toggle="collapse" href="#collapse3"><h4>View Patient Info</h4></a>
-        </h4>
+        <h5 class="panel-title">
+          <a data-toggle="collapse" href="#collapse3"><h3>Make yourself available for Appointments</h3></a>
+        </h5>
+      </div>
+      <div id="collapse3" class="panel-collapse collapse">
+        <div class="panel-body">Set your appointment schedule for the next one week</div>
+        <div class="panel-footer"><a href="SetSchedule.html?userid=${userId}">setSchedule</a></div>
+      </div>
+    </div>
+ 
+  <div class="panel panel-default">
+      <div class="panel-heading">
+        <h5 class="panel-title">
+          <a data-toggle="collapse" href="#collapse3"><h3>View Patient Info</h3></a>
+        </h5>
       </div>
       <div id="collapse3" class="panel-collapse collapse">
         <div class="panel-body">Want to check out patient's medical information?</div>
