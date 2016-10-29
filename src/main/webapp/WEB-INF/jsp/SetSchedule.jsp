@@ -61,6 +61,12 @@
 <form:form>
   <input type="checkbox" name="slot" value="slot910">9-10<br>
   <input type="checkbox" name="slot" value="slot1011"> 10-11<br>
+  <input type="checkbox" name="slot" value="slot1112"> 11-12<br>
+  <input type="checkbox" name="slot" value="slot121"> 12-1<br>
+  <input type="checkbox" name="slot" value="slot12"> 1-2<br>
+  <input type="checkbox" name="slot" value="slot23"> 2-3<br>
+  <input type="checkbox" name="slot" value="slot34"> 3-4<br>
+  <input type="checkbox" name="slot" value="slot45"> 4-5<br>
   <input type="submit" value="Submit">
 </form:form>
   </div>    

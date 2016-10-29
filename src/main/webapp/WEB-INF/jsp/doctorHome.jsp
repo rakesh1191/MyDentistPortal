@@ -37,7 +37,7 @@
       </div>
       <div id="collapse3" class="panel-collapse collapse">
         <div class="panel-body">Set your appointment schedule for the next one week</div>
-        <div class="panel-footer"><a href="SetSchedule.html?userid=${userId}">setSchedule</a></div>
+        <div class="panel-footer"><a href="SetSchedule.html?userid=${userid}">setSchedule</a></div>
       </div>
     </div>
  
@@ -57,6 +57,7 @@
 <form action="logout" method="post">
 <input name="_csrf" type="hidden" value="${_csrf.token}"/>
 <div class="container">
+<input type="hidden" value="${userid}" name="userid"/>
   <input type="submit" class="btn btn-lg btn-info collapsed" value="Logout" >
 </div>
 </form>

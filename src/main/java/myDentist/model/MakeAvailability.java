@@ -13,17 +13,16 @@ public class MakeAvailability {
 
 	@Id
 	@GeneratedValue
-	private Integer id; 
-	
-    public Integer getId() {
-		return id;
-	}
-	public void setId(Integer id) {
-		this.id = id;
-	}
+	private Integer mId; 
 	
 	private String availableDate;
 	
+	public Integer getmId() {
+		return mId;
+	}
+	public void setmId(Integer mId) {
+		this.mId = mId;
+	}
 	@OneToOne
 	private Doctor doctorId;
 	
@@ -36,6 +35,13 @@ public class MakeAvailability {
 	private boolean slot23;
 	private boolean slot34;
 	private boolean slot45;
+	
+	public Integer getId() {
+		return mId;
+	}
+	public void setId(Integer id) {
+		this.mId = id;
+	}
 	
 	public String getAvailableDate() {
 		return availableDate;
