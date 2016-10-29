@@ -3,6 +3,7 @@ package myDentist.web.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.omg.CORBA.Request;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -14,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import myDentist.model.Appointments;
 import myDentist.model.Doctor;
+import myDentist.model.MakeAvailability;
 import myDentist.model.User;
+import myDentist.model.dao.MakeAvailabilityDao;
 import myDentist.model.dao.appointmentsDao;
 import myDentist.model.dao.doctorDao;
 import myDentist.model.dao.patientDao;
@@ -31,6 +34,9 @@ public class appointmentController {
 	
 	@Autowired
 	private appointmentsDao appointmentsDao;
+	
+	@Autowired
+	private MakeAvailabilityDao availabilityDao;
 	
 	@Autowired
 	private patientDao patientDao;
@@ -108,6 +114,30 @@ public class appointmentController {
 		//appointment.setAppointmentId();
 		appointment = appointmentsDao.saveAppointment(appointment);
 		return "redirect:PatientHome.html?userid="+userid;
+	}
+	
+	@RequestMapping(value="/SetSchedule.html",method=RequestMethod.GET)
+	public String SetSchedule( ModelMap models,@RequestParam(required=false) String availableDate)
+	{
+		models.put("setdate", new MakeAvailability());
+		if(availableDate !=null){
+			System.out.println("Available date is : "+availableDate);
+		}
+		return "SetSchedule";
+	}
+	
+	@RequestMapping(value="/SetSchedule.html",method=RequestMethod.POST)
+	public String SetSchedule(@ModelAttribute("setdate") MakeAvailability makeAvailability, ModelMap models,@RequestParam String availableDate,@RequestParam(required=false) List<String> slot)
+	{
+		if(slot!=null){
+			for (String s : slot) {
+			System.out.println("column name"+s);
+			System.out.println("date POST"+availableDate);
+				availabilityDao.setSlots(s,availableDate);
+			}			
+		}else{
+		models.put("availableDate", availableDate);}
+		return "redirect:SetSchedule.html";
 	}
 
 }
