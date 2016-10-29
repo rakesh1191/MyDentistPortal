@@ -2,6 +2,7 @@ package myDentist.web.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import org.omg.CORBA.Request;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -117,26 +118,47 @@ public class appointmentController {
 	}
 	
 	@RequestMapping(value="/SetSchedule.html",method=RequestMethod.GET)
-	public String SetSchedule( ModelMap models,@RequestParam(required=false) String availableDate)
+	public String SetSchedule( ModelMap models,@RequestParam Integer userid,@RequestParam(required=false) String availableDate)
 	{
+		System.out.println("new user"+userid);
 		models.put("setdate", new MakeAvailability());
+		models.put("userid", userid);
 		if(availableDate !=null){
-			System.out.println("Available date is : "+availableDate);
+			System.out.println("Available date is : "+availableDate);			
 		}
 		return "SetSchedule";
 	}
 	
 	@RequestMapping(value="/SetSchedule.html",method=RequestMethod.POST)
-	public String SetSchedule(@ModelAttribute("setdate") MakeAvailability makeAvailability, ModelMap models,@RequestParam String availableDate,@RequestParam(required=false) List<String> slot)
+	public String SetSchedule(@ModelAttribute("setdate") MakeAvailability makeAvailability, ModelMap models,@RequestParam Integer userid,@RequestParam String availableDate,@RequestParam(required=false) List<String> slot)
 	{
+		
+		
+		Random rand = new Random();
+		int  n = rand.nextInt(1000) + 1;		
+		Integer id = n;
+		System.out.println("ID is : "+id);
+		List<Doctor> d=doctorDao.getDoctorbyUserId(userid);
 		if(slot!=null){
+			int count=0;
 			for (String s : slot) {
 			System.out.println("column name"+s);
 			System.out.println("date POST"+availableDate);
-				availabilityDao.setSlots(s,availableDate);
-			}			
+			Integer temp=id;
+			if(count==0){
+				availabilityDao.setSlots(s,availableDate,id,d.get(0));
+			}
+			else{
+					availabilityDao.updateSlots(s, availableDate, temp, d.get(0));
+			}
+			count++;
+			}
+			return "redirect:doctorHome.html?userid="+userid;
 		}else{
-		models.put("availableDate", availableDate);}
+		models.put("availableDate", availableDate);
+		models.put("userid", userid);
+		
+		}
 		return "redirect:SetSchedule.html";
 	}
 
