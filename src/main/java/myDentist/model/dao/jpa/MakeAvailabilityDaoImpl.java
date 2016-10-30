@@ -35,7 +35,7 @@ public class MakeAvailabilityDaoImpl implements MakeAvailabilityDao {
 	@Override
 	public List<MakeAvailability> getAvailabilities() {
 	
-		return entitymanager.createQuery("from User order by availableDate", MakeAvailability.class).getResultList();
+		return entitymanager.createQuery("from MakeAvailability", MakeAvailability.class).getResultList();
 	}
 
 	@Override
@@ -55,5 +55,12 @@ public class MakeAvailabilityDaoImpl implements MakeAvailabilityDao {
 		entitymanager.createNativeQuery(query).executeUpdate();		
 	
 		
+	}
+
+	@Override
+	public List<String> getSlotList(Doctor doctor) {
+		Integer doctorId=doctor.getDoctorId();
+		String query = "from MakeAvailability as mk where mk.doctorId="+doctorId;
+		return entitymanager.createQuery(query).getResultList();
 	}
 }
