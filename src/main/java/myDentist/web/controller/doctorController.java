@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import myDentist.model.Appointments;
 import myDentist.model.Doctor;
 import myDentist.model.User;
+import myDentist.model.dao.appointmentsDao;
 import myDentist.model.dao.doctorDao;
 import myDentist.model.dao.userDao;
 
@@ -24,6 +26,9 @@ public class doctorController {
 	private userDao userDao;
 	
 	@Autowired
+	private appointmentsDao appointmentsDao;
+	
+	@Autowired
 	private doctorDao doctorDao;
 	
 	@RequestMapping(value="/doctorHome.html",method=RequestMethod.GET)
@@ -31,8 +36,9 @@ public class doctorController {
 	{
 		models.put("userid", userid);
 		List<Doctor> d=doctorDao.getDoctorbyUserId(userid);
-		models.put("doctorid", d.get(0).getDoctorName().toString());
-		
+		models.put("doctorname", d.get(0).getDoctorName().toString());
+		models.put("doctorid", d.get(0).getDoctorId());
+		models.put("appointments", appointmentsDao.getAppointments());
 		//System.out.println("mmm"+);
 		System.out.println("user 1"+userid);
 		return "doctorHome";
