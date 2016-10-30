@@ -35,7 +35,7 @@ public class MakeAvailabilityDaoImpl implements MakeAvailabilityDao {
 	@Override
 	public List<MakeAvailability> getAvailabilities() {
 	
-		return entitymanager.createQuery("from User order by availableDate", MakeAvailability.class).getResultList();
+		return entitymanager.createQuery("from MakeAvailability", MakeAvailability.class).getResultList();
 	}
 
 	@Override

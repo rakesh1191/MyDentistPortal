@@ -62,7 +62,7 @@ public class appointmentController {
 	}
 	
 	@RequestMapping(value="/appointment.html", method=RequestMethod.GET)
-	public String takeAppointment(@ModelAttribute("appointments") Appointments appointment,ModelMap models,@RequestParam Integer userid,@RequestParam(required=false) String appointmentDate)
+	public String takeAppointment(@ModelAttribute("appointments") Appointments appointment,ModelMap models,@RequestParam(required=false) Integer doctorId2,@RequestParam(required=false) List<String> slots,@RequestParam Integer userid,@RequestParam(required=false) String appointmentDate)
 	{
 		if(appointmentDate==null){
 		models.put("appointments",appointment);
@@ -74,36 +74,71 @@ public class appointmentController {
 		models.put("userid", userid);
 		models.put("appointments",appointment);
 		models.put("appointmentDate", appointmentDate);
+		
+		}
+		if(slots!=null){
+			System.out.println("GET doctor ="+doctorId2);
+			models.put("slots", slots);
+			models.put("doctorid", doctorId2);
 		}
 		return "appointment";
 		
 	}
+
 	
-	@SuppressWarnings("null")
 	@RequestMapping(value="/appointment.html",method=RequestMethod.POST)
-	public String takeAppointment(@RequestParam Integer userid,@RequestParam Integer doctorId, @RequestParam String appointmentDate,ModelMap models,@RequestParam(required=false) String slot)
+	public String takeAppointment(@RequestParam Integer userid,@RequestParam(required=false) Integer doctorId,@RequestParam(required=false) Integer doctorid, @RequestParam String appointmentDate,ModelMap models,@RequestParam(required=false) String appointmentTime,@RequestParam(required=false) String slot)
 	{		
-		if(slot!=null){
-		System.out.println("Doctor ID is :"+userid+"||||| Selected date is : "+appointmentDate);
-		//appointment.setDoctorId("10");
-		System.out.println("selected slot = "+slot);
-		//Doctor d=doctorDao.getDoctor(doctorId);
-		//appointment.setDoctorId(doctorDao.getDoctor(doctorId));		
-		//System.out.println("value is :"+appointment.getAppointmentDate());
-		//appointment=appointmentsDao.saveAppointment(appointment);
+		if(appointmentTime!=null){
+		System.out.println("Doctor ID is :"+doctorid+"||||| Selected date is : "+appointmentDate);
+		Appointments apt=new Appointments();
 		
-		//	return "redirect:appointment.html";
+		System.out.println("selected slot = "+appointmentTime);
+		Doctor d=doctorDao.getDoctor(doctorid);
+		User u=userDao.getUser(userid);
+		apt.setDoctorId(d);
+		apt.setUserId(u);
+		apt.setAppointmentTime(appointmentTime);
+		apt.setAppointmentDate(appointmentDate);
+		//System.out.println("value is :"+appointment.getAppointmentDate());
+		appointmentsDao.saveAppointment(apt);
+		
+		return "redirect:PatientHome.html?userid="+userid;
 		}
 		else{
-			List<String> slots = null;
+			try{
+			List<String> slots=new ArrayList<String>();
 			Doctor d=doctorDao.getDoctor(doctorId);
-			List<String> mk= availabilityDao.getSlotList(d);
-					
+			MakeAvailability doc = new MakeAvailability();
+			List<MakeAvailability> mk= availabilityDao.getAvailabilities();
+			for (MakeAvailability makeAvailability : mk) {
+				if(makeAvailability.getDoctorId().getDoctorId()==d.getDoctorId()){
+					doc=makeAvailability;
+				}
+			}	
+			boolean b=true;
+			System.out.println("value is "+doc.isSlot1011()+doc.getDoctorId());
+			if(doc.isSlot910()){slots.add("9-10");}
+			if(doc.isSlot1011()){slots.add("10-11");}
+			if(doc.isSlot1112()==b){slots.add("11-12");}
+			if(doc.isSlot121()==b){slots.add("12-1");}
+			if(doc.isSlot12()==b){slots.add("1-2");}
+			if(doc.isSlot23()==b){slots.add("2-3");}
+			if(doc.isSlot34()==b){slots.add("3-4");}
+			if(doc.isSlot45()==b){slots.add("4-5");}
+			
 			System.out.println("LIST"+slots);
 			models.put("appointmentDate", appointmentDate);
+			models.put("slots", slots);
+			models.put("doctorId2", doctorId);
+			System.out.println("POST doctor "+doctorId);
+			}
+			catch (Exception e) {
+			}
+			return "redirect:appointment.html?userid="+userid;
 		}
 		//models.put("appointments",new Appointments());
-		return "redirect:appointment.html?userid="+userid;		
+	
 	}
 	
 	@RequestMapping(value="/rescheduleAppointment.html",method=RequestMethod.GET)

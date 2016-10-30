@@ -71,6 +71,8 @@
 	</div>
     <div class="form-group">
 		<input type="hidden" value="${userid}" name="userid"/>
+		<input type="hidden" value="${doctorid}" name="doctorid"/>
+		
         <input type="submit" name="submit" id="submit" value="Submit" class="btn btn-info pull-right">
       </div>
      <!-- Form code ends --> 
@@ -79,15 +81,14 @@
 </form:form>
 
 <form:form>
-  <input type="checkbox" name="slot" value="slot910">9-10<br>
-  <input type="checkbox" name="slot" value="slot1011"> 10-11<br>
-  <input type="checkbox" name="slot" value="slot1112"> 11-12<br>
-  <input type="checkbox" name="slot" value="slot121"> 12-1<br>
-  <input type="checkbox" name="slot" value="slot12"> 1-2<br>
-  <input type="checkbox" name="slot" value="slot23"> 2-3<br>
-  <input type="checkbox" name="slot" value="slot34"> 3-4<br>
-  <input type="checkbox" name="slot" value="slot45"> 4-5<br>
-  <input type="submit" value="Submit">
+<input type="hidden" value="${doctorid}" name="doctorid"/>
+   <select id="appointmentTime" name="appointmentTime" class="form-control" >
+								                <option>Select slot</option>
+												<c:forEach items="${slots}" var="s">												
+												<option value="${s}">${s}</option>
+												</c:forEach>
+	</select>
+	<input type="submit" name="submit" id="submit" value="Submit" class="btn btn-info">
 </form:form>
 
   </div>    
