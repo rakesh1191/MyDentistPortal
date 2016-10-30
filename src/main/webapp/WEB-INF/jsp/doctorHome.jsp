@@ -41,17 +41,38 @@
       </div>
     </div>
  
-  <div class="panel panel-default">
+<div class="panel panel-default">
       <div class="panel-heading">
         <h5 class="panel-title">
-          <a data-toggle="collapse" href="#collapse3"><h3>View Patient Info</h3></a>
+          <a data-toggle="collapse" href="#collapse4"><h3>View All Appointments</h3></a>
         </h5>
       </div>
-      <div id="collapse3" class="panel-collapse collapse">
-        <div class="panel-body">Want to check out patient's medical information?</div>
-        <div class="panel-footer">Here's the link for it.</div>
+      <div id="collapse4" class="panel-collapse collapse">
+        <div class="panel-body">Check All your appointments here</div>
+        <div class="panel-footer">
+        	<table border="1">
+        <tr>
+        <th>Appointment ID</th><th>Appointment Date</th><th>Appointment Time</th>
+        <th>PatientID</th>
+        <th>Patient Name</th>
+        <th>Operations</th>
+        </tr>
+  		<c:forEach items="${appointments}" var="apt">
+        <c:if test="${apt.doctorId.doctorId eq doctorid}" >
+        <tr>
+        <td>${apt.appointmentId}</td>
+		<td>${apt.appointmentDate}</td>
+		<td>${apt.appointmentTime}</td>
+		<td>${apt.userId.userId}</td>	
+        <td>${apt.userId.username}</td>
+		<td><a href="GenerateReport.html?userid=${apt.userId.userId}&doctorid=${doctorid}">Report</a></td>
+		</tr>        
+        </c:if>
+        </c:forEach>
+  	    </table>
+        </div>
       </div>
-    </div>
+  </div>	 
     
 </div>
 <form action="logout" method="post">
