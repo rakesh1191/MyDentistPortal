@@ -15,6 +15,8 @@ public interface MakeAvailabilityDao {
 	
 	List<MakeAvailability> getAvailabilities();
 	
+	List<String> getSlotList(Doctor doctor);
+	
 	void setSlots(String columnName,String availableDate, Integer id,Doctor userId);
 	
 	void updateSlots(String columnName,String availableDate, Integer id,Doctor userId);

@@ -56,4 +56,11 @@ public class MakeAvailabilityDaoImpl implements MakeAvailabilityDao {
 	
 		
 	}
+
+	@Override
+	public List<String> getSlotList(Doctor doctor) {
+		Integer doctorId=doctor.getDoctorId();
+		String query = "from MakeAvailability as mk where mk.doctorId="+doctorId;
+		return entitymanager.createQuery(query).getResultList();
+	}
 }
