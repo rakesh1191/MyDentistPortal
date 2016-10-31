@@ -6,6 +6,7 @@ import java.util.Random;
 
 import org.omg.CORBA.Request;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Required;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -142,17 +143,46 @@ public class appointmentController {
 	}
 	
 	@RequestMapping(value="/rescheduleAppointment.html",method=RequestMethod.GET)
-	public String rescheduleAppointment(ModelMap models,@RequestParam Integer id)
+	public String rescheduleAppointment(ModelMap models,@RequestParam Integer id,@RequestParam Integer doctorid,@RequestParam String appointmentDate)
 	{
 		Appointments app = appointmentsDao.getAppointment(id);
 		System.out.println("useris"+app.getUserId());
 		models.put("userid", app.getUserId());
+		models.put("doctorid", doctorid);
 		models.put("appointments", appointmentsDao.getAppointment(id));
+		try{
+			List<String> slots=new ArrayList<String>();
+			Doctor d=doctorDao.getDoctor(doctorid);
+			MakeAvailability doc = new MakeAvailability();
+			List<MakeAvailability> mk= availabilityDao.getAvailabilities();
+			for (MakeAvailability makeAvailability : mk) {
+				if(makeAvailability.getDoctorId().getDoctorId()==d.getDoctorId()&&makeAvailability.getAvailableDate().equals(appointmentDate)){
+					doc=makeAvailability;
+				}else{
+					//slots.add("Not Available");
+				}
+				
+			}	
+			boolean b=true;
+			System.out.println("value is "+doc.isSlot1011()+doc.getDoctorId());
+			if(doc.isSlot910()){slots.add("9-10");}
+			if(doc.isSlot1011()){slots.add("10-11");}
+			if(doc.isSlot1112()==b){slots.add("11-12");}
+			if(doc.isSlot121()==b){slots.add("12-1");}
+			if(doc.isSlot12()==b){slots.add("1-2");}
+			if(doc.isSlot23()==b){slots.add("2-3");}
+			if(doc.isSlot34()==b){slots.add("3-4");}
+			if(doc.isSlot45()==b){slots.add("4-5");}
+			
+			models.put("slots", slots);
+			}
+			catch (Exception e) {
+			}
 		return "rescheduleAppointment";
 	}
 	
 	@RequestMapping(value="/rescheduleAppointment.html",method=RequestMethod.POST)
-	public String rescheduleAppointment(@ModelAttribute("appointments") Appointments appointment,@RequestParam Integer userid,@RequestParam Integer appid)
+	public String rescheduleAppointment(@ModelAttribute("appointments") Appointments appointment,@RequestParam Integer doctorid,@RequestParam Integer userid,@RequestParam Integer appid)
 	{
 		//System.out.println("userrrrrrrrrrrrrrrrrrrrr-----"+appointmentsDao.getappointmentId(id));
 		//appointment.setPatientId(userDao.getUser(id));	
@@ -163,7 +193,9 @@ public class appointmentController {
 		System.out.println(appointment.getAppointmentId());
 		//ap.setAppointmentDate(appointment.getAppointmentDate());
 		//ap.setAppointmentTime(appointment.getAppointmentTime());
+		appointment.setDoctorId(ap.getDoctorId());
 		appointment.setUserId(ap.getUserId());
+		//appointment.setAppointmentDate(appointmentDate2);
 		//appointment.setAppointmentId();
 		appointment = appointmentsDao.saveAppointment(appointment);
 		return "redirect:PatientHome.html?userid="+userid;

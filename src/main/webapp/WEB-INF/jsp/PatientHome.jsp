@@ -48,7 +48,7 @@
         <td>${apt.appointmentTime}</td>
         <td>${apt.doctorId.doctorId}</td>
         <td>${apt.doctorId.doctorName}</td>
-        <td><a href="rescheduleAppointment.html?id=${apt.appointmentId}">Edit My appointment</a></td>
+        <td><a href="rescheduleAppointment.html?id=${apt.appointmentId}&doctorid=${apt.doctorId.doctorId}&&appointmentDate=${apt.appointmentDate}">Edit My appointment</a></td>
         </tr>  
         </tbody>      
         </c:if>
@@ -77,7 +77,7 @@
         </tbody>
         </table>
         </div>
-        <div class="panel-footer">Link for updating information.</div>
+        <div class="panel-footer"><a href="editPatient.html?userid=${users.userId}">Edit Profile Here</a></div>
       </div>
     </div>
 
