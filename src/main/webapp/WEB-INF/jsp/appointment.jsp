@@ -57,7 +57,7 @@
     <!-- Form code begins -->
 	<div  class="form-group">
       <label for="doctorId">   Doctor's Name :</label>
-         <select id="doctorId" name="doctorId" class="form-control" >
+         <select id="doctorId" name="doctorId" class="form-control" style="width: 200px">
 								                <option>Select Doctor</option>
 												<c:forEach items="${doctors}" var="d">												
 												<option value="${d.doctorId}">${d.doctorName}</option>
@@ -67,13 +67,13 @@
 	
 	<div  class="form-group">
       <label for="appointmentDate">   Appointment Date :</label>
-         <p>Date: <input type="text" id="datepicker" name="appointmentDate"></p>
+         <p><input type="text" id="datepicker" name="appointmentDate"></p>
 	</div>
     <div class="form-group">
 		<input type="hidden" value="${userid}" name="userid"/>
 		<input type="hidden" value="${doctorid}" name="doctorid"/>
 		
-        <input type="submit" name="submit" id="submit" value="Submit" class="btn btn-info pull-right">
+        <input type="submit" name="submit" id="submit" value="Submit" class="btn btn-info" >
       </div>
      <!-- Form code ends --> 
     </div>
@@ -81,16 +81,18 @@
 </form:form>
 
 <form:form>
+<div class="row">
 <input type="hidden" value="${doctorid}" name="doctorid"/>
-   <select id="appointmentTime" name="appointmentTime" class="form-control" >
+<label for="appointmentDate">   Appointment Time :</label>
+   <select id="appointmentTime" name="appointmentTime" class="form-control" style="width: 200px">
 								                <option>Select slot</option>
 												<c:forEach items="${slots}" var="s">												
 												<option value="${s}">${s}</option>
 												</c:forEach>
 	</select>
-	<input type="submit" name="submit" id="submit" value="Submit" class="btn btn-info">
+	<br><input type="submit" name="submit" id="submit" value="Submit" class="btn btn-info">
+</div>
 </form:form>
-
   </div>    
  </div>
 

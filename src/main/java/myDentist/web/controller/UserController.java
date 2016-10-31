@@ -141,6 +141,25 @@ public class UserController {
 		return "redirect:doctorHome.html";
 	}
 	
+	@RequestMapping(value="/editPatient.html", method=RequestMethod.GET)
+	public String editPatient(ModelMap models,@RequestParam Integer userid)
+	{	
+		User u=userDao.getUser(userid);
+		models.put("user", u);
+		return "editPatient";
+	}
 	
+	@RequestMapping(value="/editPatient.html", method=RequestMethod.POST)
+	public String editPatient(@ModelAttribute ("user") User user,@RequestParam Integer userid)
+	{	
+		User u=userDao.getUser(userid);
+		user.setUsername(u.getUsername());
+		user.setUserPassword(u.getUserPassword());
+		user.setUserType(u.getUserType());
+		user.setDateOfBirth(u.getDateOfBirth());
+		user.setUserId(userid);
+		user=userDao.saveUser(user);
+		return "redirect:PatientHome.html?userid="+userid;
+	}
 	
 }
