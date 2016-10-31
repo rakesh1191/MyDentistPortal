@@ -65,7 +65,8 @@
 		<td>${apt.appointmentTime}</td>
 		<td>${apt.userId.userId}</td>	
         <td>${apt.userId.username}</td>
-		<td><a href="GenerateReport.html?userid=${apt.userId.userId}&doctorid=${doctorid}">Report</a></td>
+		<td><a href="GenerateReport.html?userid=${apt.userId.userId}&doctorid=${doctorid}&user=${userid}">Create/View Report</a></td>
+
 		</tr>        
         </c:if>
         </c:forEach>
