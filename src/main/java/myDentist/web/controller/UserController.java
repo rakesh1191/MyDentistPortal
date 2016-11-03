@@ -94,6 +94,47 @@ public class UserController {
 		return "redirect:loginPage.html";
 	}
 	
+	@RequestMapping(value="/editPatient.html", method=RequestMethod.GET)
+	public String editPatient(ModelMap models,@RequestParam Integer userid)
+	{	
+		User u=userDao.getUser(userid);
+		models.put("user", u);
+		return "editPatient";
+	}
 	
+	@RequestMapping(value="/editPatient.html", method=RequestMethod.POST)
+	public String editPatient(@ModelAttribute ("user") User user,@RequestParam Integer userid)
+	{	
+		User u=userDao.getUser(userid);
+		user.setUsername(u.getUsername());
+		user.setPassword(u.getPassword());
+		user.setUserType(u.getUserType());
+		user.setDateOfBirth(u.getDateOfBirth());
+		user.setUserId(userid);
+		user=userDao.saveUser(user);
+		return "redirect:/users/profile.html?userid="+userid;
+	}
 	
+	@RequestMapping(value="/users/editUser.html", method=RequestMethod.GET)
+	public String editUser(ModelMap models,@RequestParam Integer userid)
+	{	
+		User u=userDao.getUser(userid);
+		models.put("alluser", u);
+		models.put("userid", userid);
+		return "/users/editUser";
+	}
+	
+
+	@RequestMapping(value="/users/editUser.html", method=RequestMethod.POST)
+	public String editUser(@RequestParam Integer userid,@RequestParam(required=false) String Enable,@RequestParam(required=false) String Disable)
+	{	
+		User u=userDao.getUser(userid);
+		if(Enable!=null){
+			u.setEnabled(true);
+		}else{
+			u.setEnabled(false);
+		}
+		userDao.saveUser(u);
+		return "redirect:/users/profile.html?userid="+userid;
+	}
 }

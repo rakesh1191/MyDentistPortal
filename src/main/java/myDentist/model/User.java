@@ -29,6 +29,7 @@ public class User implements UserDetails {
 	private static final long serialVersionUID = 1L;
 	public static final String ROLE_ADMIN = "ROLE_ADMIN";
 	public static final String ROLE_USER = "ROLE_USER";
+	public static final String ROLE_DOCTOR = "ROLE_DOCTOR";
 	public static String getRoleUser() {
 		return ROLE_USER;
 	}
@@ -171,7 +172,7 @@ public class User implements UserDetails {
 	}
 
 	public static String getRoleDoctor() {
-		return ROLE_ADMIN;
+		return ROLE_DOCTOR;
 	}
 
 	@Override

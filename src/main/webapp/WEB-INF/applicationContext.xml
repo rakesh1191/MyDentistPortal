@@ -54,7 +54,8 @@
      <security:csrf disabled="true" />
         <security:form-login login-page="/loginPage.html" />
         <security:logout logout-success-url="/" />
-        <security:intercept-url pattern="/users/**"  access="hasAnyRole('ROLE_ADMIN','ROLE_USER')" />
+        <security:intercept-url pattern="/users/**"  access="hasAnyRole('ROLE_ADMIN','ROLE_USER','ROLE_DOCTOR')" />
+        <security:intercept-url pattern="/appointment/**"  access="hasAnyRole('ROLE_ADMIN','ROLE_USER','ROLE_DOCTOR')" />
     </security:http>
 	
 

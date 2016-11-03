@@ -26,7 +26,7 @@
       </div>
       <div id="collapse1" class="panel-collapse collapse">
         <div class="panel-body"></div>
-        <div class="panel-footer"><a href="/myDentist/users/doctorProfile.html?userid=${userid}">View/Edit Profile</a>
+        <div class="panel-footer"><a href="/doctorProfile.html?userid=${userid}">View/Edit Profile</a>
         </div>
       </div>
     </div>
@@ -40,7 +40,7 @@
       </div>
       <div id="collapse3" class="panel-collapse collapse">
         <div class="panel-body">Set your appointment schedule for the next one week</div>
-        <div class="panel-footer"><a href="/myDentist/users/SetSchedule.html?userid=${userid}">setSchedule</a></div>
+        <div class="panel-footer"><a href="/SetSchedule.html?userid=${userid}">setSchedule</a></div>
       </div>
     </div>
  
@@ -68,7 +68,7 @@
 		<td>${apt.appointmentTime}</td>
 		<td>${apt.userId.userId}</td>	
         <td>${apt.userId.username}</td>
-		<td><a href="/myDentist/users/GenerateReport.html?userid=${apt.userId.userId}&doctorid=${doctorid}&user=${userid}">Create/View Report</a></td>
+		<td><a href="/GenerateReport.html?userid=${apt.userId.userId}&doctorid=${doctorid}&user=${userid}">Create/View Report</a></td>
 
 		</tr>        
         </c:if>
@@ -89,7 +89,7 @@
       <div id="collapse2" class="panel-collapse collapse">
         <div class="panel-body">
         Haven't schedule your appointment! Here's your chance to do it!
-        <a href="/myDentist/appointment/appointment.html?userid=${userid}">Appointment</a>
+        <a href="/appointment.html?userid=${userid}">Appointment</a>
         <br><br>
   		View All my Appointments
   	    </div>
@@ -113,7 +113,7 @@
         <td>${apt.appointmentTime}</td>
         <td>${apt.doctorId.doctorId}</td>
         <td>${apt.doctorId.doctorName}</td>
-        <td><a href="/myDentist/users/rescheduleAppointment.html?id=${apt.appointmentId}&doctorid=${apt.doctorId.doctorId}&&appointmentDate=${apt.appointmentDate}">Edit My appointment</a></td>
+        <td><a href="/rescheduleAppointment.html?id=${apt.appointmentId}&doctorid=${apt.doctorId.doctorId}&&appointmentDate=${apt.appointmentDate}">Edit My appointment</a></td>
         </tr>  
         </tbody>      
         </c:if>
@@ -142,7 +142,7 @@
         </tbody>
         </table>
         </div>
-        <div class="panel-footer"><a href="/myDentist/editPatient.html?userid=${userid}">Edit Profile Here</a></div>
+        <div class="panel-footer"><a href="editPatient.html?userid=${userid}">Edit Profile Here</a></div>
       </div>
     </div>
 
@@ -226,7 +226,7 @@
         	<td>${usr.userId}</td>
         	<td>${usr.userEmail}</td>
         	<td>${usr.userType}</td>
-        	<td><a href="/myDentist/users/editUser.html?userid=${usr.userId}">Enable/Disable User</a></td>
+        	<td><a href="users/editUser.html?userid=${usr.userId}">Enable/Disable User</a></td>
         	</tr>        
         	</c:forEach>
         </table>
