@@ -13,4 +13,6 @@ public interface userDao {
 	User saveUser(User user);
 
 	User getUserByUsername(String username);
+	
+	void saveInAuthorities(Integer userid,String role);
 }

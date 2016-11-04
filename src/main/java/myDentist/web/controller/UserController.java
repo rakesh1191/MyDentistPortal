@@ -1,5 +1,10 @@
 package myDentist.web.controller;
 
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
+
 import javax.servlet.http.HttpSession;
 
 import org.hibernate.Session;
@@ -70,8 +75,12 @@ public class UserController {
 	{	
 		user.setUserType("patient");
 		// save user to database
+		Set<String> roles =new HashSet<String>();
+		roles.add("ROLE_USER");
+		user.setRoles(roles);
 		user=userDao.saveUser(user);
 		System.out.println("Data saved in db :"+user.getUsername());
+		
 		//redirect to display page
 		return "redirect:loginPage.html";
 	}
@@ -131,6 +140,15 @@ public class UserController {
 		User u=userDao.getUser(userid);
 		if(Enable!=null){
 			u.setEnabled(true);
+			Set<String> roles =new HashSet<String>();
+			if(u.getUserType().matches("patient")){
+				roles.add("ROLE_USER");
+			}else if(u.getUserType().matches("doctor")){
+				roles.add("ROLE_DOCTOR");
+			}else{
+				roles.add("ROLE_ADMIN");
+			}
+			u.setRoles(roles);
 		}else{
 			u.setEnabled(false);
 		}

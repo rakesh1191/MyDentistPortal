@@ -48,5 +48,13 @@ public class UserDaoImpl implements userDao {
         return users.size() == 0 ? null : users.get( 0 );
     }
 
+	@Override
+	@Transactional
+	public void saveInAuthorities(Integer userid, String role) {
+		String query = "into authorities values("+userid+","+role+")";
+		entitymanager.createQuery(query).executeUpdate();
+		
+	}
+
 	
 }

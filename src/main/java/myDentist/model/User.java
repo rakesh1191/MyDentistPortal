@@ -75,7 +75,7 @@ public class User implements UserDetails {
 	}
 
 	@Column(nullable = false)
-    private boolean enabled;
+    private boolean enabled=true;
     
     public Set<String> getRoles() {
 		return roles;
@@ -86,7 +86,7 @@ public class User implements UserDetails {
 	}
 	
 	
-
+	
 	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
 	}
