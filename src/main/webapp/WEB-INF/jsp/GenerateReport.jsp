@@ -17,43 +17,40 @@
             <div class="col-sm-10" >
                 <div class="well well-sm" align="center"><strong>Doctor Registration Form</strong></div>
                 <div class="form-group">
-                    <label for="diseaseType">Disease Type : </label>
-                    <form:input path="diseaseType"/>
-                       
-                </div>
-                <div class="form-group">
-                    <label for="allergies">Allergies : </label>
-                    <form:input path="allergies"/>
-                    
+                   <table>
+                   	<tr>
+                   		<td><label for="diseaseType">Disease Type : </label></td>
+                   		<td><form:input path="diseaseType"/></td>
+                   	</tr>
+                   	<tr>
+                   		<td><label for="allergies">Allergies : </label></td>
+                   		<td><form:input path="allergies"/></td>
+                   	</tr>
+                   	<tr>
+                   		<td><label for="labResult">labResult : </label></td>
+                   		<td><form:input path="labResult"/></td>
+                   	</tr>
+                   	<tr>
+                   		<td><label for="immunizations">Immunizations : </label></td>
+                   		<td><form:input path="Immunizations"/></td>
+                   	</tr>
+                   	<tr>
+                   		<td><label for="medicines">Medicines : </label></td>
+                   		<td><form:input path="medicines"/></td>
+                   	</tr>
+                   	<tr>
+                   		<td><label for="doctorComments">doctorComments : </label></td>
+                   		<td><form:input path="doctorComments"/></td>
+                   	</tr>
+                   	<tr>
+                   		<td><label for="billingInfo">Billing Information : </label></td>
+                   		<td><form:input path="billingInfo"/></td>
+                   	</tr>
+                   </table>
              
-                </div>
-                <div class="form-group">
-                    <label for="labResult">labResult : </label>
-                    <form:input path="labResult"/>
-                   
-                </div>
-                <div class="form-group">
-                    <label for="immunizations">Immunizations : </label>
-                    <form:input path="Immunizations"/>
-                   
-                </div>
-                 <div class="form-group">
-                    <label for="medicines">Medicines : </label>
-                     <form:input path="medicines"/>
-                   
-                </div>
-                 <div class="form-group">
-                    <label for="doctorComments">doctorComments : </label>
-                     <form:input path="doctorComments"/>
-                  
-                </div>
-                 <div class="form-group">
-                    <label for="billingInfo">Billing Information : </label>
-                     <form:input path="billingInfo"/>
-                </div>
                 <input type="hidden" name="Patientid" id="Patientid" value="${Patientid}">
-                <input type="submit" name="submit" id="submit" value="Submit" class="btn btn-info pull-right">
-            </div>
+                <input type="submit" name="submit" id="submit" value="Submit" class="btn btn-info">
+            </div></div>
         </form:form>
     </div>
 </div>
