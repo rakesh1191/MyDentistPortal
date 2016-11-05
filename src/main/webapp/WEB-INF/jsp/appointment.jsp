@@ -17,69 +17,81 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
 <title>Take Appointment</title>
-<script>
-    $(document).ready(function(){
-      var date_input=$('input[name="appointmentDate"]'); //our date input has the name "date"
-      var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
-      var options={
-        format: 'mm/dd/yyyy',
-        container: container,
-        todayHighlight: true,
-        autoclose: true,
-      };
-      date_input.datepicker(options);
-    })
-</script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script>
+  $( function() {
+    $( "#datepicker" ).datepicker({ minDate: 0, maxDate: "+7D" });
+  } );
+  </script>
+
+<style>
+
+	body {
+		margin: 40px 10px;
+		padding: 0;
+		font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
+		font-size: 14px;
+	}
+
+	#calendar {
+		max-width: 900px;
+		margin: 0 auto;
+	}
+
+</style>
+
+
 </head>
 <body>
 
 <div class="bootstrap-iso">
  <div class="container-fluid">
-<form:form modelAttribute="appointments">
+<form:form modelAttribute="appointments" role="form">
   <div class="row">
 
    <div class="col-md-6 col-sm-6 col-xs-12">
 
     <!-- Form code begins -->
-    
-      <div class="form-group"> <!-- Date input -->
-        <label class="control-label" for="date">Date</label>
-        <spring:bind path="appointmentDate"><input class="form-control" id="appointmentDate" name="appointmentDate" placeholder="MM/DD/YYY" type="text"></spring:bind>
-        
-      </div>
-      <div>  
-      <label for="appointmentTime">Time</label>
-               <select id="appointmentTime" name="appointmentTime" class="form-control" required>
-								              
-												    <option value="9-10">9-10</option>
-												    <option value="10-11">10-11</option>
-												    <option value="11-12">11-12</option>
-											   		 <option value="12-1">12-1</option>
-											   		 <option value="12-1">1-2</option>
-											   		 <option value="12-1">2-3</option>
-											   		 <option value="12-1">3-4</option>
-											   		 <option value="12-1">4-5</option>
-												</select>  
-	</div>
 	<div  class="form-group">
       <label for="doctorId">   Doctor's Name :</label>
-         <select id="doctorname" name="doctorname" class="form-control" required>
+         <select id="doctorId" name="doctorId" class="form-control" style="width: 200px">
 								                <option>Select Doctor</option>
 												<c:forEach items="${doctors}" var="d">												
-												<option value="${d.doctorName}">${d.doctorName}</option>
+												<option value="${d.doctorId}">${d.doctorName}</option>
 												</c:forEach>
-												</select>
-			</div>      
+		 </select>
+	</div>
+	
+	<div  class="form-group">
+      <label for="appointmentDate">   Appointment Date :</label>
+         <p><input type="text" id="datepicker" name="appointmentDate"></p>
+	</div>
     <div class="form-group">
 		<input type="hidden" value="${userid}" name="userid"/>
-        <input type="submit" name="submit" id="submit" value="Submit" class="btn btn-info pull-right">
+		<input type="hidden" value="${doctorid}" name="doctorid"/>
+		
+        <input type="submit" name="submit" id="submit" value="Submit" class="btn btn-info" >
       </div>
      <!-- Form code ends --> 
-
     </div>
-      </div>
-   
-    
+      </div>    
+</form:form>
+
+<form:form>
+<div class="row">
+<input type="hidden" value="${doctorid}" name="doctorid"/>
+<label for="appointmentDate">   Appointment Time :</label>
+   <select id="appointmentTime" name="appointmentTime" class="form-control" style="width: 200px">
+								                <option>Select slot</option>
+												<c:forEach items="${slots}" var="s">												
+												<option value="${s}">${s}</option>
+												</c:forEach>
+	</select>
+	<br><input type="submit" name="submit" id="submit" value="Submit" class="btn btn-info">
+</div>
 </form:form>
   </div>    
  </div>

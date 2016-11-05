@@ -7,6 +7,8 @@ import javax.persistence.PersistenceContext;
 
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+
+import myDentist.model.Doctor;
 import myDentist.model.MakeAvailability;
 import myDentist.model.User;
 import myDentist.model.dao.MakeAvailabilityDao;
@@ -33,15 +35,32 @@ public class MakeAvailabilityDaoImpl implements MakeAvailabilityDao {
 	@Override
 	public List<MakeAvailability> getAvailabilities() {
 	
-		return entitymanager.createQuery("from User order by availableDate", MakeAvailability.class).getResultList();
+		return entitymanager.createQuery("from MakeAvailability", MakeAvailability.class).getResultList();
 	}
 
 	@Override
 	@Transactional
-	public void setSlots(String columnName,String availableDate) {
+	public void setSlots(String columnName,String availableDate, Integer id,Doctor userId) {
+		//System.out.println("model----"+userId.getDoctorId());
 		boolean b=true;
-		String query = "insert into MakeAvailability (id,availableDate,"+columnName+") values (' ',"+availableDate+","+b+")";
+		String query = "insert into MakeAvailability (mId,availabledate,"+columnName+",doctorId_doctorId) values ("+id+",'"+availableDate+"',"+b+","+userId.getDoctorId()+")";
 		entitymanager.createNativeQuery(query).executeUpdate();		
 	}
 
+	@Override
+	@Transactional
+	public void updateSlots(String columnName, String availableDate, Integer id, Doctor userId) {
+		boolean b=true;
+		String query = "update MakeAvailability set "+columnName+"="+b+" where mId="+id+"";
+		entitymanager.createNativeQuery(query).executeUpdate();		
+	
+		
+	}
+
+	@Override
+	public List<String> getSlotList(Doctor doctor) {
+		Integer doctorId=doctor.getDoctorId();
+		String query = "from MakeAvailability as mk where mk.doctorId="+doctorId;
+		return entitymanager.createQuery(query).getResultList();
+	}
 }

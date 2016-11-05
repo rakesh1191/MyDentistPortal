@@ -1,5 +1,6 @@
 package myDentist.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -13,29 +14,49 @@ public class MakeAvailability {
 
 	@Id
 	@GeneratedValue
-	private Integer id; 
-	
-    public Integer getId() {
-		return id;
-	}
-	public void setId(Integer id) {
-		this.id = id;
-	}
+	private Integer mId; 
 	
 	private String availableDate;
 	
+	public Integer getmId() {
+		return mId;
+	}
+	public void setmId(Integer mId) {
+		this.mId = mId;
+	}
 	@OneToOne
 	private Doctor doctorId;
 	
-	
+	@Column(nullable=false)
 	private boolean slot910;
+	
+	@Column(nullable=false)
 	private boolean slot1011;
+	
+	@Column(nullable=false)
 	private boolean slot1112;
+	
+	@Column(nullable=false)
 	private boolean slot121;
+	
+	@Column(nullable=false)
 	private boolean slot12;
+	
+	@Column(nullable=false)
 	private boolean slot23;
+	
+	@Column(nullable=false)
 	private boolean slot34;
+	
+	@Column(nullable=false)
 	private boolean slot45;
+	
+	public Integer getId() {
+		return mId;
+	}
+	public void setId(Integer id) {
+		this.mId = id;
+	}
 	
 	public String getAvailableDate() {
 		return availableDate;

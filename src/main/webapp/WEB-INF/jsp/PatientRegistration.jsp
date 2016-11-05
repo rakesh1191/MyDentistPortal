@@ -27,7 +27,7 @@
                 </div>
                 <div class="form-group">
                     <label for="userType">Type</label>
-                    <spring:bind path="userType"><input type="text" class="form-control" name="userType" id="userType" value="patient" disabled>
+                    <spring:bind path="userType"><input type="hidden" class="form-control" name="userType" id="userType" value="patient" disabled>
                     </spring:bind>
                 </div>
                 <div class="form-group">
