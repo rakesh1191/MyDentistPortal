@@ -20,8 +20,8 @@
                     	</spring:bind>
                 </div>
                 <div class="form-group">
-                    <label for="userPassword">Password</label>
-                    <spring:bind path="userPassword"><input type="password" class="form-control" name="userPassword" id="userPassword" placeholder="Enter userpassword" required>
+                    <label for="password">Password</label>
+                    <spring:bind path="password"><input type="password" class="form-control" name="password" id="password" placeholder="Enter password" required>
              
                     </spring:bind>
                 </div>
