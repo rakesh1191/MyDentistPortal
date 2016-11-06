@@ -201,6 +201,8 @@ public class appointmentController {
 		return "redirect:profile.html?userid="+userid;
 	}
 	
+	//// NO USE ///
+	
 	@RequestMapping(value="users/SetSchedule.html",method=RequestMethod.GET)
 	public String SetSchedule( ModelMap models,@RequestParam Integer userid,@RequestParam(required=false) String availableDate)
 	{
@@ -245,5 +247,6 @@ public class appointmentController {
 		}
 		return "redirect:SetSchedule.html";
 	}
+			////NO USE ///
 
 }

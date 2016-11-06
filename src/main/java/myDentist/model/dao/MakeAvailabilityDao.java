@@ -21,4 +21,5 @@ public interface MakeAvailabilityDao {
 	
 	void updateSlots(String columnName,String availableDate, Integer id,Doctor userId);
 	
+	
 }

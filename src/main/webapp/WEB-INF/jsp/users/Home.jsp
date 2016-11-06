@@ -263,7 +263,7 @@
       </div>
       <div id="collapse3" class="panel-collapse collapse">
         <div class="panel-body">Set your appointment schedule for the next one week</div>
-        <div class="panel-footer"><a href="/myDentist/users/SetSchedule.html?userid=${userid}">setSchedule</a></div>
+        <div class="panel-footer"><a href="/myDentist/setScheduleDoctor.html?userid=${userid}">setSchedule</a></div>
       </div>
     </div>
  
@@ -300,6 +300,12 @@
         </div>
       </div>
   </div>
+  <form action="logout" method="post">
+
+<div class="container">
+  <a href="<c:url value='/logout'/>" class="btn btn-info" role="button">Logout</a>
+</div>
+</form>
     </security:authorize>
     <security:authorize access="hasAnyRole('ADMIN')">
     <div class="panel-group">
@@ -362,7 +368,12 @@
         </table>
       </div>
     </div>
-    
+    <form action="logout" method="post">
+
+<div class="container">
+  <a href="<c:url value='/logout'/>" class="btn btn-info" role="button">Logout</a>
+</div>
+</form>
 
     </security:authorize>
 <%@ include file="footer.jsp" %>

@@ -52,10 +52,9 @@ public class MakeAvailabilityDaoImpl implements MakeAvailabilityDao {
 	public void updateSlots(String columnName, String availableDate, Integer id, Doctor userId) {
 		boolean b=true;
 		String query = "update MakeAvailability set "+columnName+"="+b+" where mId="+id+"";
-		entitymanager.createNativeQuery(query).executeUpdate();		
-	
-		
+		entitymanager.createNativeQuery(query).executeUpdate();	
 	}
+	
 
 	@Override
 	public List<String> getSlotList(Doctor doctor) {
