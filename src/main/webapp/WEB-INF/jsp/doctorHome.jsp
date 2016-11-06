@@ -12,6 +12,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
+<%@ include file="header.jsp" %>
  <security:authorize access="anonymous">
 <div class="container">
   <h1>Welcome to Home page</h1>
@@ -87,5 +88,6 @@
 </div>
 </form>
 </security:authorize>
+<%@ include file="footer.jsp" %>
 </body>
 </html>

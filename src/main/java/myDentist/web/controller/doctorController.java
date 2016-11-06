@@ -38,7 +38,7 @@ public class doctorController {
 	@Autowired
 	private patientDao patientDao;
 	
-	@RequestMapping(value="/users/profile.html",method=RequestMethod.GET)
+	@RequestMapping(value="/users/Home.html",method=RequestMethod.GET)
 	public String doctorH(ModelMap models)
 	{
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -56,14 +56,14 @@ public class doctorController {
 		}
 		//System.out.println("mmm"+);
 		System.out.println("user 1"+currentPrincipalName);
-		return "/users/profile";
+		return "/users/Home";
 	}
 	
-	@RequestMapping(value="/users/profile.html",method=RequestMethod.POST)
+	@RequestMapping(value="/users/Home.html",method=RequestMethod.POST)
 	public String doctorH(@RequestParam Integer userid)
 	{
 		System.out.println("user 2"+userid);
-		return "redirect:/users/profile.html?userid="+userid;
+		return "redirect:/users/Home.html?userid="+userid;
 	}
 	
 	@RequestMapping(value="/doctorHome.html",method=RequestMethod.GET)

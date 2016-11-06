@@ -11,6 +11,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
+<%@ include file="header.jsp" %>
 <div class="container">
     <div class="row" >
         <form:form modelAttribute="user">
@@ -37,5 +38,6 @@
         </form:form>
     </div>
 </div>
+<%@ include file="footer.jsp" %>
 </body>
 </html>

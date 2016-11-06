@@ -53,7 +53,6 @@ public class UserController {
 	}
 	
 	
-	
 	@RequestMapping("/adminHome.html")
 	public String adminHome(ModelMap models)
 	{
