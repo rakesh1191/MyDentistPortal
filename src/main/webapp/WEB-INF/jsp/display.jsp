@@ -8,6 +8,7 @@
 <title>List of USers</title>
 </head>
 <body>
+<%@ include file="header.jsp" %>
 <h1>List of Users</h1>
 <table border="1">
 <tr><th>ID</th><th>Username</th><th>UserEmail</th><th>Address</th><th>Birthdate</th><th>Contact</th></tr>
@@ -24,5 +25,7 @@
 </table>
 <a href="appointment.html?id=${user.userId}">Take Appointment</a>
 <a href="doctorRegistration.html">Add Doctor</a>
+
+<%@ include file="footer.jsp" %>
 </body>
 </html>

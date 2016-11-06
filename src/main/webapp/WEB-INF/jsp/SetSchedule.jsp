@@ -40,6 +40,7 @@
 
 </head>
 <body>
+<%@ include file="header.jsp" %>
 <div class="bootstrap-iso">
  <div class="container-fluid">
 <form:form modelAttribute="setdate" role="form">
@@ -74,6 +75,6 @@
 </form:form>
   </div>    
  </div>
-
+<%@ include file="footer.jsp" %>
 </body>
 </html>
