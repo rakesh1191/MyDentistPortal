@@ -6,6 +6,7 @@ import java.util.Random;
 
 import org.omg.CORBA.Request;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Required;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -61,7 +62,7 @@ public class appointmentController {
 		
 	}
 	
-	@RequestMapping(value="/appointment.html", method=RequestMethod.GET)
+	@RequestMapping(value="/appointment/appointment.html", method=RequestMethod.GET)
 	public String takeAppointment(@ModelAttribute("appointments") Appointments appointment,ModelMap models,@RequestParam(required=false) Integer doctorId2,@RequestParam(required=false) List<String> slots,@RequestParam Integer userid,@RequestParam(required=false) String appointmentDate)
 	{
 		if(appointmentDate==null){
@@ -81,12 +82,12 @@ public class appointmentController {
 			models.put("slots", slots);
 			models.put("doctorid", doctorId2);
 		}
-		return "appointment";
+		return "/appointment/appointment";
 		
 	}
 
 	
-	@RequestMapping(value="/appointment.html",method=RequestMethod.POST)
+	@RequestMapping(value="/appointment/appointment.html",method=RequestMethod.POST)
 	public String takeAppointment(@RequestParam Integer userid,@RequestParam(required=false) Integer doctorId,@RequestParam(required=false) Integer doctorid, @RequestParam String appointmentDate,ModelMap models,@RequestParam(required=false) String appointmentTime,@RequestParam(required=false) String slot)
 	{		
 		if(appointmentTime!=null){
@@ -103,7 +104,7 @@ public class appointmentController {
 		//System.out.println("value is :"+appointment.getAppointmentDate());
 		appointmentsDao.saveAppointment(apt);
 		
-		return "redirect:PatientHome.html?userid="+userid;
+		return "redirect:/users/profile.html?userid="+userid;
 		}
 		else{
 			try{
@@ -135,24 +136,53 @@ public class appointmentController {
 			}
 			catch (Exception e) {
 			}
-			return "redirect:appointment.html?userid="+userid;
+			return "redirect:/appointment/appointment.html?userid="+userid;
 		}
 		//models.put("appointments",new Appointments());
 	
 	}
 	
-	@RequestMapping(value="/rescheduleAppointment.html",method=RequestMethod.GET)
-	public String rescheduleAppointment(ModelMap models,@RequestParam Integer id)
+	@RequestMapping(value="/users/rescheduleAppointment.html",method=RequestMethod.GET)
+	public String rescheduleAppointment(ModelMap models,@RequestParam Integer id,@RequestParam Integer doctorid,@RequestParam String appointmentDate)
 	{
 		Appointments app = appointmentsDao.getAppointment(id);
 		System.out.println("useris"+app.getUserId());
 		models.put("userid", app.getUserId());
+		models.put("doctorid", doctorid);
 		models.put("appointments", appointmentsDao.getAppointment(id));
-		return "rescheduleAppointment";
+		try{
+			List<String> slots=new ArrayList<String>();
+			Doctor d=doctorDao.getDoctor(doctorid);
+			MakeAvailability doc = new MakeAvailability();
+			List<MakeAvailability> mk= availabilityDao.getAvailabilities();
+			for (MakeAvailability makeAvailability : mk) {
+				if(makeAvailability.getDoctorId().getDoctorId()==d.getDoctorId()&&makeAvailability.getAvailableDate().equals(appointmentDate)){
+					doc=makeAvailability;
+				}else{
+					//slots.add("Not Available");
+				}
+				
+			}	
+			boolean b=true;
+			System.out.println("value is "+doc.isSlot1011()+doc.getDoctorId());
+			if(doc.isSlot910()){slots.add("9-10");}
+			if(doc.isSlot1011()){slots.add("10-11");}
+			if(doc.isSlot1112()==b){slots.add("11-12");}
+			if(doc.isSlot121()==b){slots.add("12-1");}
+			if(doc.isSlot12()==b){slots.add("1-2");}
+			if(doc.isSlot23()==b){slots.add("2-3");}
+			if(doc.isSlot34()==b){slots.add("3-4");}
+			if(doc.isSlot45()==b){slots.add("4-5");}
+			
+			models.put("slots", slots);
+			}
+			catch (Exception e) {
+			}
+		return "/users/rescheduleAppointment";
 	}
 	
-	@RequestMapping(value="/rescheduleAppointment.html",method=RequestMethod.POST)
-	public String rescheduleAppointment(@ModelAttribute("appointments") Appointments appointment,@RequestParam Integer userid,@RequestParam Integer appid)
+	@RequestMapping(value="/users/rescheduleAppointment.html",method=RequestMethod.POST)
+	public String rescheduleAppointment(@ModelAttribute("appointments") Appointments appointment,@RequestParam Integer doctorid,@RequestParam Integer userid,@RequestParam Integer appid)
 	{
 		//System.out.println("userrrrrrrrrrrrrrrrrrrrr-----"+appointmentsDao.getappointmentId(id));
 		//appointment.setPatientId(userDao.getUser(id));	
@@ -163,13 +193,17 @@ public class appointmentController {
 		System.out.println(appointment.getAppointmentId());
 		//ap.setAppointmentDate(appointment.getAppointmentDate());
 		//ap.setAppointmentTime(appointment.getAppointmentTime());
+		appointment.setDoctorId(ap.getDoctorId());
 		appointment.setUserId(ap.getUserId());
+		//appointment.setAppointmentDate(appointmentDate2);
 		//appointment.setAppointmentId();
 		appointment = appointmentsDao.saveAppointment(appointment);
-		return "redirect:PatientHome.html?userid="+userid;
+		return "redirect:profile.html?userid="+userid;
 	}
 	
-	@RequestMapping(value="/SetSchedule.html",method=RequestMethod.GET)
+	//// NO USE ///
+	
+	@RequestMapping(value="users/SetSchedule.html",method=RequestMethod.GET)
 	public String SetSchedule( ModelMap models,@RequestParam Integer userid,@RequestParam(required=false) String availableDate)
 	{
 		System.out.println("new user"+userid);
@@ -178,10 +212,10 @@ public class appointmentController {
 		if(availableDate !=null){
 			System.out.println("Available date is : "+availableDate);			
 		}
-		return "SetSchedule";
+		return "users/SetSchedule";
 	}
 	
-	@RequestMapping(value="/SetSchedule.html",method=RequestMethod.POST)
+	@RequestMapping(value="users/SetSchedule.html",method=RequestMethod.POST)
 	public String SetSchedule(@ModelAttribute("setdate") MakeAvailability makeAvailability, ModelMap models,@RequestParam Integer userid,@RequestParam String availableDate,@RequestParam(required=false) List<String> slot)
 	{
 		
@@ -205,7 +239,7 @@ public class appointmentController {
 			}
 			count++;
 			}
-			return "redirect:doctorHome.html?userid="+userid;
+			return "redirect:profile.html?userid="+userid;
 		}else{
 		models.put("availableDate", availableDate);
 		models.put("userid", userid);
@@ -213,5 +247,6 @@ public class appointmentController {
 		}
 		return "redirect:SetSchedule.html";
 	}
+			////NO USE ///
 
 }

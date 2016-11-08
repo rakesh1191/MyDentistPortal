@@ -11,4 +11,8 @@ public interface userDao {
 	List<User> getUsers();	
 	
 	User saveUser(User user);
+
+	User getUserByUsername(String username);
+	
+	void saveInAuthorities(Integer userid,String role);
 }

@@ -1,11 +1,24 @@
 package myDentist.web.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Collection;
+import java.util.GregorianCalendar;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Random;
+import java.util.Set;
+
 import javax.servlet.http.HttpSession;
 
 import org.hibernate.Session;
 import org.omg.CORBA.Request;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -17,8 +30,11 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
 import myDentist.model.Appointments;
+import myDentist.model.Doctor;
+import myDentist.model.MakeAvailability;
 import myDentist.model.Patient;
 import myDentist.model.User;
+import myDentist.model.dao.MakeAvailabilityDao;
 import myDentist.model.dao.appointmentsDao;
 import myDentist.model.dao.doctorDao;
 import myDentist.model.dao.patientDao;
@@ -35,8 +51,10 @@ public class UserController {
 	private appointmentsDao appointmentsDao;
 	
 	@Autowired
-	private patientDao patientDao;
+	private doctorDao doctorDao;
 	
+	@Autowired
+	private MakeAvailabilityDao makeAvailabilityDao;
 	
 	@RequestMapping("/display.html")
 	public String displayUser(ModelMap models)
@@ -46,61 +64,12 @@ public class UserController {
 		return "display";
 	}
 	
-	@RequestMapping("/logout.html")
-	public String loginOut(HttpSession session)
-	{	
-		//if(session!=null)
-		session.invalidate();
-		//models.put("users", userDao.getUsers());
-		return "logout.html";
-	}
 	
 	@RequestMapping("/adminHome.html")
 	public String adminHome(ModelMap models)
 	{
 		models.put("appointments", appointmentsDao.getAppointments());
 		return "adminHome";
-	}
-	
-	@RequestMapping(value="/loginPage.html", method=RequestMethod.GET)
-	public String loginPage(ModelMap models)
-	{	
-		models.put("users", userDao.getUsers());
-		return "loginPage";
-	}
-	int uid=0;
-	@RequestMapping(value="/loginPage.html", method=RequestMethod.POST)
-	public String loginPage(@ModelAttribute ("user") User user,BindingResult result, ModelMap models,SessionStatus status)
-	{	
-		System.out.println(user.getUsername());
-		System.out.println(user.getUserPassword());
-		System.out.println(user.getUserType());
-		
-		for(User u : userDao.getUsers()){
-			if(user.getUsername().equals(u.getUsername())&& user.getUserPassword().equals(u.getUserPassword())){
-				if(u.getUserType().equals("patient")){
-					models.put("userid", u.getUserId());
-					//uid=u.getUserId();
-					status.setComplete();
-					return "redirect:PatientHome.html";
-				}else if(u.getUserType().equals("doctor")){
-					models.put("userid", u.getUserId());
-					uid=u.getUserId();
-					status.setComplete();
-					return "redirect:doctorHome.html";
-				}else if(u.getUserType().equals("admin")){
-					uid=u.getUserId();
-					status.setComplete();
-					return "redirect:adminHome.html";
-				}
-			}
-				
-		}
-		if(!result.hasErrors()){
-			return "loginPage.html";
-		}
-		
-		return "loginPage.html";
 	}
 	
 	
@@ -117,8 +86,12 @@ public class UserController {
 	{	
 		user.setUserType("patient");
 		// save user to database
+		Set<String> roles =new HashSet<String>();
+		roles.add("ROLE_USER");
+		user.setRoles(roles);
 		user=userDao.saveUser(user);
 		System.out.println("Data saved in db :"+user.getUsername());
+		
 		//redirect to display page
 		return "redirect:loginPage.html";
 	}
@@ -138,9 +111,114 @@ public class UserController {
 		user=userDao.saveUser(user);
 		System.out.println("Data saved in db :"+user.getUsername());
 		//redirect to display page
-		return "redirect:doctorHome.html";
+		return "redirect:loginPage.html";
 	}
 	
+	@RequestMapping(value="/editPatient.html", method=RequestMethod.GET)
+	public String editPatient(ModelMap models,@RequestParam Integer userid)
+	{	
+		User u=userDao.getUser(userid);
+		models.put("user", u);
+		return "editPatient";
+	}
 	
+	@RequestMapping(value="/editPatient.html", method=RequestMethod.POST)
+	public String editPatient(@ModelAttribute ("user") User user,@RequestParam Integer userid)
+	{	
+		User u=userDao.getUser(userid);
+		user.setUsername(u.getUsername());
+		user.setPassword(u.getPassword());
+		user.setUserType(u.getUserType());
+		user.setDateOfBirth(u.getDateOfBirth());
+		user.setUserId(userid);
+		user=userDao.saveUser(user);
+		return "redirect:/users/profile.html?userid="+userid;
+	}
 	
+	@RequestMapping(value="/users/editUser.html", method=RequestMethod.GET)
+	public String editUser(ModelMap models,@RequestParam Integer userid)
+	{	
+		User u=userDao.getUser(userid);
+		models.put("alluser", u);
+		models.put("userid", userid);
+		return "/users/editUser";
+	}
+	
+
+	@RequestMapping(value="/users/editUser.html", method=RequestMethod.POST)
+	public String editUser(@RequestParam Integer userid,@RequestParam(required=false) String Enable,@RequestParam(required=false) String Disable)
+	{	
+		User u=userDao.getUser(userid);
+		if(Enable!=null){
+			u.setEnabled(true);
+			Set<String> roles =new HashSet<String>();
+			if(u.getUserType().matches("patient")){
+				roles.add("ROLE_USER");
+			}else if(u.getUserType().matches("doctor")){
+				roles.add("ROLE_DOCTOR");
+			}else{
+				roles.add("ROLE_ADMIN");
+			}
+			u.setRoles(roles);
+		}else{
+			u.setEnabled(false);
+		}
+		userDao.saveUser(u);
+		return "redirect:/users/profile.html?userid="+userid;
+	}
+	
+	@RequestMapping(value="/setScheduleDoctor.html",method=RequestMethod.GET)
+	public String setSDoctor(ModelMap models, @RequestParam Integer userid)	{
+		
+		 	Calendar now = Calendar.getInstance();
+		    SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy");
+		    String[] days = new String[7];
+		    int delta = -now.get(GregorianCalendar.DAY_OF_WEEK) + 2; 
+		    for (int i = 0; i < 7; i++)
+		    {
+		        days[i] = format.format(now.getTime());
+		        now.add(Calendar.DATE, 1);
+		    }
+		    System.out.println(Arrays.toString(days));
+		    models.put("dates", days);
+		    models.put("userid", userid);
+		    java.util.List<String> slots=Arrays.asList("9-10","10-11","11-12");
+		    models.put("slots",slots);
+		return "setScheduleDoctor";
+	}
+	
+	@RequestMapping(value="/setScheduleDoctor.html", method=RequestMethod.POST)
+	public String setSDoctor(@RequestParam java.util.List<String> getindex, @RequestParam Integer userid, ModelMap models)	{
+		
+		System.out.println("result is"+getindex);
+		
+		for (String g : getindex) {
+			String[] date=g.split(" ");
+			String slot =date[0];
+			String str = slot.replace("-", "");
+			System.out.println("slot is  :"+str);
+			String availableDate = date[1];
+			//
+			Random rand = new Random();
+			int  n = rand.nextInt(1000) + 1;		
+			Integer id = n;
+			System.out.println("ID is : "+id);
+			List<Doctor> d=doctorDao.getDoctorbyUserId(userid);
+			List<MakeAvailability> m= makeAvailabilityDao.getAvailabilities();
+			List<String> dts=new ArrayList<String>();
+			int prevoiusID=0;
+			for (MakeAvailability makeAvailability : m) {
+				dts.add(makeAvailability.getAvailableDate());
+				if(makeAvailability.getAvailableDate().matches(availableDate)){
+					 prevoiusID= makeAvailability.getmId();
+				}
+			}
+			if(dts.contains(availableDate)){
+				makeAvailabilityDao.updateSlots(str, availableDate,prevoiusID, d.get(0));
+			}else{
+				makeAvailabilityDao.setSlots(str,availableDate,id,d.get(0));
+			}
+		}
+		return "redirect:/users/Home.html?userid="+userid;
+	}
 }

@@ -9,6 +9,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 </head>
 <body>
+<%@ include file="header.jsp" %>
 <div class="container">
     <div class="row" >
         <form:form modelAttribute="user">
@@ -20,14 +21,14 @@
                     	</spring:bind>
                 </div>
                 <div class="form-group">
-                    <label for="userPassword">Enter Password</label>
-                    <spring:bind path="userPassword"><input type="password" class="form-control" name="userPassword" id="userPassword" placeholder="Enter userpassword" required>
+                    <label for="password">Enter Password</label>
+                    <spring:bind path="password"><input type="password" class="form-control" name="password" id="password" placeholder="Enter password" required>
              
                     </spring:bind>
                 </div>
                 <div class="form-group">
                     <label for="userType">Type</label>
-                    <spring:bind path="userType"><input type="text" class="form-control" name="userType" id="userType" value="patient" disabled>
+                    <spring:bind path="userType"><input type="hidden" class="form-control" name="userType" id="userType" value="patient" disabled>
                     </spring:bind>
                 </div>
                 <div class="form-group">
@@ -55,5 +56,6 @@
         </form:form>
     </div>
 </div>
+<%@ include file="footer.jsp" %>
 </body>
 </html>
