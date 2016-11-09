@@ -1,8 +1,15 @@
 package myDentist.web.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Collection;
+import java.util.GregorianCalendar;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
+import java.util.Random;
 import java.util.Set;
 
 import javax.servlet.http.HttpSession;
@@ -23,8 +30,11 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
 import myDentist.model.Appointments;
+import myDentist.model.Doctor;
+import myDentist.model.MakeAvailability;
 import myDentist.model.Patient;
 import myDentist.model.User;
+import myDentist.model.dao.MakeAvailabilityDao;
 import myDentist.model.dao.appointmentsDao;
 import myDentist.model.dao.doctorDao;
 import myDentist.model.dao.patientDao;
@@ -41,8 +51,10 @@ public class UserController {
 	private appointmentsDao appointmentsDao;
 	
 	@Autowired
-	private patientDao patientDao;
+	private doctorDao doctorDao;
 	
+	@Autowired
+	private MakeAvailabilityDao makeAvailabilityDao;
 	
 	@RequestMapping("/display.html")
 	public String displayUser(ModelMap models)
@@ -153,5 +165,60 @@ public class UserController {
 		}
 		userDao.saveUser(u);
 		return "redirect:/users/profile.html?userid="+userid;
+	}
+	
+	@RequestMapping(value="/setScheduleDoctor.html",method=RequestMethod.GET)
+	public String setSDoctor(ModelMap models, @RequestParam Integer userid)	{
+		
+		 	Calendar now = Calendar.getInstance();
+		    SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy");
+		    String[] days = new String[7];
+		    int delta = -now.get(GregorianCalendar.DAY_OF_WEEK) + 2; 
+		    for (int i = 0; i < 7; i++)
+		    {
+		        days[i] = format.format(now.getTime());
+		        now.add(Calendar.DATE, 1);
+		    }
+		    System.out.println(Arrays.toString(days));
+		    models.put("dates", days);
+		    models.put("userid", userid);
+		    java.util.List<String> slots=Arrays.asList("9-10","10-11","11-12","12-1","1-2","2-3","3-4","4-5");
+		    models.put("slots",slots);
+		return "setScheduleDoctor";
+	}
+	
+	@RequestMapping(value="/setScheduleDoctor.html", method=RequestMethod.POST)
+	public String setSDoctor(@RequestParam java.util.List<String> getindex, @RequestParam Integer userid, ModelMap models)	{
+		
+		System.out.println("result is"+getindex);
+		
+		for (String g : getindex) {
+			String[] date=g.split(" ");
+			String slot =date[0];
+			String str = slot.replace("-", "");
+			System.out.println("slot is  :"+str);
+			String availableDate = date[1];
+			//
+			Random rand = new Random();
+			int  n = rand.nextInt(1000) + 1;		
+			Integer id = n;
+			System.out.println("ID is : "+id);
+			List<Doctor> d=doctorDao.getDoctorbyUserId(userid);
+			List<MakeAvailability> m= makeAvailabilityDao.getAvailabilities();
+			List<String> dts=new ArrayList<String>();
+			int prevoiusID=0;
+			for (MakeAvailability makeAvailability : m) {
+				dts.add(makeAvailability.getAvailableDate());
+				if(makeAvailability.getAvailableDate().matches(availableDate)){
+					 prevoiusID= makeAvailability.getmId();
+				}
+			}
+			if(dts.contains(availableDate)){
+				makeAvailabilityDao.updateSlots(str, availableDate,prevoiusID, d.get(0));
+			}else{
+				makeAvailabilityDao.setSlots(str,availableDate,id,d.get(0));
+			}
+		}
+		return "redirect:/users/Home.html?userid="+userid;
 	}
 }
