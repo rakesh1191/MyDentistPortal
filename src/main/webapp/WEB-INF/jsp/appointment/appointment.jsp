@@ -45,29 +45,41 @@
 
 
 </head>
+
 <body>
-<%@ include file="../header.jsp" %>
+
 <div class="bootstrap-iso">
  <div class="container-fluid">
-<form:form modelAttribute="appointments" role="form">
-  <div class="row">
 
-   <div class="col-md-6 col-sm-6 col-xs-12">
+<form:form modelAttribute="appointments" role="form">
+  <div align="center">
+
+   
 
     <!-- Form code begins -->
 	<div  class="form-group">
       <label for="doctorId">   Doctor's Name :</label>
          <select id="doctorId" name="doctorId" class="form-control" style="width: 200px">
 								                <option>Select Doctor</option>
-												<c:forEach items="${doctors}" var="d">												
-												<option value="${d.doctorId}">${d.doctorName}</option>
+												<c:forEach items="${doctors}" var="d">	
+												<c:if test="${doctorid eq d.doctorId}">
+												<option value="${d.doctorId}" selected>${d.doctorName}</option>
+												</c:if>
+												<option value="${d.doctorId}">${d.doctorName}</option>												
 												</c:forEach>
+												
 		 </select>
 	</div>
 	
 	<div  class="form-group">
       <label for="appointmentDate">   Appointment Date :</label>
-         <p><input type="text" id="datepicker" name="appointmentDate"></p>
+      
+      
+      
+         <p><input type="text" id="datepicker" name="appointmentDate" value="${appointmentDate}"></p>
+      
+      
+      
 	</div>
     <div class="form-group">
 		<input type="hidden" value="${userid}" name="userid"/>
@@ -76,11 +88,12 @@
         <input type="submit" name="submit" id="submit" value="Submit" class="btn btn-info" >
       </div>
      <!-- Form code ends --> 
-    </div>
+   
       </div>    
 </form:form>
-
+<c:if test="${slots ne null}">
 <form:form>
+<div align="center">
 <div class="row">
 <input type="hidden" value="${doctorid}" name="doctorid"/>
 <label for="appointmentDate">   Appointment Time :</label>
@@ -92,9 +105,15 @@
 	</select>
 	<br><input type="submit" name="submit" id="submit" value="Submit" class="btn btn-info">
 </div>
+<div><br/>
+<a href="/myDentist/appointment/appointment.html?userid=${userid}" class="btn-primary btn-sm active" role="button">Reset</a>
+</div>
+</div>
 </form:form>
+</c:if>
+
   </div>    
  </div>
-<%@ include file="../footer.jsp" %>
+
 </body>
 </html>

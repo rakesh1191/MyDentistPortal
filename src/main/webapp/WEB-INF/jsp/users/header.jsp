@@ -11,15 +11,15 @@
 	Smartphone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony Ericsson, Motorola web design" />
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 <!-- //Custom Theme files -->
-<link href="css/bootstrap.css" type="text/css" rel="stylesheet" media="all">
-<link href="css/style.css" type="text/css" rel="stylesheet" media="all">
-<link rel="stylesheet" href="css/flexslider.css" type="text/css" media="screen" />
+<link href="../css/bootstrap.css" type="text/css" rel="stylesheet" media="all">
+<link href="../css/style.css" type="text/css" rel="stylesheet" media="all">
+<link rel="stylesheet" href="../css/flexslider.css" type="text/css" media="screen" />
 <!-- js -->
-<script src="js/jquery-1.11.1.min.js"></script> 
+<script src="../js/jquery-1.11.1.min.js"></script> 
 <!-- //js -->
 <!-- start-smooth-scrolling-->
-<script type="text/javascript" src="js/move-top.js"></script>
-<script type="text/javascript" src="js/easing.js"></script>	
+<script type="text/javascript" src="../js/move-top.js"></script>
+<script type="text/javascript" src="../js/easing.js"></script>	
 <script type="text/javascript">
 		jQuery(document).ready(function($) {
 			$(".scroll").click(function(event){		
@@ -37,7 +37,7 @@
 		<nav class="navbar navbar-default">
 			<div class="container">
 				<div class="navbar-header navbar-left">
-					<h1><a href="Home.html"><img src="images/logo.png" alt="">My Dentist Portal</a></h1>
+					<h1><a href="Home.html"><img src="../images/logo.png" alt="">My Dentist Portal</a></h1>
 				</div>
 				<!--navigation-->
 				<div class="header-text navbar-left">
