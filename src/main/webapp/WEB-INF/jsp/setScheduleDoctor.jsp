@@ -4,8 +4,11 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Set Schedule</title>
 <style>
     td{
         cursor:pointer;
@@ -61,9 +64,11 @@ $(document).ready(function(){
 </script>
 </head>
 <body>
+<%@ include file="header.jsp" %>
 <form action="setScheduleDoctor.html" method="post">
-<div id="result"> </div>
-    <table id="myTable" border="1" style="border-collapse: collapse;" cellpadding="8">
+<div id="result"> 
+	<div align="center">Set Schedule</div>
+    <br/><table  id="myTable" border="1" style="border-collapse: collapse;" align="center" cellpadding="1">
         <!--1st ROW-->
        <tr>
        <th></th>
@@ -76,17 +81,18 @@ $(document).ready(function(){
 		        <tr>
 		            <th>${slot}</th>
 		            <c:forEach items="${dates}" var="date">
-		            <td><input type="checkbox" name="chb[]" value="slot${slot} ${date}"><BR></td>		            
+		            	<td><input type="checkbox" name="chb[]" value="slot${slot} ${date}" checked><BR></td>		            
 					 </c:forEach>
 		        </tr>
         	</c:forEach>
        
        
-    </table>
-    
+    </table><br/>
+    <div align="center"><input type="submit" value="Submit" id="btntest"/></div>
+    </div>
     <input type="hidden" id="rs" name="getindex" style="width: 500px">
    	<input type="hidden" name="userid" value="${userid}">
-    <input type="submit" value="Click" id="btntest" />
+   
     </form>
 </body>
 </html>

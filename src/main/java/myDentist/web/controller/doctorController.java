@@ -60,9 +60,13 @@ public class doctorController {
 	}
 	
 	@RequestMapping(value="/users/Home.html",method=RequestMethod.POST)
-	public String doctorH(@RequestParam Integer userid)
+	public String doctorH(@RequestParam Integer userid,@RequestParam (required=false) Integer aptid)
 	{
 		System.out.println("user 2"+userid);
+		if(aptid!=null){
+			Appointments ap =appointmentsDao.getAppointmentbyAptid(aptid);
+			appointmentsDao.deleteAppointments(ap);
+		}
 		return "redirect:/users/Home.html?userid="+userid;
 	}
 	
@@ -86,6 +90,24 @@ public class doctorController {
 		return "redirect:users/profile.html?userid="+userid;
 	}
 	
+	//
+	@RequestMapping(value="/users/CancelApt.html",method=RequestMethod.GET)
+	public String cancelApt(ModelMap models,@RequestParam Integer aptid)
+	{
+		models.put("aptid", aptid);
+		return "/users/CancelApt";
+	}
+	
+	@RequestMapping(value="/users/CancelApt.html",method=RequestMethod.POST)
+	public String cancelApt(@RequestParam Integer aptid,@RequestParam Integer userid)
+	{
+		System.out.println("Apt id:"+aptid);
+		Appointments ap =appointmentsDao.getAppointmentbyAptid(aptid);
+		appointmentsDao.deleteAppointments(ap);
+		return "redirect:users/Home.html?userid="+userid;
+	}
+	
+	//
 	@RequestMapping(value="users/doctorProfile.html",method=RequestMethod.GET)
 	public String doctorProfile(ModelMap models,@RequestParam Integer userid)
 	{

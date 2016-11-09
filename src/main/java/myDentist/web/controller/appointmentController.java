@@ -75,12 +75,16 @@ public class appointmentController {
 		models.put("userid", userid);
 		models.put("appointments",appointment);
 		models.put("appointmentDate", appointmentDate);
-		
+		models.put("slots", null);
 		}
 		if(slots!=null){
+			
 			System.out.println("GET doctor ="+doctorId2);
+			models.put("doctors", doctorDao.getDoctors());
 			models.put("slots", slots);
+			models.put("userid", userid);
 			models.put("doctorid", doctorId2);
+			models.put("appointmentDate", appointmentDate);
 		}
 		return "/appointment/appointment";
 		
@@ -104,7 +108,7 @@ public class appointmentController {
 		//System.out.println("value is :"+appointment.getAppointmentDate());
 		appointmentsDao.saveAppointment(apt);
 		
-		return "redirect:/users/profile.html?userid="+userid;
+		return "redirect:/appointment/appointment.html?userid="+userid;
 		}
 		else{
 			try{
@@ -119,14 +123,23 @@ public class appointmentController {
 			}	
 			boolean b=true;
 			System.out.println("value is "+doc.isSlot1011()+doc.getDoctorId());
-			if(doc.isSlot910()){slots.add("9-10");}
-			if(doc.isSlot1011()){slots.add("10-11");}
+			if(doc.isSlot910()==b){slots.add("9-10");}
+			if(doc.isSlot1011()==b){slots.add("10-11");}
 			if(doc.isSlot1112()==b){slots.add("11-12");}
 			if(doc.isSlot121()==b){slots.add("12-1");}
 			if(doc.isSlot12()==b){slots.add("1-2");}
 			if(doc.isSlot23()==b){slots.add("2-3");}
 			if(doc.isSlot34()==b){slots.add("3-4");}
 			if(doc.isSlot45()==b){slots.add("4-5");}
+			
+			List<Appointments> ap= appointmentsDao.getAppointments();
+			
+			for (Appointments appointments : ap) {
+					if(appointments.getDoctorId().getDoctorId().equals(d.getDoctorId())&& appointments.getAppointmentDate().matches(appointmentDate))
+					{
+						slots.remove(appointments.getAppointmentTime()); 
+					}
+			}
 			
 			System.out.println("LIST"+slots);
 			models.put("appointmentDate", appointmentDate);
@@ -175,6 +188,7 @@ public class appointmentController {
 			if(doc.isSlot45()==b){slots.add("4-5");}
 			
 			models.put("slots", slots);
+			
 			}
 			catch (Exception e) {
 			}

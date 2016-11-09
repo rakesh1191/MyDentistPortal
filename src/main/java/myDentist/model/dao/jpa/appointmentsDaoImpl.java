@@ -53,10 +53,13 @@ public class appointmentsDaoImpl implements appointmentsDao{
 		
 		return entitymanager.createQuery("from Appointments order by appointmentId", Appointments.class).getResultList();
 	}
+
+	@Override
+	@Transactional
+	public void deleteAppointments(Appointments apt) {
+		String query="delete from Appointments where appointmentId="+apt.getAppointmentId();
+		javax.persistence.Query query1 = entitymanager.createQuery(query);
+		query1.executeUpdate();
+	}
 	
-	//@Override
-	//public Appointments updateAppointments(Appointments appointments)
-	//{
-		//return entitymanager.createQuery("update Appointments set");
-	//}
 }

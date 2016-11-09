@@ -182,7 +182,7 @@ public class UserController {
 		    System.out.println(Arrays.toString(days));
 		    models.put("dates", days);
 		    models.put("userid", userid);
-		    java.util.List<String> slots=Arrays.asList("9-10","10-11","11-12");
+		    java.util.List<String> slots=Arrays.asList("9-10","10-11","11-12","12-1","1-2","2-3","3-4","4-5");
 		    models.put("slots",slots);
 		return "setScheduleDoctor";
 	}

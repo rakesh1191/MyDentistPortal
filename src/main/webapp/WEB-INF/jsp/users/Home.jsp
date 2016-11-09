@@ -140,7 +140,7 @@
 	<!--copy-right-->
 	</security:authorize>
 	    <security:authorize access="hasAnyRole('USER')">
-          <div class="panel-group">
+          <br/><div class="panel-group">
   <div class="panel panel-default">
       <div class="panel-heading">
         <h5 class="panel-title">
@@ -175,6 +175,11 @@
         <td>${apt.doctorId.doctorId}</td>
         <td>${apt.doctorId.doctorName}</td>
         <td><a href="/myDentist/users/rescheduleAppointment.html?id=${apt.appointmentId}&doctorid=${apt.doctorId.doctorId}&&appointmentDate=${apt.appointmentDate}">Edit My appointment</a></td>
+        <td><form action="Home.html" method="post">
+        <input type="submit" name="Delete" value="Delete Apt">
+        <input type="hidden" name="aptid" value="${apt.appointmentId}">
+        <input type="hidden" name="userid" value="${userid}">
+        </form></td>
         </tr>  
         </tbody>      
         </c:if>
@@ -239,8 +244,11 @@
 </div>
 
     </security:authorize>
-    <security:authorize access="hasAnyRole('DOCTOR')">
-<div class="panel-group">
+    <security:authorize access="hasAnyRole('DOCTOR')" >
+    
+    <div style="height: 400px">
+
+<div class="panel-group" >
     <div class="panel panel-default">
       <div class="panel-heading">
         <h5 class="panel-title">
@@ -306,8 +314,10 @@
   <a href="<c:url value='/logout'/>" class="btn btn-info" role="button">Logout</a>
 </div>
 </form>
+</div>
     </security:authorize>
     <security:authorize access="hasAnyRole('ADMIN')">
+    <br/>
     <div class="panel-group">
     <div class="panel panel-default">
       <div class="panel-heading">
@@ -317,7 +327,7 @@
       </div>
       <div id="collapse1" class="panel-collapse collapse">
         <div class="panel-body">Want to add new Doctor? Add it then</div>
-        <div class="panel-footer"><a href="doctorRegistration.html">Add New Doctor</a>
+        <div class="panel-footer"><a href="../doctorRegistration.html">Add New Doctor</a>
         </div>
       </div>
     </div>
