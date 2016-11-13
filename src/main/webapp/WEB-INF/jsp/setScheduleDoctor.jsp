@@ -68,7 +68,8 @@ $(document).ready(function(){
 <form action="setScheduleDoctor.html" method="post">
 <div id="result"> 
 	<div align="center">Set Schedule</div>
-    <br/><table  id="myTable" border="1" style="border-collapse: collapse;" align="center" cellpadding="1">
+    <br/>
+    <table  id="myTable" border="1" style="border-collapse: collapse;" align="center" cellpadding="1">
         <!--1st ROW-->
        <tr>
        <th></th>
@@ -76,17 +77,49 @@ $(document).ready(function(){
         <th>${date}</th>
         </c:forEach>
         </tr>
-        
-        	<c:forEach items="${slots}" var="slot">
+<c:set var="i" value="0"></c:set>
+<c:set var="j" value="0"></c:set>              
+        	<c:forEach items="${slots}" var="slot" varStatus="m" >
 		        <tr>
 		            <th>${slot}</th>
-		            <c:forEach items="${dates}" var="date">
-		            	<td><input type="checkbox" name="chb[]" value="slot${slot} ${date}" checked><BR></td>		            
-					 </c:forEach>
+		            <c:forEach items="${dates}" var="date" varStatus="n" >
+		            <td>
+		           <c:choose>
+		           <c:when test="${hashset[dates[n.index]][m.index] eq true}">
+		           	 <input type="checkbox" name="chb[]" value="slot${slot} ${date}" checked="checked"><BR>
+		           </c:when>
+		           <c:otherwise>
+		           <input type="checkbox" name="chb[]" value="slot${slot} ${date}"><BR>
+		           </c:otherwise>
+		           </c:choose>
+		           
+		            </td>
+		            </c:forEach>
+		            
+		            
+			            	<%-- <c:forEach items="${hashset}" var="h">
+			            	
+			            	<td>
+			            	${dates[j]}
+					        	<c:forEach items="${hashset[dates[j]]}" var="hash">
+					        	
+					            	<c:if test="${hash eq true}">
+					            			<input type="checkbox" name="chb[]" value="slot${slot} ${date}" checked><BR>
+									 </c:if>
+									 	<c:if test="${hash eq null or hash ne true}">
+					            			<input type="checkbox" name="chb[]" value="slot${slot} ${date}"><BR>
+					           		    </c:if>									 
+									
+									</c:forEach>
+										</td>	
+							        <c:set var="i" value="${i+1}"></c:set>
+						 </c:forEach> --%>
+						 
+						 <c:set var="j" value="${j+1}"></c:set> 
+		        
 		        </tr>
         	</c:forEach>
-       
-       
+        	
     </table><br/>
     <div align="center"><input type="submit" value="Submit" id="btntest"/></div>
     </div>

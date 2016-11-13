@@ -5,7 +5,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collection;
+import java.util.Dictionary;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -108,7 +110,12 @@ public class UserController {
 	{	
 		user.setUserType("doctor");
 		// save user to database
-		user=userDao.saveUser(user);
+		Integer id=user.getUserId();
+		User u=userDao.getUser(id);
+		Set<String> roles =new HashSet<String>();
+		roles.add("ROLE_DOCTOR");
+		u.setRoles(roles);
+		userDao.saveUser(u);		
 		System.out.println("Data saved in db :"+user.getUsername());
 		//redirect to display page
 		return "redirect:loginPage.html";
@@ -132,7 +139,7 @@ public class UserController {
 		user.setDateOfBirth(u.getDateOfBirth());
 		user.setUserId(userid);
 		user=userDao.saveUser(user);
-		return "redirect:/users/profile.html?userid="+userid;
+		return "redirect:/users/Home.html?userid="+userid;
 	}
 	
 	@RequestMapping(value="/users/editUser.html", method=RequestMethod.GET)
@@ -164,26 +171,41 @@ public class UserController {
 			u.setEnabled(false);
 		}
 		userDao.saveUser(u);
-		return "redirect:/users/profile.html?userid="+userid;
+		return "redirect:/users/Home.html?userid="+userid;
 	}
 	
 	@RequestMapping(value="/setScheduleDoctor.html",method=RequestMethod.GET)
 	public String setSDoctor(ModelMap models, @RequestParam Integer userid)	{
 		
-		 	Calendar now = Calendar.getInstance();
-		    SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy");
-		    String[] days = new String[7];
-		    int delta = -now.get(GregorianCalendar.DAY_OF_WEEK) + 2; 
-		    for (int i = 0; i < 7; i++)
-		    {
-		        days[i] = format.format(now.getTime());
-		        now.add(Calendar.DATE, 1);
-		    }
-		    System.out.println(Arrays.toString(days));
-		    models.put("dates", days);
-		    models.put("userid", userid);
-		    java.util.List<String> slots=Arrays.asList("9-10","10-11","11-12","12-1","1-2","2-3","3-4","4-5");
-		    models.put("slots",slots);
+		Calendar now = Calendar.getInstance();
+	    SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy");
+	    String[] days = new String[7];
+	    int delta = -now.get(GregorianCalendar.DAY_OF_WEEK) + 2; 
+	    for (int i = 0; i < 7; i++)
+	    {
+	        days[i] = format.format(now.getTime());
+	        now.add(Calendar.DATE, 1);
+	    }
+	    System.out.println(Arrays.toString(days));
+	    models.put("dates", days);
+	    models.put("userid", userid);
+	    java.util.List<String> slots=Arrays.asList("9-10","10-11","11-12","12-1","1-2","2-3","3-4","4-5");
+	    models.put("slots",slots);
+			//look for previous records
+			List<Boolean> bslot=new ArrayList<>();
+			HashMap<String, List<Boolean>> dc = new HashMap<String, List<Boolean>>();
+			dc.put("date", bslot);
+			List<MakeAvailability> make=makeAvailabilityDao.getAvailabilities();
+			for (MakeAvailability mA : make) {
+				if(mA.getDoctorId().getUserId().getUserId().equals(userid)&& Arrays.asList(days).contains(mA.getAvailableDate())){	
+					bslot=Arrays.asList(mA.isSlot910(),mA.isSlot1011(),mA.isSlot1112(),mA.isSlot121(),
+							mA.isSlot12(),mA.isSlot23(),mA.isSlot34(),mA.isSlot45());
+					dc.put(mA.getAvailableDate(), bslot);
+				}
+			}
+			models.put("hashset", dc);
+			//
+		 	
 		return "setScheduleDoctor";
 	}
 	
@@ -219,6 +241,22 @@ public class UserController {
 				makeAvailabilityDao.setSlots(str,availableDate,id,d.get(0));
 			}
 		}
+		return "redirect:/users/Home.html?userid="+userid;
+	}
+	
+	@RequestMapping(value="/users/changePassword.html", method=RequestMethod.GET)
+	public String changePassword(ModelMap models,@RequestParam Integer userid)
+	{	
+		User u=userDao.getUser(userid);
+		models.put("user", u);
+		return "/users/changePassword";
+	}
+	
+	@RequestMapping(value="/users/changePassword.html", method=RequestMethod.POST)
+	public String changePassword(@RequestParam Integer userid,@RequestParam String password)
+	{	
+		User u=userDao.getUser(userid);
+		u.setPassword(password);
 		return "redirect:/users/Home.html?userid="+userid;
 	}
 }

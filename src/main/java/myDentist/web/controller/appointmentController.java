@@ -212,7 +212,7 @@ public class appointmentController {
 		//appointment.setAppointmentDate(appointmentDate2);
 		//appointment.setAppointmentId();
 		appointment = appointmentsDao.saveAppointment(appointment);
-		return "redirect:profile.html?userid="+userid;
+		return "redirect:/users/Home.html?userid="+userid;
 	}
 	
 	//// NO USE ///
@@ -253,7 +253,7 @@ public class appointmentController {
 			}
 			count++;
 			}
-			return "redirect:profile.html?userid="+userid;
+			return "redirect:/users/Home.html?userid="+userid;
 		}else{
 		models.put("availableDate", availableDate);
 		models.put("userid", userid);

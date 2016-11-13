@@ -32,6 +32,8 @@
 
     <bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
 
+	<bean id="InitBean" class="myDentist.notification.initializeTimer" init-method="init"/>
+	
     <context:annotation-config />
 
     <tx:annotation-driven />
