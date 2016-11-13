@@ -125,7 +125,7 @@ public class doctorController {
 		doctor.setUserId(us);
 		System.out.println(doctor.getDesignation());
 		doctorDao.saveDoctor(doctor);
-		return "redirect:profile.html?userid="+userid;
+		return "redirect:/users/Home.html?userid="+userid;
 	}
 
 	@RequestMapping(value="users/GenerateReport.html",method=RequestMethod.GET)
@@ -158,6 +158,6 @@ public class doctorController {
 		}
 		//System.out.println(p.getAddress());
 		report= patientDao.savePatient(report);
-		return "redirect:profile.html?userid="+user;
+		return "redirect:/users/Home.html?userid="+userid;
 	}
 }

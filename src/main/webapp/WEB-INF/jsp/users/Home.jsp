@@ -209,6 +209,7 @@
         </table>
         </div>
         <div class="panel-footer"><a href="/myDentist/editPatient.html?userid=${userid}">Edit Profile Here</a></div>
+        <div class="panel-footer"><a href="/myDentist/users/changePassword.html?userid=${userid}">Change Password</a></div>
       </div>
     </div>
 

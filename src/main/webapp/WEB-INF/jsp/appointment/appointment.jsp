@@ -84,8 +84,9 @@
     <div class="form-group">
 		<input type="hidden" value="${userid}" name="userid"/>
 		<input type="hidden" value="${doctorid}" name="doctorid"/>
-		
-        <input type="submit" name="submit" id="submit" value="Submit" class="btn btn-info" >
+		<c:if test="${slots==null}">
+        	<input type="submit" name="submit" id="submit" value="Submit" class="btn btn-info" >
+      	</c:if>
       </div>
      <!-- Form code ends --> 
    
@@ -106,7 +107,7 @@
 	<br><input type="submit" name="submit" id="submit" value="Submit" class="btn btn-info">
 </div>
 <div><br/>
-<a href="/myDentist/appointment/appointment.html?userid=${userid}" class="btn-primary btn-sm active" role="button">Reset</a>
+<a href="/myDentist/appointment/appointment.html?userid=${userid}" class="btn-primary btn-sm active" role="button">Take Different Time Slot</a>
 </div>
 </div>
 </form:form>
