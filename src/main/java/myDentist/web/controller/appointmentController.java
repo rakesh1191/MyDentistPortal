@@ -117,15 +117,15 @@ public class appointmentController {
 			MakeAvailability doc = new MakeAvailability();
 			List<MakeAvailability> mk= availabilityDao.getAvailabilities();
 			for (MakeAvailability makeAvailability : mk) {
-				if(makeAvailability.getDoctorId().getDoctorId()==d.getDoctorId()){
+				if(makeAvailability.getDoctorId().getDoctorId()==d.getDoctorId()&&makeAvailability.getAvailableDate().matches(appointmentDate)){
 					doc=makeAvailability;
 				}
 			}	
 			boolean b=true;
 			System.out.println("value is "+doc.isSlot1011()+doc.getDoctorId());
-			if(doc.isSlot910()==b){slots.add("9-10");}
-			if(doc.isSlot1011()==b){slots.add("10-11");}
-			if(doc.isSlot1112()==b){slots.add("11-12");}
+			if(doc.isSlot910()){slots.add("9-10");}
+			if(doc.isSlot1011()){slots.add("10-11");}
+			if(doc.isSlot1112()){slots.add("11-12");}
 			if(doc.isSlot121()==b){slots.add("12-1");}
 			if(doc.isSlot12()==b){slots.add("1-2");}
 			if(doc.isSlot23()==b){slots.add("2-3");}
@@ -212,7 +212,7 @@ public class appointmentController {
 		//appointment.setAppointmentDate(appointmentDate2);
 		//appointment.setAppointmentId();
 		appointment = appointmentsDao.saveAppointment(appointment);
-		return "redirect:profile.html?userid="+userid;
+		return "redirect:/users/Home.html?userid="+userid;
 	}
 	
 	//// NO USE ///
@@ -253,7 +253,7 @@ public class appointmentController {
 			}
 			count++;
 			}
-			return "redirect:profile.html?userid="+userid;
+			return "redirect:/users/Home.html?userid="+userid;
 		}else{
 		models.put("availableDate", availableDate);
 		models.put("userid", userid);
