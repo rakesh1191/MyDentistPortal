@@ -58,7 +58,7 @@ $(document).ready(function(){
  	
     document.getElementById('btntest').onclick = function(){
     	  var selchb = getSelectedChbox(this.form);     // gets the array returned by getSelectedChbox()
-    	  alert(selchb);
+    	 // alert(selchb);
     	}
 });
 </script>

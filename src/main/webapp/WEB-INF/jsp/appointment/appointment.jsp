@@ -97,6 +97,7 @@
 <div align="center">
 <div class="row">
 <input type="hidden" value="${doctorid}" name="doctorid"/>
+<input type="hidden" value="${appointmentDate}" name="appointmentDate"/>
 <label for="appointmentDate">   Appointment Time :</label>
    <select id="appointmentTime" name="appointmentTime" class="form-control" style="width: 200px">
 								                <option>Select slot</option>
@@ -106,11 +107,12 @@
 	</select>
 	<br><input type="submit" name="submit" id="submit" value="Submit" class="btn btn-info">
 </div>
+
+</div>
+</form:form>
 <div><br/>
 <a href="/myDentist/appointment/appointment.html?userid=${userid}" class="btn-primary btn-sm active" role="button">Take Different Time Slot</a>
 </div>
-</div>
-</form:form>
 </c:if>
 
   </div>    
