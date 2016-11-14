@@ -35,41 +35,6 @@
 <!-- footer -->
 	<div class="footer">
 		<div class="container">
-			<div class="footer-grids">
-				<div class="col-md-3 footer-grid">
-					<h3>patients & Visitors</h3>
-					<ul>
-						<li><a>Find a Doctor</a></li>
-						<li><a>Information For patients</a></li>
-						<li><a>Information For visitors</a></li>
-					</ul>
-				</div>
-				<div class="col-md-3 footer-grid">
-					<h3>research</h3>
-					<ul>
-						<li><a>Reaserch Highlights</a></li>
-						<li><a>Resources For Professionals</a></li>
-						<li><a>Finding Opportunities</a></li>
-					</ul>
-				</div>
-				<div class="col-md-3 footer-grid">
-					<h3>education & Training</h3>
-					<ul>
-						<li><a>Patient Health Library</a></li>
-						<li><a>Residency & Fellowship</a></li>
-						<li><a>Information</a></li>
-					</ul>
-				</div>
-				<div class="col-md-3 footer-grid">
-					<h3>community</h3>
-					<ul>
-						<li><a>Community Health & Wellness</a></li>
-						<li><a>Community Relations</a></li>
-						<li><a>Community Services & Resources</a></li>
-					</ul>
-				</div>
-				<div class="clearfix"> </div>
-			</div>
 			<div class="footer-grds">
 				<ul>
 					<li><a href="#">Privacy Policy |</a></li>

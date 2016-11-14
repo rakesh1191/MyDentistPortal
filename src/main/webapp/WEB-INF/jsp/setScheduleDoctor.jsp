@@ -64,7 +64,7 @@ $(document).ready(function(){
 </script>
 </head>
 <body>
-<%@ include file="header.jsp" %>
+<%@ include file="/WEB-INF/header.jsp" %>
 <form action="setScheduleDoctor.html" method="post">
 <div id="result"> 
 	<div align="center">Set Schedule</div>
@@ -128,4 +128,5 @@ $(document).ready(function(){
    
     </form>
 </body>
+<%@ include file="/WEB-INF/footer.jsp" %>
 </html>

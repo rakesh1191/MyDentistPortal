@@ -9,7 +9,7 @@
 <title></title>
 </head>
 <body>
-<%@ include file="../header.jsp" %>
+<%@ include file="/WEB-INF/header.jsp" %>
  <div id="collapse3" class="panel-collapse collapse">
         <form:form>
          <table border="1">
@@ -34,6 +34,6 @@
         </table>
         </form:form>
       </div>
-<%@ include file="../footer.jsp" %>
+<%@ include file="/WEB-INF/footer.jsp" %>
 </body>
 </html>

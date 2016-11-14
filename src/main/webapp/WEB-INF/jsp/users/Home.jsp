@@ -387,7 +387,7 @@
 </form>
 
     </security:authorize>
-<%@ include file="footer.jsp" %>
+<%@ include file="/WEB-INF/footer.jsp" %>
 	<!--//copy-right-->
 	<!--smooth-scrolling-of-move-up-->
 	<script type="text/javascript">
