@@ -108,7 +108,7 @@ public class appointmentController {
 		//System.out.println("value is :"+appointment.getAppointmentDate());
 		appointmentsDao.saveAppointment(apt);
 		
-		return "redirect:/appointment/appointment.html?userid="+userid;
+		return "redirect:/users/Home.html?userid="+userid;
 		}
 		else{
 			try{
@@ -174,7 +174,7 @@ public class appointmentController {
 				}else{
 					//slots.add("Not Available");
 				}
-				
+					
 			}	
 			boolean b=true;
 			System.out.println("value is "+doc.isSlot1011()+doc.getDoctorId());

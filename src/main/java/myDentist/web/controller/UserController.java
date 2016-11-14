@@ -95,7 +95,7 @@ public class UserController {
 		System.out.println("Data saved in db :"+user.getUsername());
 		
 		//redirect to display page
-		return "redirect:loginPage.html";
+		return "redirect:/users/Home.html?userid="+user.getUserId();
 	}
 	
 	@RequestMapping(value="/doctorRegistration.html", method=RequestMethod.GET)
@@ -111,14 +111,13 @@ public class UserController {
 		user.setUserType("doctor");
 		// save user to database
 		Integer id=user.getUserId();
-		User u=userDao.getUser(id);
 		Set<String> roles =new HashSet<String>();
 		roles.add("ROLE_DOCTOR");
-		u.setRoles(roles);
-		userDao.saveUser(u);		
+		user.setRoles(roles);
+		user=userDao.saveUser(user);		
 		System.out.println("Data saved in db :"+user.getUsername());
 		//redirect to display page
-		return "redirect:loginPage.html";
+		return "redirect:/users/Home.html?userid="+id;
 	}
 	
 	@RequestMapping(value="/editPatient.html", method=RequestMethod.GET)
@@ -249,14 +248,19 @@ public class UserController {
 	{	
 		User u=userDao.getUser(userid);
 		models.put("user", u);
+		models.put("userid", userid);
 		return "/users/changePassword";
 	}
 	
 	@RequestMapping(value="/users/changePassword.html", method=RequestMethod.POST)
-	public String changePassword(@RequestParam Integer userid,@RequestParam String password)
+	public String changePassword(@RequestParam Integer userid,@RequestParam String inputPassword,@RequestParam String previousPassword)
 	{	
 		User u=userDao.getUser(userid);
-		u.setPassword(password);
+		if(previousPassword.equals(u.getPassword())){
+			//System.out.println(previousPassword);
+			u.setPassword(inputPassword);
+			userDao.saveUser(u);
+		}
 		return "redirect:/users/Home.html?userid="+userid;
 	}
 }

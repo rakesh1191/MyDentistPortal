@@ -9,8 +9,8 @@
 <title></title>
 </head>
 <body>
-<%@ include file="/WEB-INF/header.jsp" %>
- <div id="collapse3" class="panel-collapse collapse">
+<%@ include file="/WEB-INF/header.jsp" %><br/>
+ <div style="height: 200px" align="center" >
         <form:form>
          <table border="1">
         	<tr><th>User ID</th><th>User Email</th><th>Type</th><th></th></tr>
