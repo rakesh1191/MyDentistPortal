@@ -21,7 +21,7 @@
   <link rel="stylesheet" href="/resources/demos/style.css">
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-  <script>
+  <script type="text/javascript">
   $( function() {
     $( "#datepicker" ).datepicker({ minDate: 0, maxDate: "+7D" });
   } );
@@ -89,7 +89,6 @@
 <c:if test="${slots ne null}">
 <form:form>
 <input type="hidden" value="${doctorid}" name="doctorid"/>
-<input type="hidden" value="${appointmentDate}" name="appointmentDate"/>
 <table class="table table-bordered" style="width:500px;">
 <tr>
 <td><label for="appointmentDate">   Appointment Time :</label>
