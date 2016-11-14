@@ -11,15 +11,15 @@
 	Smartphone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony Ericsson, Motorola web design" />
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 <!-- //Custom Theme files -->
-<link href="css/bootstrap.css" type="text/css" rel="stylesheet" media="all">
-<link href="css/style.css" type="text/css" rel="stylesheet" media="all">
+<link href="../css/bootstrap.css" type="text/css" rel="stylesheet" media="all">
+<link href="../css/style.css" type="text/css" rel="stylesheet" media="all">
 <link rel="stylesheet" href="css/flexslider.css" type="text/css" media="screen" />
 <!-- js -->
-<script src="js/jquery-1.11.1.min.js"></script> 
+<script src="../js/jquery-1.11.1.min.js"></script> 
 <!-- //js -->
 <!-- start-smooth-scrolling-->
-<script type="text/javascript" src="js/move-top.js"></script>
-<script type="text/javascript" src="js/easing.js"></script>	
+<script type="text/javascript" src="../js/move-top.js"></script>
+<script type="text/javascript" src="../js/easing.js"></script>	
 <script type="text/javascript">
 		jQuery(document).ready(function($) {
 			$(".scroll").click(function(event){		
@@ -33,6 +33,7 @@
 </head>
 <body>
 <!-- footer -->
+<center>
 	<div class="footer">
 		<div class="container">
 			<div class="footer-grds">
@@ -41,10 +42,11 @@
 					<li><a href="contact.html">Contact |</a></li>
 					<li><a href="#">Terms of Use</a></li>
 				</ul>
-				<p>Copyright © 2015 Dental Clinic. All Rights Reserved </p>
+				<p>Copyright © 2016 My Dentist. All Rights Reserved </p>
 			</div>
 		</div>
 	</div>
+</center>
 <!-- //footer --><!-- here stars scrolling icon -->
 	<script type="text/javascript">
 									$(document).ready(function() {

@@ -11,15 +11,15 @@
 	Smartphone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony Ericsson, Motorola web design" />
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 <!-- //Custom Theme files -->
-<link href="css/bootstrap.css" type="text/css" rel="stylesheet" media="all">
-<link href="css/style.css" type="text/css" rel="stylesheet" media="all">
-<link rel="stylesheet" href="css/flexslider.css" type="text/css" media="screen" />
+<link href="/myDentist/css/bootstrap.css" type="text/css" rel="stylesheet" media="all">
+<link href="/myDentist/css/style.css" type="text/css" rel="stylesheet" media="all">
+<link rel="stylesheet" href="../css/flexslider.css" type="text/css" media="screen" />
 <!-- js -->
-<script src="js/jquery-1.11.1.min.js"></script> 
+<script src="/myDentist/js/jquery-1.11.1.min.js"></script> 
 <!-- //js -->
 <!-- start-smooth-scrolling-->
-<script type="text/javascript" src="js/move-top.js"></script>
-<script type="text/javascript" src="js/easing.js"></script>	
+<script type="text/javascript" src="/myDentist/js/move-top.js"></script>
+<script type="text/javascript" src="/myDentist/js/easing.js"></script>	
 <script type="text/javascript">
 		jQuery(document).ready(function($) {
 			$(".scroll").click(function(event){		
@@ -30,14 +30,13 @@
 		});
 </script>
 </head>
-
 <body>
 	<!--header-->
 	<div class="header">
 		<nav class="navbar navbar-default">
 			<div class="container">
 				<div class="navbar-header navbar-left">
-					<h1><a href="Home.html"><img src="images/logo.png" alt="">My Dentist Portal</a></h1>
+					<h1><a href="Home.html"><img src="/myDentist/images/logo.png" alt="">My Dentist Portal</a></h1>
 				</div>
 				<!--navigation-->
 				<div class="header-text navbar-left">
@@ -66,7 +65,7 @@
 					<!-- Collect the nav links, forms, and other content for toggling -->
 					<div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">					
 						<ul class="nav navbar-nav navbar-left">
-							<li class="active"><a href="Home.html"><span>H</span><span>O</span><span>M</span><span>E</span></a></li>
+							<li class="active"><a href="/myDentist/users/Home.html"><span>H</span><span>O</span><span>M</span><span>E</span></a></li>
 							<li><a href="about.html" class="link link--yaku"><span>A</span><span>B</span><span>O</span><span>U</span><span>T</span></a></li>
 							<li><a href="contact.html" class="link link--yaku"><span>C</span><span>O</span><span>N</span><span>T</span><span>A</span><span>C</span><span>T</span> <span>U</span><span>S</span></a></li>
 						</ul>		
