@@ -11,7 +11,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
-<%@ include file="header.jsp" %>
+<%@ include file="/WEB-INF/header.jsp" %>
 <div class="container">
     <div class="row" >
         <form:form modelAttribute="report">
@@ -55,6 +55,6 @@
         </form:form>
     </div>
 </div>
-<%@ include file="footer.jsp" %>
+<%@ include file="/WEB-INF/footer.jsp" %>
 </body>
 </html>
