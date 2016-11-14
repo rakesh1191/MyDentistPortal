@@ -33,7 +33,7 @@
                 </div>
                 <div class="form-group">
                     <label for="userEmail">Enter Email ID</label>
-                        <spring:bind path="userEmail"><input type="text" class="form-control" id="userEmail" name="userEmail" placeholder="Enter Email" required>
+                        <spring:bind path="userEmail"><input type="email" class="form-control" id="userEmail" name="userEmail" placeholder="Enter Email" required>
                 		</spring:bind>
                 </div>
                 <div class="form-group">

@@ -248,14 +248,19 @@ public class UserController {
 	{	
 		User u=userDao.getUser(userid);
 		models.put("user", u);
+		models.put("userid", userid);
 		return "/users/changePassword";
 	}
 	
 	@RequestMapping(value="/users/changePassword.html", method=RequestMethod.POST)
-	public String changePassword(@RequestParam Integer userid,@RequestParam String password)
+	public String changePassword(@RequestParam Integer userid,@RequestParam String inputPassword,@RequestParam String previousPassword)
 	{	
 		User u=userDao.getUser(userid);
-		u.setPassword(password);
+		if(previousPassword.equals(u.getPassword())){
+			//System.out.println(previousPassword);
+			u.setPassword(inputPassword);
+			userDao.saveUser(u);
+		}
 		return "redirect:/users/Home.html?userid="+userid;
 	}
 }

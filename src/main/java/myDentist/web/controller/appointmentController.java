@@ -174,7 +174,7 @@ public class appointmentController {
 				}else{
 					//slots.add("Not Available");
 				}
-				
+					
 			}	
 			boolean b=true;
 			System.out.println("value is "+doc.isSlot1011()+doc.getDoctorId());
