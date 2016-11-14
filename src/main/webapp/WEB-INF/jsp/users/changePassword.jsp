@@ -24,6 +24,7 @@ $(document).ready(function() {
 </script>
 </head>
 <body>
+<%@ include file="/WEB-INF/header.jsp" %>
 <div align="center">
 <div>Previous Password : <input type="text" name="previousPassword"></div>
 <div>Enter New Password : <input type="text" name="password" id="password"></div>
@@ -34,4 +35,5 @@ $(document).ready(function() {
 </form> 
 </div>
 </body>
+<%@ include file="/WEB-INF/footer.jsp" %>
 </html>

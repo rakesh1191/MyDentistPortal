@@ -70,15 +70,7 @@
 						<ul class="nav navbar-nav navbar-left">
 							<li class="active"><a href="Home.html"><span>H</span><span>O</span><span>M</span><span>E</span></a></li>
 							<li><a href="about.html" class="link link--yaku"><span>A</span><span>B</span><span>O</span><span>U</span><span>T</span></a></li>
-							<li><a href="#" class="dropdown-toggle link link--yaku" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span>G</span><span>A</span><span>L</span><span>L</span><span>E</span><span>R</span><span>Y</span><span class="caret"></span></a>
-								<ul class="dropdown-menu">
-									<li><a class="hvr-bounce-to-bottom" href="gallery.html">Gallery1</a></li>
-									<li><a class="hvr-bounce-to-bottom" href="gallery.html">Gallery2</a></li>
-									<li><a class="hvr-bounce-to-bottom" href="gallery.html">Gallery3</a></li>      
-								</ul>
-							</li>
 							<li><a href="contact.html" class="link link--yaku"><span>C</span><span>O</span><span>N</span><span>T</span><span>A</span><span>C</span><span>T</span> <span>U</span><span>S</span></a></li>
-							<li><a href="loginPage.html" class="link link--yaku"><span>L</span><span>O</span><span>G</span><span>I</span><span>N</span> </a></li>
 													
 						</ul>		
 						<div class="clearfix"> </div>
