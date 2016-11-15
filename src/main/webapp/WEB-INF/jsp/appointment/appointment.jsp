@@ -42,12 +42,12 @@
 	}
 
 </style>
+<%@ include file="/WEB-INF/header.jsp" %>
 
 
 </head>
 
 <body>
-<%@ include file="/WEB-INF/header.jsp" %>
 <br><br>
 <div class="bootstrap-iso">
  <div class="container-fluid">
@@ -74,6 +74,7 @@
       <td><p><input type="text" id="datepicker" name="appointmentDate" value="${appointmentDate}"></p></td>
       </tr>
 	</table>
+  
 
     <div class="form-group">
 		<input type="hidden" value="${userid}" name="userid"/>
@@ -110,8 +111,8 @@
 
   </div>    
  </div>
+<%@ include file="/WEB-INF/footer.jsp" %>
 
 </body>
 <br><br>
-<%@ include file="/WEB-INF/footer.jsp" %>
 </html>

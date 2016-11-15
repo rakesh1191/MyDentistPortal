@@ -7,10 +7,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Doctor Registration Form</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<%@ include file="/WEB-INF/header.jsp" %>
+
 </head>
 <body>
-<%@ include file="/WEB-INF/header.jsp" %>
-<br><br>
+<br><br><br>
 <div class="container">
     <div class="row" >
         <form:form modelAttribute="user">
@@ -32,6 +33,8 @@
                 		<td><spring:bind path="userEmail"><input type="text" class="form-control" id="userEmail" name="userEmail" placeholder="Enter Email" required>
                 		</spring:bind></td>
                 	</tr>
+                	<spring:bind path="userType"><input type="hidden" class="form-control" name="userType" id="userType" value="doctor" disabled>
+                    </spring:bind>
                 	<tr>
                 		<td><label for="userAddress">Enter Address</label></td>
                 		<td><spring:bind path="userAddress"><input type="text" class="form-control" name="userAddress" id="userAddress" placeholder="Enter address" required>

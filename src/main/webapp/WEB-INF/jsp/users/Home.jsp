@@ -55,7 +55,7 @@
 					<div class="top-nav-text">
 						<ul>
 							<li>Call us: <span>+11 111 2222</span></li>
-							<li>Email : <a class="email-link" href="mailto:example@mail.com">mail@example.com</a></li>
+							<li>Email : <a class="email-link" href="mailto:example@mail.com">mydentist70@gmail.com</a></li>
 							<li>
 								<ul class="social-icons">
 									<li><a href="#"></a></li>
@@ -71,7 +71,11 @@
 							<li class="active"><a href="Home.html"><span>H</span><span>O</span><span>M</span><span>E</span></a></li>
 							<li><a href="about.html" class="link link--yaku"><span>A</span><span>B</span><span>O</span><span>U</span><span>T</span></a></li>
 							<li><a href="contact.html" class="link link--yaku"><span>C</span><span>O</span><span>N</span><span>T</span><span>A</span><span>C</span><span>T</span> <span>U</span><span>S</span></a></li>
-													
+							<li><div>
+								<form action="logout" method="post">
+								<a href="<c:url value='/logout'/>" class="link link--yaku"><span>L</span><span>O</span><span>G</span><span>O</span><span>U</span><span>T</span></a>
+								</form></div>
+							</li>						
 						</ul>		
 						<div class="clearfix"> </div>
 					</div><!--//navigation-->
@@ -228,12 +232,6 @@
         <div class="panel-footer">Here's the link for paying the bills.</div>
       </div>
     </div>
-<form action="logout" method="post">
-
-<div class="container">
-  <a href="<c:url value='/logout'/>" class="btn btn-info" role="button">Logout</a>
-</div>
-</form>
 </div>
 
     </security:authorize>
@@ -301,12 +299,6 @@
         </div>
       </div>
   </div>
-  <form action="logout" method="post">
-
-<div class="container">
-  <a href="<c:url value='/logout'/>" class="btn btn-info" role="button">Logout</a>
-</div>
-</form>
 </div>
     </security:authorize>
     <security:authorize access="hasAnyRole('ADMIN')">
@@ -371,13 +363,8 @@
         </table>
       </div>
     </div>
-    <form action="logout" method="post">
-
-<div class="container">
-  <a href="<c:url value='/logout'/>" class="btn btn-info" role="button">Logout</a>
-</div>
-</form>
-
+<br>
+<br><br>
     </security:authorize>
 <%@ include file="/WEB-INF/footer.jsp" %>
 	<!--//copy-right-->

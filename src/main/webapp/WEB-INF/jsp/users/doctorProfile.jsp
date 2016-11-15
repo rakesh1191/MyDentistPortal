@@ -10,6 +10,7 @@
 </head>
 <body>
 <%@ include file="/WEB-INF/header.jsp" %>
+<br><br>
 <div class="container">
     <div class="row" >
         <form:form modelAttribute="doctors">
@@ -28,15 +29,16 @@
                 </div>
                 <div class="form-group">
                     <label for="specialization">specialization</label>
-                    <spring:bind path="specialization"><input type="text" class="form-control" name="specialization" id="specialization" required>
+                    <spring:bind path="specialization"><input type="text" class="form-control" name="specialization" placeholder="Enter specialization" id="specialization" required>
                     </spring:bind>
                 </div>
                 
-                <input type="submit" name="submit" id="submit" value="Submit" class="btn btn-info pull-right">
+                <input type="submit" name="submit" id="submit" value="Submit" class="btn btn-info">
             </div>
         </form:form>
     </div>
 </div>
+<br><br>
 <%@ include file="/WEB-INF/footer.jsp" %>
 </body>
 </html>
