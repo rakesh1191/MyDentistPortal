@@ -14,9 +14,6 @@
 <link href="/myDentist/css/bootstrap.css" type="text/css" rel="stylesheet" media="all">
 <link href="/myDentist/css/style.css" type="text/css" rel="stylesheet" media="all">
 <link rel="stylesheet" href="../css/flexslider.css" type="text/css" media="screen" />
-<!-- js -->
-<script src="/myDentist/js/jquery-1.11.1.min.js"></script> 
-<!-- //js -->
 <!-- start-smooth-scrolling-->
 <script type="text/javascript" src="/myDentist/js/move-top.js"></script>
 <script type="text/javascript" src="/myDentist/js/easing.js"></script>	
