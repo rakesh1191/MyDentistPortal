@@ -4,6 +4,8 @@ import java.lang.reflect.Method;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -36,6 +38,38 @@ public class doctorController {
 	@Autowired
 	private patientDao patientDao;
 	
+	@RequestMapping(value="/users/Home.html",method=RequestMethod.GET)
+	public String doctorH(ModelMap models)
+	{
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String currentPrincipalName = authentication.getName();
+		User user= userDao.getUserByUsername(currentPrincipalName);
+		models.put("userid",user.getUserId());
+		models.put("users",user);
+		models.put("alluser", userDao.getUsers());
+		models.put("appointments",appointmentsDao.getAppointments());
+		List<Doctor> d=doctorDao.getDoctorbyUserId(user.getUserId());
+		try{
+		models.put("doctorid", d.get(0).getDoctorId());
+		}catch (Exception e) {
+			// TODO: handle exception
+		}
+		//System.out.println("mmm"+);
+		System.out.println("user 1"+currentPrincipalName);
+		return "/users/Home";
+	}
+	
+	@RequestMapping(value="/users/Home.html",method=RequestMethod.POST)
+	public String doctorH(@RequestParam Integer userid,@RequestParam (required=false) Integer aptid)
+	{
+		System.out.println("user 2"+userid);
+		if(aptid!=null){
+			Appointments ap =appointmentsDao.getAppointmentbyAptid(aptid);
+			appointmentsDao.deleteAppointments(ap);
+		}
+		return "redirect:/users/Home.html?userid="+userid;
+	}
+	
 	@RequestMapping(value="/doctorHome.html",method=RequestMethod.GET)
 	public String doctorHome(ModelMap models,@RequestParam Integer userid)
 	{
@@ -53,30 +87,48 @@ public class doctorController {
 	public String doctorHome(@RequestParam Integer userid)
 	{
 		System.out.println("user 2"+userid);
-		return "redirect:doctorHome.html?userid="+userid;
+		return "redirect:users/profile.html?userid="+userid;
 	}
 	
-	@RequestMapping(value="/doctorProfile.html",method=RequestMethod.GET)
+	//
+	@RequestMapping(value="/users/CancelApt.html",method=RequestMethod.GET)
+	public String cancelApt(ModelMap models,@RequestParam Integer aptid)
+	{
+		models.put("aptid", aptid);
+		return "/users/CancelApt";
+	}
+	
+	@RequestMapping(value="/users/CancelApt.html",method=RequestMethod.POST)
+	public String cancelApt(@RequestParam Integer aptid,@RequestParam Integer userid)
+	{
+		System.out.println("Apt id:"+aptid);
+		Appointments ap =appointmentsDao.getAppointmentbyAptid(aptid);
+		appointmentsDao.deleteAppointments(ap);
+		return "redirect:users/Home.html?userid="+userid;
+	}
+	
+	//
+	@RequestMapping(value="users/doctorProfile.html",method=RequestMethod.GET)
 	public String doctorProfile(ModelMap models,@RequestParam Integer userid)
 	{
 		System.out.println("user 3"+userid);
 		models.put("userid", userid);
 		models.put("users", userDao.getUsers());
 		models.put("doctors", doctorDao.getDoctors());
-		return "doctorProfile";
+		return "users/doctorProfile";
 	}
 	
-	@RequestMapping(value="/doctorProfile.html",method=RequestMethod.POST)
+	@RequestMapping(value="users/doctorProfile.html",method=RequestMethod.POST)
 	public String doctorProfile(@ModelAttribute ("doctors") Doctor doctor,BindingResult result,@RequestParam Integer userid)
 	{
 		User us=userDao.getUser(userid);
 		doctor.setUserId(us);
 		System.out.println(doctor.getDesignation());
 		doctorDao.saveDoctor(doctor);
-		return "redirect:doctorHome.html?userid="+userid;
+		return "redirect:/users/Home.html?userid="+userid;
 	}
 
-	@RequestMapping(value="/GenerateReport.html",method=RequestMethod.GET)
+	@RequestMapping(value="users/GenerateReport.html",method=RequestMethod.GET)
 	public String GenerateReport(ModelMap models,@RequestParam Integer userid,@RequestParam Integer user)
 	{
 		System.out.println("user 3"+userid);
@@ -91,10 +143,10 @@ public class doctorController {
 		models.put("userid", userid);
 		models.put("user", user);
 		
-		return "GenerateReport";
+		return "users/GenerateReport";
 	}
 	
-	@RequestMapping(value="/GenerateReport.html",method=RequestMethod.POST)
+	@RequestMapping(value="users/GenerateReport.html",method=RequestMethod.POST)
 	public String GenerateReport(@ModelAttribute ("report") Patient report,@RequestParam(required=false) Integer Patientid,@RequestParam Integer userid,@RequestParam Integer user)
 	{
 		
@@ -106,6 +158,6 @@ public class doctorController {
 		}
 		//System.out.println(p.getAddress());
 		report= patientDao.savePatient(report);
-		return "redirect:doctorHome.html?userid="+user;
+		return "redirect:/users/Home.html?userid="+userid;
 	}
 }

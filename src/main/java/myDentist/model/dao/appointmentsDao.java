@@ -18,6 +18,6 @@ public interface appointmentsDao {
 	
 	List<Appointments> getAppointments();	
 	
-	
+	void deleteAppointments(Appointments apt);
 	
 }

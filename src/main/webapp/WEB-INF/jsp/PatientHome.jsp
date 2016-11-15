@@ -11,6 +11,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
+<%@ include file="header.jsp" %>
 <div class="container">
   <h1>Welcome to Home Page</h1>
   <br><br>
@@ -110,8 +111,10 @@
 <input name="_csrf" type="hidden" value="${_csrf.token}"/>
 <div class="container">
   <input type="submit" class="btn btn-lg btn-info collapsed" value="Logout" >
+  <a href="<c:url value='/logout' />">Logout</a>
 </div>
 </form>
+<%@ include file="footer.jsp" %>
 </body>
 </html>
 
