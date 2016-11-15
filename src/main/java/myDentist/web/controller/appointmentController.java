@@ -65,6 +65,7 @@ public class appointmentController {
 	@RequestMapping(value="/appointment/appointment.html", method=RequestMethod.GET)
 	public String takeAppointment(@ModelAttribute("appointments") Appointments appointment,ModelMap models,@RequestParam(required=false) Integer doctorId2,@RequestParam(required=false) List<String> slots,@RequestParam Integer userid,@RequestParam(required=false) String appointmentDate)
 	{
+		models.put("userid", userid);
 		if(appointmentDate==null){
 		models.put("appointments",appointment);
 		models.put("doctors", doctorDao.getDoctors());
@@ -91,13 +92,14 @@ public class appointmentController {
 	}
 
 	
+	
 	@RequestMapping(value="/appointment/appointment.html",method=RequestMethod.POST)
 	public String takeAppointment(@RequestParam Integer userid,@RequestParam(required=false) Integer doctorId,@RequestParam(required=false) Integer doctorid, @RequestParam String appointmentDate,ModelMap models,@RequestParam(required=false) String appointmentTime,@RequestParam(required=false) String slot)
 	{		
 		if(appointmentTime!=null){
 		System.out.println("Doctor ID is :"+doctorid+"||||| Selected date is : "+appointmentDate);
 		Appointments apt=new Appointments();
-		
+		models.put("userid", userid);
 		System.out.println("selected slot = "+appointmentTime);
 		Doctor d=doctorDao.getDoctor(doctorid);
 		User u=userDao.getUser(userid);
@@ -141,6 +143,9 @@ public class appointmentController {
 					}
 			}
 			
+			String g="No slot available";
+			models.put("msg", g);
+			models.put("userid", userid);
 			System.out.println("LIST"+slots);
 			models.put("appointmentDate", appointmentDate);
 			models.put("slots", slots);
@@ -149,6 +154,7 @@ public class appointmentController {
 			}
 			catch (Exception e) {
 			}
+			models.put("userid", userid);
 			return "redirect:/appointment/appointment.html?userid="+userid;
 		}
 		//models.put("appointments",new Appointments());

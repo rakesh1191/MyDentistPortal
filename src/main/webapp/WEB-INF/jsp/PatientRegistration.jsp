@@ -28,7 +28,7 @@
                 	</tr>
                 	<tr>
                 		<td><label for="userEmail">Enter Email ID</label></td>
-                		<td><spring:bind path="userEmail"><input type="text" class="form-control" id="userEmail" name="userEmail" placeholder="Enter Email" required>
+                		<td><spring:bind path="userEmail"><input type="email" class="form-control" id="userEmail" name="userEmail" placeholder="Enter Email" required>
                 		</spring:bind></td>
                 	</tr>
                 	<tr>
@@ -40,12 +40,12 @@
                     </spring:bind>
                 	<tr>
                 		<td><label for="dateOfBirth">Enter Date of Birth</label></td>
-                		<td><spring:bind path="dateOfBirth"><input type="text" class="form-control" name="dateOfBirth" id="dateOfBirth" placeholder="Enter date of birth" required>
+                		<td><spring:bind path="dateOfBirth"><input type="date" class="form-control" name="dateOfBirth" id="dateOfBirth" placeholder="Enter date of birth" required>
                     </spring:bind></td>
                 	</tr>
                 	<tr>
                 		<td><label for="userContact">Enter Contact</label></td>
-                		<td><spring:bind path="userContact"><input type="text" class="form-control" name="userContact" id="userContact" placeholder="Enter Contact" required/>
+                		<td><spring:bind path="userContact"><input type="number"  class="form-control" maxlength="10" minlength="10" data-fv-phone-country11="US" name="userContact" id="userContact" placeholder="Enter Contact" required/>
                     </spring:bind></td>
                 	</tr>
                 </table>
