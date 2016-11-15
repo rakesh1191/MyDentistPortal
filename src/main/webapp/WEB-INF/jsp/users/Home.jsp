@@ -170,7 +170,7 @@
         <td>${apt.doctorId.doctorName}</td>
         <td><a href="/myDentist/users/rescheduleAppointment.html?id=${apt.appointmentId}&doctorid=${apt.doctorId.doctorId}&&appointmentDate=${apt.appointmentDate}">Edit My appointment</a></td>
         <td><form action="Home.html" method="post">
-        <input type="submit" name="Delete" value="Delete Apt">
+        <input style="color: black;" type="submit" name="Delete" value="Cancel Appointment">
         <input type="hidden" name="aptid" value="${apt.appointmentId}">
         <input type="hidden" name="userid" value="${userid}">
         </form></td>
@@ -275,15 +275,15 @@
         <div class="panel-footer">
         	<table border="1">
         <tr>
-        <th>Appointment ID</th><th>Appointment Date</th><th>Appointment Time</th>
+        <th>Appointment Date</th><th>Appointment Time</th>
         <th>PatientID</th>
         <th>Patient Name</th>
         <th>Operations</th>
         </tr>
   		<c:forEach items="${appointments}" var="apt">
-        <c:if test="${apt.doctorId.doctorId eq doctorid}" >
+        <c:if test="${apt.doctorId.doctorId eq doctorid && apt.appointmentDate eq tomorrow}" >
         <tr>
-        <td>${apt.appointmentId}</td>
+        
 		<td>${apt.appointmentDate}</td>
 		<td>${apt.appointmentTime}</td>
 		<td>${apt.userId.userId}</td>	
