@@ -27,7 +27,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 </script>
 </head>	
 <body>
-<%@ include file="header.jsp" %>
+<%@ include file="/WEB-INF/header.jsp" %>
 <br><br>
 <div class="container">
     <div class="row">
@@ -55,9 +55,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		</div>
 	</div>
 </div>
-<br>
-
-<%@ include file="footer.jsp" %>
 </body>
+<%@ include file="/WEB-INF/footer.jsp" %>
 </html>
 

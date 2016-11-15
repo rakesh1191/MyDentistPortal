@@ -29,7 +29,7 @@
   </script>
 </head>
 <body>
-<%@ include file="../header.jsp" %>
+<%@ include file="/WEB-INF/header.jsp" %>
 <div class="bootstrap-iso">
 <div class="container-fluid">
 <div class="row">
@@ -82,6 +82,6 @@
   </div>    
  </div>
 </div>
-<%@ include file="../footer.jsp" %>
+<%@ include file="/WEB-INF/footer.jsp" %>
 </body>
 </html>

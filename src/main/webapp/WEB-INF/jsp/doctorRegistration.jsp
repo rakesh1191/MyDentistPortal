@@ -7,56 +7,57 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Doctor Registration Form</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<%@ include file="/WEB-INF/header.jsp" %>
+
 </head>
 <body>
-<%@ include file="header.jsp" %>
+<br><br><br>
 <div class="container">
     <div class="row" >
         <form:form modelAttribute="user">
             <div class="col-sm-10" >
                 <div class="well well-sm" align="center"><strong>Doctor Registration Form</strong></div>
-                <div class="form-group">
-                    <label for="UserName">Username</label>
-                        <spring:bind path="username"><input type="text" class="form-control" name="username" id="username" placeholder="Enter username" required>
-                    	</spring:bind>
-                </div>
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <spring:bind path="password"><input type="password" class="form-control" name="password" id="password" placeholder="Enter password" required>
-             
+                <table class="table table-bordered">
+                	<tr>
+                		<td><label for="UserName">Username</label></td>
+                		<td><spring:bind path="username"><input type="text" class="form-control" name="username" id="username" placeholder="Enter username" required>
+                    	</spring:bind></td>
+                	</tr>
+                	<tr>
+                		<td><label for="password">Password</label></td>
+                		<td><spring:bind path="password"><input type="password" class="form-control" name="password" id="password" placeholder="Enter password" required>
+                    </spring:bind></td>
+                	</tr>
+                	<tr>
+                		<td><label for="userEmail">Enter Email ID</label></td>
+                		<td><spring:bind path="userEmail"><input type="text" class="form-control" id="userEmail" name="userEmail" placeholder="Enter Email" required>
+                		</spring:bind></td>
+                	</tr>
+                	<spring:bind path="userType"><input type="hidden" class="form-control" name="userType" id="userType" value="doctor" disabled>
                     </spring:bind>
-                </div>
-                <div class="form-group">
-                    <label for="userType">Type</label>
-                    <spring:bind path="userType"><input type="text" class="form-control" name="userType" id="userType" value="doctor" disabled>
-                    </spring:bind>
-                </div>
-                <div class="form-group">
-                    <label for="userEmail">Enter Email ID</label>
-                        <spring:bind path="userEmail"><input type="text" class="form-control" id="userEmail" name="userEmail" placeholder="Enter Email" required>
-                		</spring:bind>
-                </div>
-                <div class="form-group">
-                    <label for="userAddress">Enter Address</label>
-                    <spring:bind path="userAddress"><input type="text" class="form-control" name="userAddress" id="userAddress" placeholder="Enter address" required>
-                    </spring:bind>
-                </div>
-                <div class="form-group">
-                    <label for="dateOfBirth">Enter Date of Birth</label>
-                    <spring:bind path="dateOfBirth"><input type="text" class="form-control" name="dateOfBirth" id="dateOfBirth" placeholder="Enter date of birth" required>
-                    </spring:bind>
-                </div>
-                <div class="form-group">
-                    <label for="userContact">Enter Contact</label>
-                    <spring:bind path="userContact"><input type="text" class="form-control" name="userContact" id="userContact" placeholder="Enter Contact" required/>
-                    </spring:bind>
-                </div>
-                <input type="submit" name="submit" id="submit" class="btn btn-info pull-right">
+                	<tr>
+                		<td><label for="userAddress">Enter Address</label></td>
+                		<td><spring:bind path="userAddress"><input type="text" class="form-control" name="userAddress" id="userAddress" placeholder="Enter address" required>
+                    </spring:bind></td>
+                	</tr>
+                	<tr>
+                		<td><label for="dateOfBirth">Enter Date of Birth</label></td>
+                		<td><spring:bind path="dateOfBirth"><input type="text" class="form-control" name="dateOfBirth" id="dateOfBirth" placeholder="Enter date of birth" required>
+                    </spring:bind></td>
+                	</tr>
+                	<tr>
+                		<td><label for="userContact">Enter Contact</label></td>
+                		<td><spring:bind path="userContact"><input type="text" class="form-control" name="userContact" id="userContact" placeholder="Enter Contact" required/>
+                    </spring:bind></td>
+                	</tr>
+                </table>
+                <br>
+                <input type="submit" name="submit" id="submit" class="btn btn-info">
             </div>
         </form:form>
     </div>
 </div>
-
-<%@ include file="footer.jsp" %>
+<br>
+<%@ include file="/WEB-INF/footer.jsp" %>
 </body>
 </html>

@@ -11,33 +11,34 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
-<%@ include file="header.jsp" %>
+<%@ include file="/WEB-INF/header.jsp" %>
+<br><br>
 <div class="container">
     <div class="row" >
         <form:form modelAttribute="user">
             <div class="col-sm-10" >
                 <div class="well well-sm" align="center"><strong>Update Information</strong></div>
-                <div class="form-group">
-                    <label for="userContact">Contact</label>
-                    <form:input path="userContact"/>
-                       
-                </div>
-                <div class="form-group">
-                    <label for="userEmail">Email</label>
-                    <form:input path="userEmail"/>
-                    
-             
-                </div>
-                <div class="form-group">
-                    <label for="userAddress">Address</label>
-                    <form:input path="userAddress"/>
-                   
-                </div>
+                <table class="table table-bordered">
+                <tr>
+                	<td><center><label for="userContact" style="font-size:20px; color:black;">Contact</label></center></td>
+                	<td><form:input path="userContact" style="width:300px; font-size:20px;"/></td>
+                </tr>
+                <tr>
+                	<td><center><label for="userEmail" style="font-size:20px; color:black;">Email</label></center></td>
+                	<td><form:input path="userEmail" style="width:300px; font-size:20px;"/></td>
+                </tr>
+                <tr>
+                	<td><center><label for="userAddress" style="font-size:20px; color:black;">Address</label></center></td>
+                	<td><form:input path="userAddress" style="width:300px; font-size:20px;"/></td>
+                </tr>
+                </table>
+                <br>
                 <input type="submit" name="submit" id="submit" value="Submit" class="btn btn-info">	
             </div>
         </form:form>
     </div>
 </div>
-<%@ include file="footer.jsp" %>
+<br><br>
+<%@ include file="/WEB-INF/footer.jsp" %>
 </body>
 </html>

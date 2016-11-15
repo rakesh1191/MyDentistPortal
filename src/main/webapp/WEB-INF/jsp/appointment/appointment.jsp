@@ -21,7 +21,7 @@
   <link rel="stylesheet" href="/resources/demos/style.css">
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-  <script>
+  <script type="text/javascript">
   $( function() {
     $( "#datepicker" ).datepicker({ minDate: 0, maxDate: "+7D" });
   } );
@@ -42,24 +42,24 @@
 	}
 
 </style>
+<%@ include file="/WEB-INF/header.jsp" %>
 
 
 </head>
 
 <body>
-
+<br><br>
 <div class="bootstrap-iso">
  <div class="container-fluid">
 
 <form:form modelAttribute="appointments" role="form">
-  <div align="center">
-
-   
-
+<div class="col-sm-12" align="justify">
+<div class="well well-sm" align="center"><strong>Make Appointment</strong></div>
+	<table class="table table-bordered" style="width:500px;" >
     <!-- Form code begins -->
-	<div  class="form-group">
-      <label for="doctorId">   Doctor's Name :</label>
-         <select id="doctorId" name="doctorId" class="form-control" style="width: 200px">
+     <tr>
+     <td> <label for="doctorId">   Doctor's Name :</label></td>
+     <td>    <select id="doctorId" name="doctorId" class="form-control" style="width: 200px">
 								                <option>Select Doctor</option>
 												<c:forEach items="${doctors}" var="d">	
 												<c:if test="${doctorid eq d.doctorId}">
@@ -68,19 +68,14 @@
 												<option value="${d.doctorId}">${d.doctorName}</option>												
 												</c:forEach>
 												
-		 </select>
-	</div>
-	
-	<div  class="form-group">
-      <label for="appointmentDate">   Appointment Date :</label>
-      
-      
-      
-         <p><input type="text" id="datepicker" name="appointmentDate" value="${appointmentDate}"></p>
-      
-      
-      
-	</div>
+		 </select></td></tr>
+	  <tr>
+      <td><label for="appointmentDate">   Appointment Date :</label></td>
+      <td><p><input type="text" id="datepicker" name="appointmentDate" value="${appointmentDate}"></p></td>
+      </tr>
+	</table>
+  
+
     <div class="form-group">
 		<input type="hidden" value="${userid}" name="userid"/>
 		<input type="hidden" value="${doctorid}" name="doctorid"/>
@@ -89,32 +84,35 @@
       	</c:if>
       </div>
      <!-- Form code ends --> 
+   </div>   
    
-      </div>    
 </form:form>
 <c:if test="${slots ne null}">
 <form:form>
-<div align="center">
-<div class="row">
 <input type="hidden" value="${doctorid}" name="doctorid"/>
-<label for="appointmentDate">   Appointment Time :</label>
-   <select id="appointmentTime" name="appointmentTime" class="form-control" style="width: 200px">
+<table class="table table-bordered" style="width:500px;">
+<tr>
+<td><label for="appointmentDate">   Appointment Time :</label>
+</td>
+ <td><select id="appointmentTime" name="appointmentTime" class="form-control" style="width: 200px">
 								                <option>Select slot</option>
 												<c:forEach items="${slots}" var="s">												
 												<option value="${s}">${s}</option>
 												</c:forEach>
-	</select>
+	</select></td></tr>
+</table>
 	<br><input type="submit" name="submit" id="submit" value="Submit" class="btn btn-info">
-</div>
+
+</form:form>
 <div><br/>
 <a href="/myDentist/appointment/appointment.html?userid=${userid}" class="btn-primary btn-sm active" role="button">Take Different Time Slot</a>
 </div>
-</div>
-</form:form>
 </c:if>
 
   </div>    
  </div>
+<%@ include file="/WEB-INF/footer.jsp" %>
 
 </body>
+<br><br>
 </html>

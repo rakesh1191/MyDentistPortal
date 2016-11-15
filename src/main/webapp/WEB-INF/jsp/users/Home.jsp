@@ -55,7 +55,7 @@
 					<div class="top-nav-text">
 						<ul>
 							<li>Call us: <span>+11 111 2222</span></li>
-							<li>Email : <a class="email-link" href="mailto:example@mail.com">mail@example.com</a></li>
+							<li>Email : <a class="email-link" href="mailto:example@mail.com">mydentist70@gmail.com</a></li>
 							<li>
 								<ul class="social-icons">
 									<li><a href="#"></a></li>
@@ -70,16 +70,12 @@
 						<ul class="nav navbar-nav navbar-left">
 							<li class="active"><a href="Home.html"><span>H</span><span>O</span><span>M</span><span>E</span></a></li>
 							<li><a href="about.html" class="link link--yaku"><span>A</span><span>B</span><span>O</span><span>U</span><span>T</span></a></li>
-							<li><a href="#" class="dropdown-toggle link link--yaku" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span>G</span><span>A</span><span>L</span><span>L</span><span>E</span><span>R</span><span>Y</span><span class="caret"></span></a>
-								<ul class="dropdown-menu">
-									<li><a class="hvr-bounce-to-bottom" href="gallery.html">Gallery1</a></li>
-									<li><a class="hvr-bounce-to-bottom" href="gallery.html">Gallery2</a></li>
-									<li><a class="hvr-bounce-to-bottom" href="gallery.html">Gallery3</a></li>      
-								</ul>
-							</li>
 							<li><a href="contact.html" class="link link--yaku"><span>C</span><span>O</span><span>N</span><span>T</span><span>A</span><span>C</span><span>T</span> <span>U</span><span>S</span></a></li>
-							<li><a href="loginPage.html" class="link link--yaku"><span>L</span><span>O</span><span>G</span><span>I</span><span>N</span> </a></li>
-													
+							<li><div>
+								<form action="logout" method="post">
+								<a href="<c:url value='/logout'/>" class="link link--yaku"><span>L</span><span>O</span><span>G</span><span>O</span><span>U</span><span>T</span></a>
+								</form></div>
+							</li>						
 						</ul>		
 						<div class="clearfix"> </div>
 					</div><!--//navigation-->
@@ -236,12 +232,6 @@
         <div class="panel-footer">Here's the link for paying the bills.</div>
       </div>
     </div>
-<form action="logout" method="post">
-
-<div class="container">
-  <a href="<c:url value='/logout'/>" class="btn btn-info" role="button">Logout</a>
-</div>
-</form>
 </div>
 
     </security:authorize>
@@ -309,12 +299,6 @@
         </div>
       </div>
   </div>
-  <form action="logout" method="post">
-
-<div class="container">
-  <a href="<c:url value='/logout'/>" class="btn btn-info" role="button">Logout</a>
-</div>
-</form>
 </div>
     </security:authorize>
     <security:authorize access="hasAnyRole('ADMIN')">
@@ -379,15 +363,10 @@
         </table>
       </div>
     </div>
-    <form action="logout" method="post">
-
-<div class="container">
-  <a href="<c:url value='/logout'/>" class="btn btn-info" role="button">Logout</a>
-</div>
-</form>
-
+<br>
+<br><br>
     </security:authorize>
-<%@ include file="footer.jsp" %>
+<%@ include file="/WEB-INF/footer.jsp" %>
 	<!--//copy-right-->
 	<!--smooth-scrolling-of-move-up-->
 	<script type="text/javascript">

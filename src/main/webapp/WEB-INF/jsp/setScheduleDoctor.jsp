@@ -58,13 +58,14 @@ $(document).ready(function(){
  	
     document.getElementById('btntest').onclick = function(){
     	  var selchb = getSelectedChbox(this.form);     // gets the array returned by getSelectedChbox()
-    	  alert(selchb);
+    	 // alert(selchb);
     	}
 });
 </script>
 </head>
 <body>
-<%@ include file="header.jsp" %>
+<%@ include file="/WEB-INF/header.jsp" %>
+<br><br>
 <form action="setScheduleDoctor.html" method="post">
 <div id="result"> 
 	<div align="center">Set Schedule</div>
@@ -128,4 +129,6 @@ $(document).ready(function(){
    
     </form>
 </body>
+<br><br>
+<%@ include file="/WEB-INF/footer.jsp" %>
 </html>
