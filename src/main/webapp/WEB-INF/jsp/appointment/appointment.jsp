@@ -23,7 +23,7 @@
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <script type="text/javascript">
   $( function() {
-    $( "#datepicker" ).datepicker({ minDate: 0, maxDate: "+7D" });
+    $( "#datepicker" ).datepicker({ minDate:  0, maxDate: "+6D" });
   } );
   </script>
 
@@ -85,10 +85,14 @@
       </div>
      <!-- Form code ends --> 
    </div>   
-   
+ 
 </form:form>
-<c:if test="${slots ne null}">
+
 <form:form>
+<input type="hidden" value="${userid}" name="userid"/>
+<c:choose>
+<c:when test="${slots ne null}">
+
 <input type="hidden" value="${doctorid}" name="doctorid"/>
 <table class="table table-bordered" style="width:500px;">
 <tr>
@@ -101,13 +105,22 @@
 												</c:forEach>
 	</select></td></tr>
 </table>
+	
 	<br><input type="submit" name="submit" id="submit" value="Submit" class="btn btn-info">
 
-</form:form>
+
+
 <div><br/>
-<a href="/myDentist/appointment/appointment.html?userid=${userid}" class="btn-primary btn-sm active" role="button">Take Different Time Slot</a>
+
 </div>
-</c:if>
+</c:when>
+<c:otherwise>
+
+
+<a href="/myDentist/appointment/appointment.html?userid=${userid}">Take Different Time Slot</a>
+</c:otherwise>
+</c:choose>
+</form:form> 
 
   </div>    
  </div>

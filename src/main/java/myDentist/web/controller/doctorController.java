@@ -1,6 +1,9 @@
 package myDentist.web.controller;
 
 import java.lang.reflect.Method;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,6 +51,14 @@ public class doctorController {
 		models.put("users",user);
 		models.put("alluser", userDao.getUsers());
 		models.put("appointments",appointmentsDao.getAppointments());
+		Calendar calendar = Calendar.getInstance();
+	    // get a date to represent "today"
+	    Date today = calendar.getTime();
+	    calendar.add(Calendar.DAY_OF_YEAR, 1);
+	    // now get "tomorrow"
+	    Date tomorrow = calendar.getTime();
+	    String tom=new SimpleDateFormat("MM/dd/yyyy").format(tomorrow);
+	    models.put("tomorrow",tom);
 		List<Doctor> d=doctorDao.getDoctorbyUserId(user.getUserId());
 		try{
 		models.put("doctorid", d.get(0).getDoctorId());

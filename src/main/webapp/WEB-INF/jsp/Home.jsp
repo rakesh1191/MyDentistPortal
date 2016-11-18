@@ -67,8 +67,6 @@
 					<div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">					
 						<ul class="nav navbar-nav navbar-left">
 							<li class="active"><a href="Home.html"><span>H</span><span>O</span><span>M</span><span>E</span></a></li>
-							<li><a href="about.html" class="link link--yaku"><span>A</span><span>B</span><span>O</span><span>U</span><span>T</span></a></li>
-							<li><a href="contact.html" class="link link--yaku"><span>C</span><span>O</span><span>N</span><span>T</span><span>A</span><span>C</span><span>T</span> <span>U</span><span>S</span></a></li>
 							<li><a href="/myDentist/users/Home.html" class="link link--yaku"><span>L</span><span>O</span><span>G</span><span>I</span><span>N</span> </a></li>
 													
 						</ul>		
@@ -120,12 +118,6 @@
 	</div>
 	<!--banner-->
 	<!--banner-bottom-->
-	<div class="banner-bottom">
-		<div class="container">
-			<h4>Lorem Ipsum has been the <span>industry's</span> standard dummy text. </h4>
-			<p>Contrary to popular belief when an unknown printer took a galley of type and scrambled it to make a type specimen book. </p>
-		</div>
-	</div>
 	<!--//banner-bottom-->
 	<!--copy-right-->
 <%@ include file="/WEB-INF/footer.jsp" %>

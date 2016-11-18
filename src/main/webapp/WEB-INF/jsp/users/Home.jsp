@@ -69,8 +69,6 @@
 					<div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">					
 						<ul class="nav navbar-nav navbar-left">
 							<li class="active"><a href="Home.html"><span>H</span><span>O</span><span>M</span><span>E</span></a></li>
-							<li><a href="about.html" class="link link--yaku"><span>A</span><span>B</span><span>O</span><span>U</span><span>T</span></a></li>
-							<li><a href="contact.html" class="link link--yaku"><span>C</span><span>O</span><span>N</span><span>T</span><span>A</span><span>C</span><span>T</span> <span>U</span><span>S</span></a></li>
 							<li><div>
 								<form action="logout" method="post">
 								<a href="<c:url value='/logout'/>" class="link link--yaku"><span>L</span><span>O</span><span>G</span><span>O</span><span>U</span><span>T</span></a>
@@ -172,7 +170,7 @@
         <td>${apt.doctorId.doctorName}</td>
         <td><a href="/myDentist/users/rescheduleAppointment.html?id=${apt.appointmentId}&doctorid=${apt.doctorId.doctorId}&&appointmentDate=${apt.appointmentDate}">Edit My appointment</a></td>
         <td><form action="Home.html" method="post">
-        <input type="submit" name="Delete" value="Delete Apt">
+        <input style="color: black;" type="submit" name="Delete" value="Cancel Appointment">
         <input type="hidden" name="aptid" value="${apt.appointmentId}">
         <input type="hidden" name="userid" value="${userid}">
         </form></td>
@@ -277,15 +275,15 @@
         <div class="panel-footer">
         	<table border="1">
         <tr>
-        <th>Appointment ID</th><th>Appointment Date</th><th>Appointment Time</th>
+        <th>Appointment Date</th><th>Appointment Time</th>
         <th>PatientID</th>
         <th>Patient Name</th>
         <th>Operations</th>
         </tr>
   		<c:forEach items="${appointments}" var="apt">
-        <c:if test="${apt.doctorId.doctorId eq doctorid}" >
+        <c:if test="${apt.doctorId.doctorId eq doctorid && apt.appointmentDate eq tomorrow}" >
         <tr>
-        <td>${apt.appointmentId}</td>
+        
 		<td>${apt.appointmentDate}</td>
 		<td>${apt.appointmentTime}</td>
 		<td>${apt.userId.userId}</td>	
