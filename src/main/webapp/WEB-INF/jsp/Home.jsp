@@ -41,7 +41,7 @@
 				</div>
 				<!--navigation-->
 				<div class="header-text navbar-left">
-					<p>Lorem Ipsum is simply dummy text of the printing and typesetting<p>
+					<p>Creating vibrant smiles for healthy lifestyles!<p>
 				</div>
 				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
 					<span class="sr-only">Toggle navigation</span>
