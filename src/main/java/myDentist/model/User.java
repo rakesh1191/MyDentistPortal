@@ -14,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -37,13 +38,15 @@ public class User implements UserDetails {
 	@Id
     @GeneratedValue
     private Integer userId;
-
+	
+	@Column(unique=true)
     private String username;
 
     private String userType;
     
     private Integer userContact;
     
+    @Column(unique=true)
     private String userEmail;
     
     private Date dateOfBirth;

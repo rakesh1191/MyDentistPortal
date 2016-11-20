@@ -62,4 +62,12 @@ public class MakeAvailabilityDaoImpl implements MakeAvailabilityDao {
 		String query = "from MakeAvailability as mk where mk.doctorId="+doctorId;
 		return entitymanager.createQuery(query).getResultList();
 	}
+
+	@Override
+	@Transactional
+	public void removeAvailability(Integer id) {
+		String query="delete from MakeAvailability where mId="+id;
+		javax.persistence.Query query1 = entitymanager.createQuery(query);
+		query1.executeUpdate();
+	}
 }
