@@ -1,5 +1,6 @@
 package myDentist.web.controller;
 
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -13,17 +14,27 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
+import java.util.logging.Logger;
 
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+import javax.persistence.PersistenceException;
 import javax.servlet.http.HttpSession;
 
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
+import org.hibernate.engine.jdbc.spi.SqlExceptionHelper;
+import org.hibernate.exception.ConstraintViolationException;
+import org.hibernate.internal.util.xml.ErrorLogger;
 import org.omg.CORBA.Request;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
+import org.springframework.orm.jpa.JpaSystemException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -84,18 +95,49 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/PatientRegistration.html", method=RequestMethod.POST)
-	public String PatientRegistration(@ModelAttribute ("User") User user, BindingResult result)
+	public String PatientRegistration(ModelMap models,@ModelAttribute ("User") User user, BindingResult result)
 	{	
-		user.setUserType("patient");
-		// save user to database
-		Set<String> roles =new HashSet<String>();
-		roles.add("ROLE_USER");
-		user.setRoles(roles);
-		user=userDao.saveUser(user);
-		System.out.println("Data saved in db :"+user.getUsername());
-		
-		//redirect to display page
-		return "redirect:/users/Home.html?userid="+user.getUserId();
+		try{
+			Boolean check=true;
+			List<User> userCheck=userDao.getUsers();
+			for (User u2 : userCheck) {
+				if(u2.getUserEmail().equals(user.getUserEmail()))
+				{
+					check=false;
+					System.out.println("boolean is "+check.toString());
+				}
+			}
+			if(check){
+				user.setUserType("patient");
+				// save user to database
+				Set<String> roles =new HashSet<String>();
+				roles.add("ROLE_USER");
+				user.setRoles(roles);
+				user=userDao.saveUser(user);
+				System.out.println("Data saved in db :"+user.getUsername());			
+				//redirect to display page
+				return "redirect:/users/Home.html?userid="+user.getUserId();
+			}
+			else{
+				models.put("uniqueEmailId", "Email already exists..Try with Different one");
+				return "redirect:PatientRegistration.html";
+			}
+		}catch (Exception e) {
+			  if (e instanceof JpaSystemException) {
+			        // Duplicate entry
+				  System.out.println("unique :"+e.getMessage());				  
+					//for unique user name
+				  	models.put("uniqueUsername", "Username already exists..");
+					//models.put("uniqueEmailId", "Username already exists..");
+			  } 
+			  else 
+			  {
+				 // models.put("uniqueEmailId", "Email already exists..Try with Different one");
+			        // Other SQL Exception
+				  	System.out.println("unique2 :"+e.getMessage());
+			  }
+			return "redirect:PatientRegistration.html";
+		}
 	}
 	
 	@RequestMapping(value="/doctorRegistration.html", method=RequestMethod.GET)
@@ -106,8 +148,9 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/doctorRegistration.html", method=RequestMethod.POST)
-	public String doctorRegistration(@ModelAttribute ("User") User user, BindingResult result)
+	public String doctorRegistration(ModelMap models, @ModelAttribute ("User") User user, BindingResult result)
 	{	
+		try{
 		user.setUserType("doctor");
 		// save user to database
 		Integer id=user.getUserId();
@@ -118,6 +161,10 @@ public class UserController {
 		System.out.println("Data saved in db :"+user.getUsername());
 		//redirect to display page
 		return "redirect:/users/Home.html?userid="+id;
+		}catch (Exception e) {
+			models.put("uniqueUsername", "Username already exists..");
+			return "redirect:doctorRegistration.html";
+		}
 	}
 	
 	@RequestMapping(value="/editPatient.html", method=RequestMethod.GET)
@@ -212,8 +259,20 @@ public class UserController {
 	public String setSDoctor(@RequestParam java.util.List<String> getindex, @RequestParam Integer userid, ModelMap models)	{
 		
 		System.out.println("result is"+getindex);
-		
-		for (String g : getindex) {
+		java.util.List<String> slots=new ArrayList<String>();
+		 java.util.List<String> slotsnew=new ArrayList<String>();
+		 List<Doctor> doc=doctorDao.getDoctorbyUserId(userid);
+		 //uncheck 
+		 List<MakeAvailability> mk= makeAvailabilityDao.getAvailabilities();
+		 for (MakeAvailability makeAvailability : mk) {
+			if(makeAvailability.getDoctorId().getDoctorId().equals(doc.get(0).getDoctorId())){
+				makeAvailabilityDao.removeAvailability(makeAvailability.getmId());
+			}
+		}
+		 //		
+		 for (String g : getindex) {
+			
+			try{
 			String[] date=g.split(" ");
 			String slot =date[0];
 			String str = slot.replace("-", "");
@@ -221,7 +280,7 @@ public class UserController {
 			String availableDate = date[1];
 			//
 			Random rand = new Random();
-			int  n = rand.nextInt(1000) + 1;		
+			int  n = rand.nextInt(1000000) + 1;		
 			Integer id = n;
 			System.out.println("ID is : "+id);
 			List<Doctor> d=doctorDao.getDoctorbyUserId(userid);
@@ -229,16 +288,26 @@ public class UserController {
 			List<String> dts=new ArrayList<String>();
 			int prevoiusID=0;
 			for (MakeAvailability makeAvailability : m) {
-				dts.add(makeAvailability.getAvailableDate());
-				if(makeAvailability.getAvailableDate().matches(availableDate)){
-					 prevoiusID= makeAvailability.getmId();
+				
+				if(makeAvailability.getAvailableDate().matches(availableDate)&& d.get(0).getDoctorId().equals(makeAvailability.getDoctorId().getDoctorId())){
+					dts.add(makeAvailability.getAvailableDate());
+					prevoiusID= makeAvailability.getmId();
 				}
 			}
+			//unchecked checkbox
+			 slots=Arrays.asList("9-10","10-11","11-12","12-1","1-2","2-3","3-4","4-5");
+			 slotsnew.add(slot);
+			 
+			
+			 //
 			if(dts.contains(availableDate)){
 				makeAvailabilityDao.updateSlots(str, availableDate,prevoiusID, d.get(0));
 			}else{
 				makeAvailabilityDao.setSlots(str,availableDate,id,d.get(0));
 			}
+			
+			}catch(Exception e){}
+			
 		}
 		return "redirect:/users/Home.html?userid="+userid;
 	}

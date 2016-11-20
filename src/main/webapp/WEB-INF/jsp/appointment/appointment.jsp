@@ -125,8 +125,16 @@ body {
 					</div>
 				</c:when>
 				<c:otherwise>
-
-
+				
+					<script type="text/javascript">
+						$(function(){
+							var btn=document.getElementById("submit"); 
+							btn.disabled=false;
+						});
+					</script>
+					
+					<p style="color: red;">${param['noslot']}</p>
+				
 					<a href="/myDentist/appointment/appointment.html?userid=${userid}">Take
 						Different Time Slot</a>
 				</c:otherwise>

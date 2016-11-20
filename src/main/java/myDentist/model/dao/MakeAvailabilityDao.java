@@ -13,6 +13,8 @@ public interface MakeAvailabilityDao {
 	
 	MakeAvailability saveAvailability(MakeAvailability makeAvailability);
 	
+	void removeAvailability(Integer id);
+	
 	List<MakeAvailability> getAvailabilities();
 	
 	List<String> getSlotList(Doctor doctor);

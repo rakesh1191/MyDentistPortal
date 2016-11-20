@@ -68,8 +68,7 @@ public class appointmentController {
 		models.put("userid", userid);
 		if(appointmentDate==null){
 		models.put("appointments",appointment);
-		models.put("doctors", doctorDao.getDoctors());
-			
+		models.put("doctors", doctorDao.getDoctors());		
 		models.put("doctors", doctorDao.getDoctors());
 		System.out.println("Doctor ID is :"+userid+"||||| Selected date is (GET) : "+appointmentDate);
 		//System.out.println("doctor"+doctorDao.getDoctor(102).getDoctorName());
@@ -96,7 +95,7 @@ public class appointmentController {
 	@RequestMapping(value="/appointment/appointment.html",method=RequestMethod.POST)
 	public String takeAppointment(@RequestParam Integer userid,@RequestParam(required=false) Integer doctorId,@RequestParam(required=false) Integer doctorid, @RequestParam String appointmentDate,ModelMap models,@RequestParam(required=false) String appointmentTime,@RequestParam(required=false) String slot)
 	{		
-		if(appointmentTime!=null){
+		if(appointmentTime!=null&&appointmentDate!="Select slot"){
 		System.out.println("Doctor ID is :"+doctorid+"||||| Selected date is : "+appointmentDate);
 		Appointments apt=new Appointments();
 		models.put("userid", userid);
@@ -105,6 +104,7 @@ public class appointmentController {
 		User u=userDao.getUser(userid);
 		apt.setDoctorId(d);
 		apt.setUserId(u);
+		models.put("noslot", "No slot Available");	
 		apt.setAppointmentTime(appointmentTime);
 		apt.setAppointmentDate(appointmentDate);
 		//System.out.println("value is :"+appointment.getAppointmentDate());
@@ -142,9 +142,7 @@ public class appointmentController {
 						slots.remove(appointments.getAppointmentTime()); 
 					}
 			}
-			
-			String g="No slot available";
-			models.put("msg", g);
+			models.put("noslot", "No slot Available");	
 			models.put("userid", userid);
 			System.out.println("LIST"+slots);
 			models.put("appointmentDate", appointmentDate);
@@ -255,6 +253,7 @@ public class appointmentController {
 				availabilityDao.setSlots(s,availableDate,id,d.get(0));
 			}
 			else{
+					
 					availabilityDao.updateSlots(s, availableDate, temp, d.get(0));
 			}
 			count++;

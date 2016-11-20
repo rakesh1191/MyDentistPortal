@@ -8,7 +8,7 @@
                 	<tr>
                 		<td><label for="UserName">Username</label></td>
                 		<td><spring:bind path="username"><input type="text" class="form-control" name="username" id="username" placeholder="Enter username" required>
-                    	</spring:bind></td>
+                    	</spring:bind><p style="color: red;">${param['uniqueUsername']}</p></td>
                 	</tr>
                 	<tr>
                 		<td><label for="password">Password</label></td>
@@ -18,7 +18,7 @@
                 	<tr>
                 		<td><label for="userEmail">Enter Email ID</label></td>
                 		<td><spring:bind path="userEmail"><input type="email" class="form-control" id="userEmail" name="userEmail" placeholder="Enter Email" required>
-                		</spring:bind></td>
+                		</spring:bind><p style="color: red;">${param['uniqueEmailId']}</p></td>
                 	</tr>
                 	<tr>
                 		<td><label for="userAddress">Enter Address</label></td>
