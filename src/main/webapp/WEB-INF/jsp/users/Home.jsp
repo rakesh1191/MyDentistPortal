@@ -43,7 +43,7 @@
 				</div>
 				<!--navigation-->
 				<div class="header-text navbar-left">
-					<p>Lorem Ipsum is simply dummy text of the printing and typesetting<p>
+					<p>Creating vibrant smiles for healthy lifestyles!<p>
 				</div>
 				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
 					<span class="sr-only">Toggle navigation</span>
@@ -69,10 +69,9 @@
 					<div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">					
 						<ul class="nav navbar-nav navbar-left">
 							<li class="active"><a href="Home.html"><span>H</span><span>O</span><span>M</span><span>E</span></a></li>
-							<li><div>
-								<form action="logout" method="post">
+							<li>
 								<a href="<c:url value='/logout'/>" class="link link--yaku"><span>L</span><span>O</span><span>G</span><span>O</span><span>U</span><span>T</span></a>
-								</form></div>
+								
 							</li>						
 						</ul>		
 						<div class="clearfix"> </div>

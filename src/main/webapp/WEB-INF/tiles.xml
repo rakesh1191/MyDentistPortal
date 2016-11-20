@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+    "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+    "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+
+<tiles-definitions>
+
+	<definition name="template" template="/WEB-INF/jsp/template.jsp" />
+
+	<definition name="PatientRegistration" extends="template">
+		<put-attribute name="title" value="Patient Registration" />
+		<put-attribute name="content"
+			value="/WEB-INF/jsp/PatientRegistration.jsp" />
+	</definition>
+
+	<definition name="setScheduleDoctor" extends="template">
+		<put-attribute name="title" value="Set Schedule Doctor" />
+		<put-attribute name="content" value="/WEB-INF/jsp/setScheduleDoctor.jsp" />
+	</definition>
+
+	<definition name="loginPage" extends="template">
+		<put-attribute name="title" value="Login Page" />
+		<put-attribute name="content" value="/WEB-INF/jsp/loginPage.jsp" />
+	</definition>
+
+	<definition name="users/GenerateReport" extends="template">
+		<put-attribute name="title" value="Generate Report" />
+		<put-attribute name="content"
+			value="/WEB-INF/jsp/users/GenerateReport.jsp" />
+	</definition>
+
+	<definition name="/users/editUser" extends="template">
+		<put-attribute name="title" value="Edit User" />
+		<put-attribute name="content" value="/WEB-INF/jsp/users/editUser.jsp" />
+	</definition>
+
+	<definition name="editPatient" extends="template">
+		<put-attribute name="title" value="Edit Patient" />
+		<put-attribute name="content" value="/WEB-INF/jsp/editPatient.jsp" />
+	</definition>
+
+	<definition name="doctorRegistration" extends="template">
+		<put-attribute name="title" value="Doctor Registration" />
+		<put-attribute name="content"
+			value="/WEB-INF/jsp/doctorRegistration.jsp" />
+	</definition>
+
+	<definition name="/users/rescheduleAppointment" extends="template">
+		<put-attribute name="title" value="Reschedule Appointment" />
+		<put-attribute name="content"
+			value="/WEB-INF/jsp//users/rescheduleAppointment.jsp" />
+	</definition>
+
+	<definition name="users/SetSchedule" extends="template">
+		<put-attribute name="title" value="Set Schedule" />
+		<put-attribute name="content" value="/WEB-INF/jsp/users/SetSchedule.jsp" />
+	</definition>
+
+	<definition name="users/doctorProfile" extends="template">
+		<put-attribute name="title" value="Doctor Profile" />
+		<put-attribute name="content"
+			value="/WEB-INF/jsp/users/doctorProfile.jsp" />
+	</definition>
+
+	<definition name="/users/changePassword" extends="template">
+		<put-attribute name="title" value="Change Password" />
+		<put-attribute name="content"
+			value="/WEB-INF/jsp/users/changePassword.jsp" />
+	</definition>
+
+	<definition name="/appointment/appointment" extends="template">
+		<put-attribute name="title" value="Login Page" />
+		<put-attribute name="content"
+			value="/WEB-INF/jsp/appointment/appointment.jsp" />
+	</definition>
+	
+	<definition name="display" extends="template">
+		<put-attribute name="title" value="Display Users" />
+		<put-attribute name="content"
+			value="/WEB-INF/jsp/display.jsp" />
+	</definition>
+
+</tiles-definitions>
+    
