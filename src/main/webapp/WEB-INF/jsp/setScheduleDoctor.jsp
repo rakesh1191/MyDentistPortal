@@ -54,6 +54,17 @@ $(document).ready(function(){
     	  var selchb = getSelectedChbox(this.form);     // gets the array returned by getSelectedChbox()
     	 // alert(selchb);
     	}
+    $("#select").change(function(){
+		if($(this).prop("checked"))
+			$(":checkbox").prop("checked",true);
+		else
+			$(":checkbox").prop("checked",false);
+	});
+	$("#hide").click(function(){
+		$(":checked").filter(function(){
+			return $(this).attr("id") != "select";
+		}).closest("tr").hide();
+	});
 });
 </script>
 <br><br>
@@ -77,7 +88,7 @@ $(document).ready(function(){
     <table  id="myTable" border="1" style="border-collapse: collapse;" align="center" cellpadding="1">
         <!--1st ROW-->
        <tr>
-       <th></th>
+       <th style="padding-left: 25px;"><input id="select" type="checkbox" /></th>
        <c:forEach items="${dates}" var="date">
         <th>${date}</th>
         </c:forEach>

@@ -280,7 +280,7 @@
         <th>Operations</th>
         </tr>
   		<c:forEach items="${appointments}" var="apt">
-        <c:if test="${apt.doctorId.doctorId eq doctorid && apt.appointmentDate eq tomorrow}" >
+        <c:if test="${apt.doctorId.doctorId eq doctorid && apt.appointmentDate > tomorrow}" >
         <tr>
         
 		<td>${apt.appointmentDate}</td>
