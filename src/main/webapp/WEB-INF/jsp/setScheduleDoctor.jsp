@@ -57,8 +57,21 @@ $(document).ready(function(){
 });
 </script>
 <br><br>
+
+<form action="setScheduleDoctor.html" method="get">
+	<div class="container">
+	<c:if test="${param['nextweek'] eq 1}">	
+		<a href="/myDentist/setScheduleDoctor.html?nextweek=2&userid=${userid}">Set Schedule For Next Week</a>
+		
+	</c:if>
+	<c:if test="${param['nextweek'] ne 1}">
+		<a href="/myDentist/setScheduleDoctor.html?nextweek=1&userid=${userid}">Current Week</a>
+	</c:if>
+	</div>
+	</form>
 <form action="setScheduleDoctor.html" method="post">
 <div id="result"> 
+	
 	<div align="center">Set Schedule</div>
     <br/>
     <table  id="myTable" border="1" style="border-collapse: collapse;" align="center" cellpadding="1">
@@ -117,6 +130,7 @@ $(document).ready(function(){
     </div>
     <input type="hidden" id="rs" name="getindex" style="width: 500px">
    	<input type="hidden" name="userid" value="${userid}">
+   	<input type="hidden" name="week" value="${param['nextweek']}">
    
     </form>
 <br><br>
