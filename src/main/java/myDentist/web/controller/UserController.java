@@ -39,8 +39,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.servlet.ModelAndView;
 
 import myDentist.model.Appointments;
 import myDentist.model.Doctor;
@@ -88,10 +90,50 @@ public class UserController {
 	
 	
 	@RequestMapping(value="/PatientRegistration.html", method=RequestMethod.GET)
-	public String PatientRegistration(ModelMap models)
+	public ModelAndView PatientRegistration(ModelMap models)
 	{	
 		models.put("user", new User());
-		return "PatientRegistration";
+		return new ModelAndView("PatientRegistration");
+	}
+	
+	@RequestMapping(value="/PatientRegistrationAJAX.html", method=RequestMethod.GET)
+	@ResponseBody
+	public String Patientajax(ModelMap models,@RequestParam String userEmail)
+	{	
+		//for email
+		Boolean check=true;
+		List<User> userCheck=userDao.getUsers();
+		for (User u2 : userCheck) {
+			if(u2.getUserEmail().equals(userEmail))
+			{
+				check=false;
+				System.out.println("boolean is "+check.toString());
+			}
+		}
+		if(!check){
+			return "Email already Exists";
+		}
+		return " ";
+	}
+	
+	@RequestMapping(value="/PatientRegistrationusernameAJAX.html", method=RequestMethod.GET)
+	@ResponseBody
+	public String PatientUsernameajax(ModelMap models,@RequestParam String userName)
+	{	
+		//for user name
+		Boolean check=true;
+		List<User> userCheck=userDao.getUsers();
+		for (User u2 : userCheck) {
+			if(u2.getUsername().equals(userName))
+			{
+				check=false;
+				System.out.println("boolean is "+check.toString());
+			}
+		}
+		if(!check){
+			return "Username already Exists";
+		}
+		return " ";
 	}
 	
 	@RequestMapping(value="/PatientRegistration.html", method=RequestMethod.POST)
