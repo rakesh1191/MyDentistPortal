@@ -460,9 +460,22 @@ public class UserController {
 		return "/users/changePassword";
 	}
 	
+	@RequestMapping(value="/changePasswordAJAX.html", method=RequestMethod.GET)
+	@ResponseBody
+	public String changePasswordAJAX(ModelMap models,@RequestParam Integer userid,@RequestParam String prevPassword)
+	{	
+		System.out.println("previous password ="+prevPassword);
+		User u=userDao.getUser(userid);
+		if(prevPassword.equals(u.getPassword())){
+			return "";
+		}else{
+			return "Invalid Password";
+		}
+	}
+	
 	@RequestMapping(value="/users/changePassword.html", method=RequestMethod.POST)
 	public String changePassword(@RequestParam Integer userid,@RequestParam String inputPassword,@RequestParam String previousPassword)
-	{	
+	{			
 		User u=userDao.getUser(userid);
 		if(previousPassword.equals(u.getPassword())){
 			//System.out.println(previousPassword);
