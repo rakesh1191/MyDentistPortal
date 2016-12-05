@@ -98,8 +98,8 @@ body {
 					</tr>
 				</table>
 						<div class="ui-widget">
-						<label for="employee">Employee: </label>
-						<input id="employee" />
+						
+						
  						</div>
 
 				<div class="form-group">
