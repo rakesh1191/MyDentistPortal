@@ -1,7 +1,7 @@
 # MyDentistPortal
 Java-Spring-Hibernate-AJAX
 
-Run the application from Spring boot in eclipse
+Run the application in eclipse
 ------------------
 
 Right click on root prject 
